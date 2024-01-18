@@ -37,10 +37,10 @@ int main(){
 		int temp;
 		cin>>temp;
 		if(mp.find(temp)==mp.end()){
-			cout<<0<<'\n';
+			cout<<0<<' ';
 		}
 		else{
-			cout<<mp[temp]<<'\n';
+			cout<<mp[temp]<<' ';
 		}
 	}
 	
