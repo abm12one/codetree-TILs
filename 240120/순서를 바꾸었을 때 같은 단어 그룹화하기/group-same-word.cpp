@@ -23,24 +23,12 @@ int main(){
 	unordered_map<string,int>map;
 	int mnum=0;
 	for(int r=0;r<n;r++){
-		vector<int>count(52,0);
+		
 		string str;
 		cin>>str;
-		for(int i=0;i<str.size();i++){
-			count[str[i]-'A']++;
-		}
-		string temp="";
-		for(int i=0;i<count.size();i++){
-			if(count[i]==0)continue;
-			else{
-				temp+=char('0'+count[i]);
-				temp+=char('A'+i);
-			}
-			
-			
-			
-		}
-		mnum=max(mnum,++map[temp]);
+		sort(str.begin(),str.end());
+		map[str]++;
+		mnum=max(mnum,map[str]);
 	}
 	
 	
