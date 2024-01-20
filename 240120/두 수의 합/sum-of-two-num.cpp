@@ -1,63 +1,33 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<queue>
-#include<stack>
-#include<string>
-#include<cstring>
-#include<cmath>
-#include<limits.h>
-#include<cassert>
+#include <iostream>
 #include <unordered_map>
 
 using namespace std;
 
-int main(){
+#define MAX_N 100000
 
-    ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	unordered_map<int,int>map;
-	int ans=0;
-	int n,m;
-	cin>>n>>m;
-	vector<int>arr(n+1);
-	vector<int>visit(m+1,0);
-	for(int i=1;i<=n;i++){
-		
-		cin>>arr[i];
-		map[arr[i]]++;
-	}
-	
-	sort(arr.begin(),arr.end());
-	
-	for(int i=1;i<=n+1;i++){
+// 변수 선언
+int n, k;
+int arr[MAX_N];
+unordered_map<long long, int> count;
 
-		if(arr[i]>m/2)break;
-		
-		if(visit[arr[i]]==1)continue;
-		
-		visit[arr[i]]=1;
-		
-		int there=m-arr[i];
-		
-		if(map.find(there)==map.end()){
-			continue;
-		}
-		
-		int v=map[arr[i]];
-		
-		if(there==arr[i]){
-			ans+=v*(v-1)/2;
-		}
-		
-		else{
-			ans+=v*map[there];
-		}
-		
-	}
-	
-	cout<<ans<<'\n';
-	
+int main() {
+    // 입력:
+    cin >> n >> k;
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    int ans = 0;
+
+    // 배열을 앞에서부터 순회하며 쌍을 만들어줍니다.
+    for(int i = 0; i < n; i++) {
+        long long diff = (long long)k - arr[i];
+        // 가능한 모든 쌍의 수를 세어줍니다.
+        ans += count[diff];
+
+        // 현재 숫자의 개수를 하나 증가시켜줍니다.
+        count[arr[i]]++;
+    }
+
+    cout << ans;
+    return 0;
 }
