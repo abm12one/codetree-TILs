@@ -43,13 +43,11 @@ int main(){
 		cin>>arr[i];
 		map[arr[i]]++;
 	}
-	for(int i=0;i<n;i++){
-		if(visit[arr[i]]==0){
-			narr.push_back(node{arr[i],map[arr[i]]});
-			visit[arr[i]]=1;
-		}
-		
+	
+	for(unordered_map<int, int>::iterator it = map.begin(); it != map.end(); it++){
+		narr.push_back(node{it->first,it->second});
 	}
+	
 	sort(narr.begin(),narr.end(),cmp);
 	for(int i=0;i<m;i++){
 		cout<<narr[i].v<<' ';
