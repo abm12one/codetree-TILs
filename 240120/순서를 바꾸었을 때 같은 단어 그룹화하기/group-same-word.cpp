@@ -23,7 +23,7 @@ int main(){
 	unordered_map<string,int>map;
 	
 	for(int r=0;r<n;r++){
-		vector<int>count(53,0);
+		vector<int>count(52,0);
 		string str;
 		cin>>str;
 		for(int i=0;i<str.size();i++){
@@ -31,11 +31,13 @@ int main(){
 		}
 		string temp="";
 		for(int i=0;i<count.size();i++){
-			
-			for(int j=0;j<count[i];j++){
-				
+			if(count[i]==0)continue;
+			else{
+				temp+=char('0'+count[i]);
 				temp+=char('A'+i);
 			}
+			
+			
 			
 		}
 		map[temp]++;
@@ -43,7 +45,7 @@ int main(){
 	int mnum=0;
 	for(unordered_map<string,int>::iterator it=map.begin();it!=map.end();it++){
 		mnum=max(mnum,it->second);
-		
+		cout<<it->first<<'\n';
 	}
 	cout<<mnum<<'\n';
 	
