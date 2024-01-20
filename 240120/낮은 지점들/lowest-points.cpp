@@ -17,12 +17,13 @@ int main(){
     ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-	unordered_map<int,int>map;
+	unordered_map<int,long>map;
 	
 	int n;
 	cin>>n;
 	for(int i=0;i<n;i++){
-		int x,y;
+		int x;
+		long y;
 		cin>>x>>y;
 		if(map.count(x)==0){
 			map[x]=y;
@@ -33,8 +34,8 @@ int main(){
 			}
 		}
 	}
-	int sum=0;
-	for(unordered_map<int,int>::iterator it=map.begin();it!=map.end();it++){
+	long sum=0;
+	for(unordered_map<int,long>::iterator it=map.begin();it!=map.end();it++){
 		sum+=it->second;
 	}
 	cout<<sum<<'\n';
