@@ -21,7 +21,7 @@ int main(){
 	int n;
 	cin>>n;
 	unordered_map<string,int>map;
-	
+	int mnum=0;
 	for(int r=0;r<n;r++){
 		vector<int>count(52,0);
 		string str;
@@ -40,13 +40,10 @@ int main(){
 			
 			
 		}
-		map[temp]++;
+		mnum=max(mnum,++map[temp]);
 	}
-	int mnum=0;
-	for(unordered_map<string,int>::iterator it=map.begin();it!=map.end();it++){
-		mnum=max(mnum,it->second);
-		cout<<it->first<<'\n';
-	}
+	
+	
 	cout<<mnum<<'\n';
 	
 }
