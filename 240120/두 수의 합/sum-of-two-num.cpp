@@ -22,36 +22,42 @@ int main(){
 	int ans=0;
 	int n,m;
 	cin>>n>>m;
-	
+	vector<int>arr(n+1);
+	vector<int>visit(m+1,0);
 	for(int i=1;i<=n;i++){
-		int temp;
-		cin>>temp;
-		map[temp]++;
+		
+		cin>>arr[i];
+		map[arr[i]]++;
 	}
 	
+	sort(arr.begin(),arr.end());
 	
-	for(int i=1;i<=m/2;i++){
-		if(map.find(i)==map.end()){
+	for(int i=1;i<=n+1;i++){
+
+		if(arr[i]>m/2)break;
+		
+		if(visit[arr[i]]==1)continue;
+		
+		visit[arr[i]]=1;
+		
+		int there=m-arr[i];
+		
+		if(map.find(there)==map.end()){
 			continue;
 		}
-		else{
-			int there=m-i;
-			if(there==i){
-				ans+=map[i]*(map[i]-1)/2;
-			}
-			else if(map.find(there)==map.end()){
-				continue;
-			}
-			else{
-				ans+=map[i]*map[there];
-			}
-			
-			
-			
+		
+		int v=map[arr[i]];
+		
+		if(there==arr[i]){
+			ans+=v*(v-1)/2;
 		}
 		
+		else{
+			ans+=v*map[there];
+		}
 		
 	}
+	
 	cout<<ans<<'\n';
 	
 }
