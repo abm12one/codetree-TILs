@@ -11,34 +11,45 @@
 #include <unordered_map>
 
 using namespace std;
-vector<int>arr;
+
 int main(){
 
     ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
+	
+	unordered_map<int,int>map;
 	int ans=0;
 	int n,m;
 	cin>>n>>m;
-	for(int i=0;i<n;i++){
+	
+	for(int i=1;i<=n;i++){
 		int temp;
 		cin>>temp;
-		arr.push_back(temp);
+		map[temp]++;
 	}
-	sort(arr.begin(),arr.end());
-	int st=0;
-	int ed=n-1;
-	while(st<ed){
-		if(arr[st]+arr[ed]<m){
-			st++;
+	
+	
+	for(int i=1;i<=m/2;i++){
+		if(map.find(i)==map.end()){
+			continue;
 		}
-		else if(arr[st]+arr[ed]==m){
-			st++;
-			ans++;
+		else{
+			int there=m-i;
+			if(there==i){
+				ans+=map[i]*(map[i]-1)/2;
+			}
+			else if(map.find(there)==map.end()){
+				continue;
+			}
+			else{
+				ans+=map[i]*map[there];
+			}
+			
+			
+			
 		}
-		else if(arr[st]+arr[ed]>m){
-			ed--;
-		}
+		
 		
 	}
 	cout<<ans<<'\n';
