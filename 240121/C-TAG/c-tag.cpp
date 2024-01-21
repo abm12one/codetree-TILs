@@ -16,28 +16,34 @@ using namespace std;
 int n,m;
 vector<string>a;
 vector<string>b;
-int sum=0;
-
-void isok(int x,int y,int z){
+int sum;
+unordered_set<string>s;
+int isok(int x,int y,int z){
 	
-	unordered_set<string>s;
+	s.clear();
 	
 	for(int i=0;i<n;i++){
 		string temp="";
-		temp+=a[i][x]+a[i][y]+a[i][z];
+		temp+=a[i][x];
+		temp+=a[i][y];
+		temp+=a[i][z];
 		s.insert(temp);
+		
 	}
 	
 	for(int i=0;i<n;i++){
-		string temp="";
-		temp+=b[i][x]+b[i][y]+b[i][z];
-		if(s.find(temp)!=s.end()){
-			return;
+		string str="";
+		str+=b[i][x];
+		str+=b[i][y];
+		str+=b[i][z];
+		
+		if(s.count(str)>0){
+			return 0;
 		}
 	}
 	
-	sum++;
-	return;
+
+	return 1;
 	
 }
 
@@ -62,7 +68,7 @@ int main(){
 		for(int j=i+1;j<m-1;j++){
 			for(int k=j+1;k<m;k++){
 				
-				isok(i,j,k);
+				if(isok(i,j,k))sum++;
 				
 				
 			}
