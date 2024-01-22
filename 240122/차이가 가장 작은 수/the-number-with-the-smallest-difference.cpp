@@ -31,16 +31,13 @@ int main(){
 		cin>>t;
 		s.insert(t);
 	}
-	int ans=987654321;
 	
+	int ans=987654321;
 	for(set<int>::iterator st=s.begin();st!=s.end();st++){
-		set<int>::iterator ed=st;
-		ed++;
-		while(ed!=s.end()){
-			if(*ed-*st>=m){
-				ans=min(ans,*ed-*st);
-			}
-			ed++;
+		set<int>::iterator it=s.lower_bound(*st+m);
+		if(it!=s.end()){
+			
+			ans=min(ans,*it-*st);
 		}
 		
 	}
@@ -48,7 +45,7 @@ int main(){
 		cout<<-1<<'\n';
 	}
 	else{
-		cout<<ans<<'\n';	
+		cout<<ans<<'\n';
 	}
 	
 }
