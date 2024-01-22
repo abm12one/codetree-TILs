@@ -44,5 +44,11 @@ int main(){
 		}
 		
 	}
-	cout<<ans<<'\n';
+	if(ans==987654321){
+		cout<<-1<<'\n';
+	}
+	else{
+		cout<<ans<<'\n';	
+	}
+	
 }
