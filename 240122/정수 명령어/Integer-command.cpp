@@ -51,7 +51,7 @@ int main(){
 			cout<<"EMPTY"<<'\n';
 		}
 		else{
-			cout<<*s.begin()<<' '<<*s.rbegin()<<'\n';
+			cout<<*s.rbegin()<<' '<<*s.begin()<<'\n';
 		}
 	}
 
