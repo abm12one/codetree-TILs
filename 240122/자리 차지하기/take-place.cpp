@@ -35,23 +35,16 @@ int main(){
 	for(int i=0;i<n;i++){
 		int t;
 		cin>>t;
-		if(s.find(t)!=s.end()){
-			s.erase(t);
-			sum++;
-			continue;
-		}
-		set<int>::iterator it=s.lower_bound(t);
-		if(*s.rbegin()<t){
-			s.erase(*s.rbegin());
-			sum++;
-		}
-		else if(it==s.begin()){
-			continue;
-		}
-		else{
+		
+		set<int>::iterator it=s.upper_bound(t);
+		
+		if(it!=s.begin()){
 			it--;
 			s.erase(*it);
 			sum++;
+		}
+		else{
+			break;
 		}
 		
 		
