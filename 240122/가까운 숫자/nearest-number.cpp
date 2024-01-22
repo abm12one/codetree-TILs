@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<queue>
+#include<stack>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<limits.h>
+#include<cassert>
+#include<unordered_map>
+#include<map>
+#include <unordered_set>
+#include<set>
+
+using namespace std;
+
+int main(){
+
+    ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int n;
+	cin>>n;
+	set<int>s;
+	s.insert(0);
+	int dis=987654321;
+	for(int i=0;i<n;i++){
+		int t;
+		cin>>t;
+		
+		set<int>::iterator it=s.upper_bound(t);
+		if(it!=s.end()){
+			dis=min(dis,(*it-t));
+		}
+		it--;
+		dis=min(dis,t-*it);
+		s.insert(t);
+		cout<<dis<<'\n';
+	}
+	
+	
+	
+}
