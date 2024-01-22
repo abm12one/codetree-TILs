@@ -41,8 +41,11 @@ int main(){
 			continue;
 		}
 		set<int>::iterator it=s.lower_bound(t);
-		
-		if(it==s.begin()){
+		if(*s.rbegin()<t){
+			s.erase(*s.rbegin());
+			sum++;
+		}
+		else if(it==s.begin()){
 			continue;
 		}
 		else{
