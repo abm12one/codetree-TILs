@@ -29,11 +29,12 @@ int main(){
 		cin>>t;
 		s.insert(t);
 	}
-	set<int>::iterator it=s.end();
-	it--;
+	set<int>::reverse_iterator it=s.rbegin();;
+
+	
 	for(int i=0;i<k;i++){
 		cout<<*it<<' ';
-		it--;
+		it++;
 	}
 	
 	
