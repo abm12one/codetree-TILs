@@ -20,21 +20,21 @@ int dis=0;
 vector<vector<pair<int,int>>>m;
 vector<int>visit;
 vector<int>d;
-/*
+
 int dp(int n){
-	int dis=0;
+	int value=0;
 	for(int i=0;i<m[n].size();i++){
 		int there=m[n][i].first;
-		int vthere=m[n][i].second;
+		int vt=m[n][i].second;
 		if(visit[there]==0){
 			visit[there]=1;
-			dis=(dis,vthere+dp[there]);
-			visit[there]=0;
+			value=max(value,vt+dp(there));
+			
 		}
 	}
-	return dis;
+	return value;
 }
-*/
+
 
 void dfs(int n){
 	
@@ -78,10 +78,12 @@ int main(){
 	visit=vector<int>(n+1,0);
 	d=vector<int>(n+1,0);
 	
-	
+	/*
 	dis=0;
 	visit[st]=1;
 	dfs(st);
-	cout<<dis<<'\n';
+	*/
+	visit[st]=1;
+	cout<<dp(st)<<'\n';
 	
 }
