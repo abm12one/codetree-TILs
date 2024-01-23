@@ -1,31 +1,43 @@
-#include <iostream>
-#include <set>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<queue>
+#include<stack>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<limits.h>
+#include<cassert>
+#include<unordered_map>
+#include<map>
+#include <unordered_set>
+#include<set>
 
-int main() {
-	// 여기에 코드를 작성해주세요.
-	uint64_t n, t;
-	std::cin >> n >> t;
+using namespace std;
 
-	std::set<uint64_t> s;
-	while (n--) {
-		uint64_t a, b;
-		std::cin >> a >> b;
+int main(){
 
-		uint64_t target = a + b * t;
-
-                // 나보다 앞지른 사람만 모두 제거합니다. 같은 그룹으로 포함시키기 위해서
-		while (1) {
-			auto it = s.lower_bound(target);
-			if (it == s.end())
+    ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int n,t;
+	cin>>n>>t;
+	set<long>s;
+	int sum=0;
+	for(int i=0;i<n;i++){
+		long st,v;
+		cin>>st>>v;
+		long ed=st+v*t;
+		while(1){
+			auto it=s.lower_bound(ed);
+			if(it==s.end()){
 				break;
-
-			s.erase(*it);
+			}
+			s.erase(it);
 		}
-
-		s.emplace(target); // 그룹으로 등록합니다.
+		s.insert(ed);
 	}
-
-	std::cout << s.size(); // 그룹 사이즈 수
-
-	return 0;
+	cout<<s.size()<<'\n';
+	
 }
