@@ -15,41 +15,36 @@
 
 using namespace std;
 int n,m;
-set<int>s;
+set<tuple<int,int,int>>s;
 
-int find(set<int>&s){
-	
-	auto st=s.begin();
-	auto ed=st;
-	ed++;
-	int mnum=0;
-	
-	while(ed!=s.end()){
-		mnum=max(mnum,*ed-*st-1);
-		ed++;
-		st++;
-	}
-	return mnum;
-	
-}
+
 int main(){
 
     ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 	
-	
-	
 	cin>>n>>m;
-	s.insert(-1);
-	s.insert(n+1);
+	set<int>num;
+	set<tuple<int,int,int>>s;
+	num.insert(-1);
+	num.insert(n+1);
+	s.insert(make_tuple(n+1,-1,n+1));
 	for(int i=0;i<m;i++){
 		int t;
 		cin>>t;
-		s.insert(t);
-		int dis=find(s);
-		cout<<dis<<'\n';
+		auto it=num.lower_bound(t);
+		int r=*it;
+		it--;
+		int l=*it;
 		
+		s.erase(make_tuple(r-l-1,l,r));
+		s.insert(make_tuple(r-t-1,t,r));
+		s.insert(make_tuple(t-l-1,l,t));
+		num.insert(t);
+		tuple<int,int,int> now=*s.rbegin();
+		
+		cout<<get<0>(now)<<'\n';
 	}
 	
 	
