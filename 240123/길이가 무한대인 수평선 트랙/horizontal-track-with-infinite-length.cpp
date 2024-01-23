@@ -19,7 +19,7 @@ int main() {
 			if (it == s.end())
 				break;
 
-			s.erase(it);
+			s.erase(*it);
 		}
 
 		s.emplace(target); // 그룹으로 등록합니다.
