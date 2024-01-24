@@ -38,9 +38,9 @@ int main(){
 	
 	int n;
 	cin>>n;
-	m=vector<vector<int>>(n+2);
-	visit=vector<int>(n+2,0);
-	hasr=vector<int>(n+2,0);
+	m=vector<vector<int>>(10001);
+	
+	hasr=vector<int>(10001,0);
 	
 	for(int i=0;i<n;i++){
 		int a,b;
@@ -52,24 +52,14 @@ int main(){
 		m[a].push_back(b);
 		hasr[b]++;
 	}
-	
-	
-	
-	for(int i=1;i<=n+1;i++){
-		if(visit[i]==0){
-			dfs(i);
-		}
-		
-	}
 	int sum=0;
-	for(int i=1;i<n+2;i++){
-		if(visit[i]==1){
+	for(int i=1;i<=10001;i++){
+		if(hasr[i]==1){
 			sum++;
 		}
 	}
 	if(sum==n){
 		cout<<1<<'\n';
-		
 	}
 	else{
 		cout<<0<<'\n';
