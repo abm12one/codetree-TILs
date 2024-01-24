@@ -17,18 +17,27 @@ using namespace std;
 
 vector<vector<int>>m;
 vector<int>visit;
+vector<int>p;
 vector<int>hasr;
 
-void dfs(int n){
-	for(int i=0;i<m[n].size();i++){
-		int next=m[n][i];
-		if(visit[next]==0){
-			visit[next]=1;
-			dfs(next);
-		}
-		
+int find(int a){
+	if(p[a]==a){
+		return p[a];
 	}
+	return p[a]=find(p[a]);
 }
+int uset(int a,int b){
+	int fa=find(a);
+	int fb=find(b);
+	if(fa==fb){
+		return 0;
+	}
+	
+	p[fa]=fb;
+	return 1;
+	
+}
+
 
 int main(){
 
@@ -38,17 +47,30 @@ int main(){
 	
 	int n;
 	cin>>n;
-	m=vector<vector<int>>(10001);
+	p=vector<int>(10001);
 	
+	for(int i=1;i<10002;i++){
+		p[i]=i;
+	}
+	
+	m=vector<vector<int>>(10001);
 	hasr=vector<int>(10001,0);
 	
 	for(int i=0;i<n;i++){
 		int a,b;
 		cin>>a>>b;
+		
+		
 		if(hasr[b]==1){
 			cout<<0<<'\n';
 			return 0;
 		}
+		
+		if(uset(a,b)==0){
+			cout<<0<<'\n';
+			return 0;
+		}
+		
 		m[a].push_back(b);
 		hasr[b]++;
 	}
