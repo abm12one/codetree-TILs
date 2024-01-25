@@ -46,6 +46,7 @@ int main(){
 		cin>>a>>b>>v;
 		arr[a][b]=v;
 		arr[b][a]=v;
+		arr[i+1][i+1]=0;
 	}
 	
 	setting();
