@@ -46,7 +46,7 @@ int main(){
 	
 	int n,k;
 	cin>>n>>k;
-	p=vector<int>(n+1);
+	p=vector<int>(501);
 	for(int i=0;i<n+1;i++){
 		p[i]=i;
 	}
