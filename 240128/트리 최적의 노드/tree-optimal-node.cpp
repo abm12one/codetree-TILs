@@ -23,6 +23,7 @@ vector<int>visit;
 vector<int>dis;
 void dfs(int n){
 	int flag=0;
+	mnum=max(mnum,dis[n]);
 	for(int i=0;i<arr[n].size();i++){
 		int there=arr[n][i];
 		if(visit[there]==0){
@@ -36,7 +37,7 @@ void dfs(int n){
 	}
 	if(flag==0){
 		st=n;
-		mnum=max(mnum,dis[n]);
+		
 	}
 	return;
 }
@@ -68,6 +69,7 @@ int main(){
 	mnum=0;
 	dis=vector<int>(n+1,0);
 	visit=vector<int>(n+1,0);
+	
 	visit[st]=1;
 	dfs(st);
 	cout<<(mnum+1)/2<<'\n';
