@@ -18,6 +18,8 @@ using namespace std;
 vector<int>p;
 
 int find(int a){
+	if(p[a]==0)return 0;
+	
 	if(p[a]==a){
 		return p[a];
 	}
@@ -28,6 +30,22 @@ int uset(int a,int b){
 	
 	int fa=find(a);
 	int fb=find(b);
+	if(fa==0){
+		if(fb==0){
+			return 0;
+		}
+		else{
+			p[fb]=0;
+			return 0;
+		}
+		
+	}
+	
+	else if(fb==0){
+		p[fa]=0;
+		return 0;
+	}
+	
 	if(fa==fb){
 		p[fa]=0;
 		p[fb]=0;
