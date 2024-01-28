@@ -66,7 +66,7 @@ int solve(int i,int j){
 	visit[there]=1;
 	dfs(f);
 	ret+=mnum;
-	cout<<mnum<<' ';
+	
 	
 	
 	//2
@@ -91,11 +91,11 @@ int solve(int i,int j){
 	visit[i]=1;
 	dfs(s);
 	ret+=mnum;
-	cout<<mnum<<' ';
+	
 	
 	
 	ret+=d;
-	cout<<d<<'\n';
+
 	return ret;
 }
 
