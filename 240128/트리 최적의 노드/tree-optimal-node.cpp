@@ -23,10 +23,11 @@ vector<int>visit;
 vector<int>dis;
 void dfs(int n){
 	int flag=0;
-	mnum=max(mnum,dis[n]);
+	
 	for(int i=0;i<arr[n].size();i++){
 		int there=arr[n][i];
 		if(visit[there]==0){
+			mnum=max(mnum,dis[there]);
 			dis[there]=dis[n]+1;
 			flag=1;
 			visit[there]=1;
