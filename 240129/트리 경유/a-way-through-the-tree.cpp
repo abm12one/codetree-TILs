@@ -32,6 +32,7 @@ int isok(int now){
 		
 	}
 	if(last==-1){
+		visit[now]=1;
 		return 0;
 	}
 	else{
