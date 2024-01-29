@@ -19,19 +19,25 @@ vector<int>visit;
 
 int isok(int now){
 	int temp=now;
+	
+	int last=-1;
 	while(temp>0){
 		
 		if(visit[temp]==0){
 			temp=temp/2;
 		}
 		else{
-			return temp;
+			last=temp;
 		}
 		
 	}
-	visit[now]=1;
-	//cout<<now<<"is visited"<<"\n";
-	return 0;
+	if(last==-1){
+		visit[now]=1;
+		return 0;
+	}
+	else{
+		return last;
+	}
 	
 	
 }
