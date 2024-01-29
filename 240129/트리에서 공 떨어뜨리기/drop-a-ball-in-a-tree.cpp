@@ -23,6 +23,7 @@ void put(int r,int k){
 	
 	if(le[r]==-1&&ri[r]==-1){
 		ans=r;
+		return;
 	}
 	else if(le[r]==-1){
 		put(ri[r],k);
@@ -30,14 +31,13 @@ void put(int r,int k){
 	else if(ri[r]==-1){
 		put(ri[r],k);
 	}
-	else{
-		if(k%2==0){
-			put(le[r],k/2);
-		}
-		else{
-			put(le[r],k/2+1);	
-		}
+	else if(k%2==0){
+		put(le[r],k/2);
 	}
+	else{
+		put(le[r],k/2+1);	
+	}
+	
 	return;
 	
 }
@@ -60,4 +60,5 @@ int main(){
 	cin>>k;
 	put(1,k);
 	cout<<ans<<'\n';
+	return 0;
 }
