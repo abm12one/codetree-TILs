@@ -18,10 +18,11 @@ using namespace std;
 vector<int>le;
 vector<int>ri;
 int n;
-int put(int r,int k){
+int ans;
+void put(int r,int k){
 	
 	if(le[r]==-1&&ri[r]==-1){
-		return r;
+		ans=r;
 	}
 	else if(le[r]==-1){
 		put(ri[r],k);
@@ -37,7 +38,7 @@ int put(int r,int k){
 			put(le[r],k/2+1);	
 		}
 	}
-	
+	return;
 	
 }
 
@@ -57,6 +58,6 @@ int main(){
 	}
 	int k;
 	cin>>k;
-	cout<<put(1,k)<<"\n";
-	
+	put(1,k);
+	cout<<ans<<'\n';
 }
