@@ -19,7 +19,7 @@ vector<int>le;
 vector<int>ri;
 int n;
 int ans;
-void put(int r,int k){
+void put(int r,long k){
 	
 	if(le[r]==-1&&ri[r]==-1){
 		ans=r;
@@ -56,7 +56,7 @@ int main(){
 	for(int i=1;i<n+1;i++){
 		cin>>le[i]>>ri[i];
 	}
-	int k;
+	long k;
 	cin>>k;
 	put(1,k);
 	cout<<ans<<'\n';
