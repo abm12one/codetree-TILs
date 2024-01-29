@@ -25,14 +25,15 @@ void put(int r,long k){
 		ans=r;
 		return;
 	}
-	else if(le[r]==-1){
+	
+	if(le[r]==-1){
 		put(ri[r],k);
 	}
 	else if(ri[r]==-1){
-		put(ri[r],k);
+		put(le[r],k);
 	}
 	else if(k%2==0){
-		put(le[r],k/2);
+		put(ri[r],k/2);
 	}
 	else{
 		put(le[r],k/2+1);	
