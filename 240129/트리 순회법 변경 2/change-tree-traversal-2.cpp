@@ -21,7 +21,7 @@ vector<int>in;
 void post(int pl,int pr,int il,int ir){
 	
 	//cout<<pl<<' '<<pr<<' '<<il<<' '<<ir<<'\n';
-	
+	if(pl>pr) return;
 	if(pl==pr){
 		cout<<pre[pl]<<' ';
 		return;
@@ -41,7 +41,8 @@ void post(int pl,int pr,int il,int ir){
 	}
 	
 	int s=dpoint-il-1;//
-	if(dpoint==il){
+	/*
+    if(dpoint==il){
 		
 		post(pl+1,pr,il+1,ir);
 		cout<<root<<' ';
@@ -53,9 +54,9 @@ void post(int pl,int pr,int il,int ir){
 	
 	if(dpoint!=ir){
 		post(pl+s+2,pr,dpoint+1,ir);
-	}
-	
-	
+	}*/
+	post(pl+1,pl+s+1,il,dpoint-1);
+	post(pl+s+2,pr,dpoint+1,ir);
 	cout<<root<<' ';
 	
 	return;
