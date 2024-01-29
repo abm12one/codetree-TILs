@@ -23,22 +23,20 @@ int isok(int now){
 	int last=-1;
 	while(temp>0){
 		
-		if(visit[temp]==0){
-			temp=temp/2;
-		}
-		else{
+		if(visit[temp]){
 			last=temp;
 		}
+		temp=temp/2;
+		
+		
 		
 	}
 	if(last==-1){
-		visit[now]=1;
 		return 0;
 	}
 	else{
 		return last;
 	}
-	
 	
 }
 
