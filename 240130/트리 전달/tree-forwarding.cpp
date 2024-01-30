@@ -16,9 +16,19 @@
 using namespace std;
 
 vector<vector<int>>list;
+vector<vector<int>>nlist;
 vector<int>p;
 vector<int>visit;
 
+void setting(int origin,int n){
+	for(int i=0;i<list[n].size();i++){
+		int there=list[n][i];
+		nlist[origin].push_back(there);
+		setting(origin,there);
+	}
+	return;
+}
+/*
 void dfs(int n,int w){
 	p[n]+=w;
 	
@@ -28,7 +38,7 @@ void dfs(int n,int w){
 	}
 	return;
 }
-
+*/
 
 int main(){
 
@@ -39,6 +49,7 @@ int main(){
 	int n,m;
 	cin>>n>>m;
 	list=vector<vector<int>>(n+1);
+	nlist=vector<vector<int>>(n+1);
 	p=vector<int>(n+1);
 	visit=vector<int>(n+1);
 	
@@ -49,13 +60,19 @@ int main(){
 		list[pa].push_back(i);
 	}
 	
+	for(int i=1;i<=n;i++){
+		setting(i,i);
+	}
 	for(int i=0;i<m;i++){
 		int a,w;
 		cin>>a>>w;
-		
-		dfs(a,w);
+		p[a]+=w;
+		for(int j=0;j<nlist[a].size();j++){
+			p[nlist[a][j]]+=w;
+		}
 		
 	}
+
 	
 	for(int i=1;i<=n;i++){
 		cout<<p[i]<<' ';
