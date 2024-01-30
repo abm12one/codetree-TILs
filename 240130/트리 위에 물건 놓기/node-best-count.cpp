@@ -23,9 +23,10 @@ void sol(int n){
 	visit[n]=1;
 	int flag=0;
 	for(int i=0;i<m[n].size();i++){
-		flag=1;
+		
 		int there=m[n][i];
 		if(visit[there]==0){
+			flag=1;
 			sol(there);
 			way[n][0]+=way[there][1];
 			way[n][1]+=min(way[there][0],way[there][1])+1;
