@@ -55,7 +55,7 @@ void find(int n, int sum){
 		for(int i=0;i<m[n].size();i++){
 			int there=m[n][i];
 			if(visit[there]==1)continue;
-			find(there,sum-arr[n]);
+			find(there,dp[there][0]);
 		}	
 	}
 	
