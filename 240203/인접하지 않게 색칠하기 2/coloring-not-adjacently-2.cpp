@@ -22,8 +22,10 @@ int n,k;
 
 void dfs(int n){
 	visit[n]=1;
-	int left=0;
-	int right=0;
+	
+	dp[n][1][1]=arr[n];
+	dp[n][0][0]=0;
+	
 	for(int i=0;i<m[n].size();i++){
 		int there=m[n][i];
 		if(visit[there]==1)continue;
@@ -31,30 +33,23 @@ void dfs(int n){
 		
 		dfs(there);
 		
-		if(left==0){
-			left=there;
+		for(int i=k;i>=1;i--){
+			for(int j=1;j<=i;j++){
+				dp[n][i][1]=max(dp[n][i][1],dp[n][i-j][1]+dp[there][j][0]);
+			}	
 		}
-		else{
-			right=there;
-		}
+		for(int i=k;i>=0;i--){
+			for(int j=0;j<=i;j++){
+				dp[n][i][0]=max(dp[n][i][0],dp[n][i-j][0]+max(dp[there][j][0],dp[there][j][1]));
+			}
+		}	
+		
 		
 	}
 	
-	dp[n][1][1]=arr[n];
-	dp[n][0][0]=0;
 	
-	if(left!=0 && right!=0){
-		for(int i=1;i<=k;i++){
-			for(int j=0;j<i;j++){
-				dp[n][i][1]=max(dp[n][i][1],dp[left][j][0]+dp[right][i-j-1][0]+arr[n]);
-			}	
-		}
-		for(int i=0;i<=k;i++){
-			for(int j=0;j<=i;j++){
-				dp[n][i][0]=max(dp[n][i][0],max(dp[left][j][0],dp[left][j][1])+max(dp[right][i-j][0],dp[right][i-j][1]));
-			}
-		}	
-	}
+	
+	
 	
 	
 }
