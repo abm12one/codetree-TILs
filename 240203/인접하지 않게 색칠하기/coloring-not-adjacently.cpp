@@ -33,12 +33,12 @@ void dfs(int n){
 		
 		dfs(there);
 		
-		for(int i=1;i<=k;i++){
+		for(int i=k;i>=1;i--){
 			for(int j=1;j<=i;j++){
 				dp[n][i][1]=max(dp[n][i][1],dp[n][i-j][1]+dp[there][j][0]);
 			}	
 		}
-		for(int i=0;i<=k;i++){
+		for(int i=k;i>=0;i--){
 			for(int j=0;j<=i;j++){
 				dp[n][i][0]=max(dp[n][i][0],dp[n][i-j][0]+max(dp[there][j][0],dp[there][j][1]));
 			}
