@@ -25,7 +25,7 @@ void dfs(int n){
 		int there=m[n][i];
 		
 		d[there]=d[n]+1;
-		p[there]=n;
+		
 		dfs(there);
 	}
 	
@@ -33,7 +33,7 @@ void dfs(int n){
 }
 
 int sol(int a,int b){
-	
+
 	while(d[a]!=d[b]){
 		if(d[a]>d[b]){
 			a=p[a];
@@ -42,13 +42,15 @@ int sol(int a,int b){
 		else{
 			b=p[b];
 		}
+		
 	}
 	
 	
 	while(a!=b){
 		
 		a=p[a];
-		b=p[a];
+		b=p[b];
+		
 	}
 	
 	return a;
@@ -68,10 +70,12 @@ int main(){
 	d=vector<int>(n+1);
 	p=vector<int>(n+1);
 	m=vector<vector<int>>(n+1);
+	
 	for(int i=0;i<n-1;i++){
 		int a,b;
 		cin>>a>>b;
 		m[a].push_back(b);
+		p[b]=a;
 		visit[b]=1;
 	}
 	
