@@ -132,7 +132,7 @@ int main(){
 	
 	
 	sett();
-	cout<<p[0][4];
+	
 	
 	int q;
 	cin>>q;
