@@ -89,14 +89,16 @@ int main(){
 		
 		
 	}
+	;
 	sort(arr.begin(),arr.end());
 	
 	int s,e,k;
 	cin>>s>>e>>k;
 	int now=1;
 	int ans=snum[find(s)];
+	
 
-	for(int i=arr.size()-1;i>=0;i--){
+	for(int i=arr.size()-1;i>=1;i--){
 
 		if(now<=k&&i!=find(s)&&i!=find(e)){
 			ans+=snum[find(i)];
