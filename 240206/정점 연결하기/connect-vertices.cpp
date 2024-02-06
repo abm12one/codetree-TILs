@@ -67,10 +67,10 @@ int main(){
 	}
 	
 	vector<int>ans;
-	ans.push_back(p[1]);
+	ans.push_back(find(1));
 	for(int i=1;i<n+1;i++){
-		if(p[i]!=p[1]){
-			ans.push_back(p[i]);
+		if(find(i)!=find(1)){
+			ans.push_back(find(i));
 			break;
 		}
 	}
