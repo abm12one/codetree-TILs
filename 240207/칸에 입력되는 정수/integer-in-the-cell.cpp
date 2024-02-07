@@ -63,7 +63,7 @@ int main(){
 		p[i]=i;
 	}
 	
-	int ans;
+	int ans=m;
 	for(int i=1;i<=m;i++){
 		int k;
 		cin>>k;
