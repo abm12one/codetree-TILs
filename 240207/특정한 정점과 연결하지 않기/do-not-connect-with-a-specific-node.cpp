@@ -88,7 +88,7 @@ int main(){
 		
 	}
 	
-	sort(arr.begin(),arr.end(),greater());
+	sort(arr.begin(),arr.end(),greater<int>());
 	
 	int res=snum[fs];
 	int nk=min(k,(int)arr.size());
