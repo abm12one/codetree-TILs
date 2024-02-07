@@ -72,7 +72,7 @@ int main(){
 			ans=i-1;
 			break;
 		}
-		p[k]=find(fk-1);
+		p[fk]=find(fk-1);
 		
 		
 	}
