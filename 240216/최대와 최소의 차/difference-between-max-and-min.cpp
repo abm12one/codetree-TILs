@@ -94,7 +94,7 @@ int main(){
 		mmin=pow(n-1-en,2);
 	}
 	
-	int en=0;
+	en=0;
 	for(int i=0;i<n+1;i++){
 		p[i]=i;
 	}
