@@ -64,18 +64,17 @@ int main(){
 	for(int i=0;i<n+1;i++){
 		p[i]=i;
 	}
-	int on=0;
-	int zn=0;
+	
 	for(int i=0;i<m;i++){
 		int a,b,d;
 		cin>>a>>b>>d;
 		if(d==1){
 			oarr.push_back(node{a,b});
-			on++;
+		
 		}
 		else{
 			zarr.push_back(node{a,b});
-			zn++;
+
 		}
 		
 	}
@@ -87,13 +86,9 @@ int main(){
 		en++;
 		
 	}
-	if(en==n-1){
-		mmin=0;
-	}	
-	else{
-		mmin=pow(n-1-en,2);
-	}
 	
+	mmin=pow(n-1-en,2);
+
 	en=0;
 	for(int i=0;i<n+1;i++){
 		p[i]=i;
@@ -106,5 +101,6 @@ int main(){
 	
 	mmax=pow(en,2);
 	
+	cout<<mmin<<" "<<mmax<<'\n';
 	cout<<mmax-mmin<<"\n";
 }
