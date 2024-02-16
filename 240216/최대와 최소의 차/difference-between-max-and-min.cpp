@@ -29,7 +29,7 @@ bool compare(node n1,node n2){
 }
 */
 vector<node>oarr;
-
+vector<node>zarr;
 int find(int a){
 	if(p[a]==a){
 		return p[a];
@@ -74,7 +74,7 @@ int main(){
 			on++;
 		}
 		else{
-			
+			zarr.push_back(node{a,b});
 			zn++;
 		}
 		
@@ -87,14 +87,29 @@ int main(){
 		en++;
 		
 	}
-	
-	mmin=pow(n-1-en,2);
-	if(zn>=n-1){
-		mmax=pow(n-1,2);
-	}
+	if(en==n-1){
+		mmin=0;
+	}	
 	else{
-		mmax=pow(zn,2);	
+		mmin=pow(n-1-en,2);
 	}
+	
+	for(int i=0;i<n+1;i++){
+		p[i]=i;
+	}
+	for(int i=0;i<zarr.size();i++){
+		if(uset(zarr[i].st,zarr[i].ed)==0)continue;
+		en++;
+		
+	}
+	if(en>=n-1){
+		mmax=pow(n-1,2);
+	}	
+	else{
+		mmin=pow(en,2);
+	}
+
+	
 	
 	cout<<mmax-mmin<<"\n";
 }
