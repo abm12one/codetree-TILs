@@ -87,13 +87,14 @@ int main(){
 		en++;
 		
 	}
-	if(en==n-1){
-		mmin=0;
-	}	
+	
+	mmin=pow(n-1-en,2);
+	if(zn>=n-1){
+		mmax=pow(n-1,2);
+	}
 	else{
-		mmin=pow(n-1-en,2);
+		mmax=pow(zn,2);	
 	}
 	
-	mmax=pow(zn,2);
 	cout<<mmax-mmin<<"\n";
 }
