@@ -94,6 +94,7 @@ int main(){
 		mmin=pow(n-1-en,2);
 	}
 	
+	int en=0;
 	for(int i=0;i<n+1;i++){
 		p[i]=i;
 	}
@@ -102,14 +103,8 @@ int main(){
 		en++;
 		
 	}
-	if(en>=n-1){
-		mmax=pow(n-1,2);
-	}	
-	else{
-		mmin=pow(en,2);
-	}
-
 	
+	mmax=pow(en,2);
 	
 	cout<<mmax-mmin<<"\n";
 }
