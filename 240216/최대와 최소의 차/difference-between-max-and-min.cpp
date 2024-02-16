@@ -79,15 +79,15 @@ int main(){
 		
 	}
 	int en=0;
-	int mmin=0;
-	int mmax=0;
+	long mmin=0;
+	long mmax=0;
 	for(int i=0;i<oarr.size();i++){
 		if(uset(oarr[i].st,oarr[i].ed)==0)continue;
 		en++;
 		
 	}
 	
-	mmin=pow(n-1-en,2);
+	mmin=(long)pow(n-1-en,2);
 
 	en=0;
 	for(int i=0;i<n+1;i++){
@@ -99,7 +99,7 @@ int main(){
 		
 	}
 	
-	mmax=pow(en,2);
+	mmax=(long)pow(en,2);
 	
 
 	cout<<mmax-mmin<<"\n";
