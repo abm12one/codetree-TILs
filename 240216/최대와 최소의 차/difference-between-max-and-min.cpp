@@ -101,6 +101,6 @@ int main(){
 	
 	mmax=pow(en,2);
 	
-	cout<<mmin<<" "<<mmax<<'\n';
+
 	cout<<mmax-mmin<<"\n";
 }
