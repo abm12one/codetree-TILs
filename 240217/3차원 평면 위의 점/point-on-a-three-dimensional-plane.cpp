@@ -23,7 +23,7 @@ typedef struct{
 }edge;
 
 typedef struct {
-	int x,y,z;
+	int x,y,z,id;
 }node;
 
 vector<node>narr;
@@ -32,6 +32,16 @@ vector<int>p;
 
 bool compare(edge e1,edge e2){
 	return e1.value<e2.value;
+}
+
+bool cmpx(node n1,node n2){
+	return n1.x<n2.x;
+}
+bool cmpy(node n1,node n2){
+	return n1.y<n2.y;
+}
+bool cmpz(node n1,node n2){
+	return n1.z<n2.z;
 }
 
 int find(int a){
@@ -75,17 +85,31 @@ int main(){
 	for(int i=1;i<=n;i++){
 		int x,y,z;
 		cin>>x>>y>>z;
-		narr[i]=node{x,y,z};
+		narr.push_back(node{x,y,z,i});
 	}
 	
-	for(int i=1;i<narr.size()-1;i++){
-		for(int j=i+1;j<narr.size();j++){
-			int dx=abs(narr[i].x-narr[j].x);
-			int dy=abs(narr[i].y-narr[j].y);
-			int dz=abs(narr[i].z-narr[j].z);
-			int mmin=min(dx,min(dy,dz));
-			earr.push_back(edge{mmin,i,j});
-		}
+	sort(narr.begin(),narr.end(),cmpx);
+	for(int i=0;i<narr.size()-1;i++){
+		int v=abs(narr[i].x-narr[i+1].x);
+		int s=narr[i].id;
+		int e=narr[i+1].id;
+		earr.push_back(edge{v,s,e});
+	}
+	
+	sort(narr.begin(),narr.end(),cmpy);
+	for(int i=0;i<narr.size()-1;i++){
+		int v=abs(narr[i].y-narr[i+1].y);
+		int s=narr[i].id;
+		int e=narr[i+1].id;
+		earr.push_back(edge{v,s,e});
+	}
+	
+	sort(narr.begin(),narr.end(),cmpz);
+	for(int i=0;i<narr.size()-1;i++){
+		int v=abs(narr[i].z-narr[i+1].z);
+		int s=narr[i].id;
+		int e=narr[i+1].id;
+		earr.push_back(edge{v,s,e});
 	}
 	
 	sort(earr.begin(),earr.end(),compare);
