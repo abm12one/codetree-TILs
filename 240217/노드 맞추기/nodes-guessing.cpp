@@ -50,16 +50,22 @@ int main(){
 	map<string,int>stoi;
 	int n;
 	cin>>n;
-	g=vector<vector<int>>(n+1);
-	child=vector<vector<int>>(n+1);
-	in=vector<int>(n+1);
-	str=vector<string>(n+1);
-	for(int i=1;i<=n;i++){
+	g=vector<vector<int>>(n);
+	child=vector<vector<int>>(n);
+	in=vector<int>(n);
+	str=vector<string>(n);
+	for(int i=0;i<n;i++){
 		string temp;
 		cin>>temp;
-		stoi[temp]=i;
 		str[i]=temp;
 	}
+	
+	sort(str.begin(),str.end());
+	
+	for(int i=0;i<n;i++){
+		stoi[str[i]]=i;
+	}
+
 	
 	int m;
 	cin>>m;
@@ -75,7 +81,7 @@ int main(){
 	}
 	vector<int>root;
 	
-	for(int i=1;i<n+1;i++){
+	for(int i=0;i<n;i++){
 		if(in[i]==0){
 			q.push(i);
 			root.push_back(i);
@@ -95,7 +101,7 @@ int main(){
 	solve();
 	
 	
-	for(int i=1;i<n+1;i++){
+	for(int i=0;i<n;i++){
 		
 		cout<<str[i]<<' ';
 		sort(child[i].begin(),child[i].end());
