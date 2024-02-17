@@ -14,7 +14,7 @@
 #include<set>
 
 using namespace std;
-queue<int>q;
+priority_queue<int,vector<int>,greater<int>>pq;
 vector<int>visit;
 vector<int>in;
 vector<vector<int>>map;
@@ -22,15 +22,15 @@ int n,m;
 vector<int>ans;
 void solve(){
 	
-	while(!q.empty()){
-		int now=q.front();
+	while(!pq.empty()){
+		int now=pq.top();
 		ans.push_back(now);
-		q.pop();
+		pq.pop();
 		for(int i=0;i<map[now].size();i++){
 			int there=map[now][i];
 			in[there]--;
 			if(in[there]==0){
-				q.push(there);
+				pq.push(there);
 			}
 			
 		}
@@ -61,7 +61,7 @@ int main(){
 	
 	for(int i=1;i<n+1;i++){
 		if(in[i]==0){
-			q.push(i);
+			pq.push(i);
 		}
 	}
 	
