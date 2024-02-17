@@ -20,6 +20,7 @@ vector<vector<int>>g;
 vector<vector<int>>child;
 vector<int>in;
 queue<int>q;
+vector<string>str;
 
 void solve(){
 	
@@ -52,10 +53,12 @@ int main(){
 	g=vector<vector<int>>(n+1);
 	child=vector<vector<int>>(n+1);
 	in=vector<int>(n+1);
+	str=vector<string>(n+1);
 	for(int i=1;i<=n;i++){
 		string temp;
 		cin>>temp;
 		stoi[temp]=i;
+		str[i]=temp;
 	}
 	
 	int m;
@@ -83,9 +86,9 @@ int main(){
 	sort(root.begin(),root.end());
 	
 	for(int i=0;i<root.size();i++){
-		char temp='a'+root[i]-1;
 		
-		cout<<temp<<' ';
+		
+		cout<<str[root[i]]<<' ';
 	}
 	cout<<'\n';
 	
@@ -93,13 +96,13 @@ int main(){
 	
 	
 	for(int i=1;i<n+1;i++){
-		char temp='a'+i-1;
-		cout<<temp<<' ';
+		
+		cout<<str[i]<<' ';
 		sort(child[i].begin(),child[i].end());
 		cout<<child[i].size()<<' ';
 		for(int j=0;j<child[i].size();j++){
-			char temp='a'+child[i][j]-1;
-			cout<<temp<<' ';
+			
+			cout<<str[child[i][j]]<<' ';
 		}
 		cout<<'\n';
 	}
