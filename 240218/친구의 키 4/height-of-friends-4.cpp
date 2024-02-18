@@ -97,23 +97,25 @@ int main() {
     }
 
     // 답을 결정하고 이분 탐색을 진행합니다.
-    int lo = 0, hi = m;
-
+    int lo = 0, hi = m+1;
+	int flag=0;
     while(lo < hi) {
         int mid = (lo + hi) / 2;
-
+	
         // 1번부터 mid번 정보까지 사용했을 때
         // 사이클이 존재한다면 입력에서 모순이 존재합니다.
         // 정답을 갱신하고 더 작은 답이 있는지 탐색합니다.
         if(CycleExist(mid)) {
             hi = mid;
+			flag=1;
+			
         }
         else {
             lo = mid + 1;
         }
     }
-
-    if(lo >= m)
+	
+    if(flag==0)
         cout << "Consistent";
     else
         cout << hi;
