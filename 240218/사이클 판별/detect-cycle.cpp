@@ -24,7 +24,7 @@ int solve(){
 	while(!q.empty()){
 		int now=q.front();
 		num++;
-		cout<<now<<'\n';
+		
 		q.pop();
 		for(int i=0;i<map[now].size();i++){
 			int there=map[now][i];
