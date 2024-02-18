@@ -115,7 +115,7 @@ int main() {
         }
     }
 	
-    if(flag==0)
+    if(lo==m+1)
         cout << "Consistent";
     else
         cout << hi;
