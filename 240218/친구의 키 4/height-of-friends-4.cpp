@@ -113,7 +113,7 @@ int main() {
         }
     }
 
-    if(hi == 0)
+    if(lo >= m)
         cout << "Consistent";
     else
         cout << hi;
