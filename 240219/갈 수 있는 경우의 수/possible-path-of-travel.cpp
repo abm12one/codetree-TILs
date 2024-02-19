@@ -21,7 +21,7 @@ vector<vector<int>>pre;
 int dp(int now){
 	
 	int &ret=cache[now];
-	if(ret!=0&&ret!=-1){
+	if(ret!=0){
 		return ret;
 	}
 	ret=0;
@@ -44,7 +44,7 @@ int main(){
 	
 	int n,m;
 	cin>>n>>m;
-	cache=vector<int>(n+1,-1);
+	cache=vector<int>(n+1,0);
 	pre=vector<vector<int>>(n+1);
 	for(int i=0;i<m;i++){
 		int a,b;
