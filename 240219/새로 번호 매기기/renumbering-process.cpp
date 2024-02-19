@@ -25,7 +25,7 @@ void sol(){
 	while(!pq.empty()){
 		
 		int now=pq.top();
-		cout<<now<<'\n';
+	
 		arr[now]=cnt++;
 		num++;
 		pq.pop();
