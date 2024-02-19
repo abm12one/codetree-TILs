@@ -28,7 +28,6 @@ void sol1(){
 	while(!pmapq.empty()){
 		
 		int now=pmapq.top();
-		cout<<now<<"\n";
 		pans.push_back(now);
 		pmapq.pop();
 		
