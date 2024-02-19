@@ -34,10 +34,6 @@ int dp(int now){
 		ret%=1000000007;
 	}
 	
-	if(ret==0){
-		return ret=1;
-	}
-	
 	return ret;
 	
 }
@@ -58,7 +54,7 @@ int main(){
 		pre[b].push_back(a);
 		
 	}
-	
+	cache[1]=1;
 	cout<<dp(n)<<'\n';
 	
 }
