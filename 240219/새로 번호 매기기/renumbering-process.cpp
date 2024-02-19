@@ -15,18 +15,19 @@
 #include <iomanip>
 using namespace std;
 vector<vector<int>>map;
-priority_queue<int,vector<int>,greater<int>>pq;
+priority_queue<int>pq;
 vector<int>arr;
 vector<int>in;
 int num=0;
+int n,m;
 void sol(){
-	int cnt=1;
+	int cnt=n;
 	
 	while(!pq.empty()){
 		
 		int now=pq.top();
 	
-		arr[now]=cnt++;
+		arr[now]=cnt--;
 		num++;
 		pq.pop();
 		for(int i=0;i<map[now].size();i++){
@@ -49,7 +50,7 @@ int main(){
 	cin.tie(NULL);
 	cout.tie(NULL);
 	
-	int n,m;
+	
 	cin>>n>>m;
 	
 	in=vector<int>(n+1);
@@ -59,8 +60,8 @@ int main(){
 	for(int i=0;i<m;i++){
 		int a,b;
 		cin>>a>>b;
-		map[a].push_back(b);
-		in[b]++;
+		map[b].push_back(a);
+		in[a]++;
 	}
 	
 	/*
