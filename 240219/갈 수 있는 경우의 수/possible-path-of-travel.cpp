@@ -55,6 +55,4 @@ int main(){
 	cache[1]=1;
 	cout<<dp(n)<<'\n';
 	
-}<cache[n]<<'\n';
-	
 }
