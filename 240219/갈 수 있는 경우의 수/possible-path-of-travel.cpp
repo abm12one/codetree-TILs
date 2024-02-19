@@ -16,17 +16,23 @@
 using namespace std;
 
 vector<int>cache;
-vector<vector<int>>map;
+vector<vector<int>>pre;
 
-void dp(int now){
+int dp(int now){
 	
-	for(int i=0;i<map[now].size();i++){
-		int p=map[now][i];
-		cache[p]+=cache[now];
-		cache[p]%=1000000007;
-		dp(p);
+	int &ret=cache[now];
+	if(ret!=0&&ret!=-1){
+		return ret;
 	}
-	return;
+	ret=0;
+	
+	for(int i=0;i<pre[now].size();i++){
+		int p=pre[now][i];
+		ret+=dp(p);
+		ret%=1000000007;
+	}
+	
+	return ret;
 	
 }
 
@@ -38,16 +44,17 @@ int main(){
 	
 	int n,m;
 	cin>>n>>m;
-	cache=vector<int>(n+1,0);
-	map=vector<vector<int>>(n+1);
+	cache=vector<int>(n+1,-1);
+	pre=vector<vector<int>>(n+1);
 	for(int i=0;i<m;i++){
 		int a,b;
 		cin>>a>>b;
-		map[a].push_back(b);
+		pre[b].push_back(a);
 		
 	}
 	cache[1]=1;
-	dp(1);
-	cout<<cache[n]<<'\n';
+	cout<<dp(n)<<'\n';
+	
+}<cache[n]<<'\n';
 	
 }
