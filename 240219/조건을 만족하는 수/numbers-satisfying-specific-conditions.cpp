@@ -23,6 +23,7 @@ vector<int>pmapin;
 vector<int>mmapin;
 priority_queue<int>mmapq;
 priority_queue<int,vector<int>,greater<int>>pmapq;
+vector<int>rev;
 void sol1(){
 	
 	while(!pmapq.empty()){
@@ -50,11 +51,12 @@ void sol1(){
 
 
 void sol2(){
-	
+	int cnt=1;
 	while(!mmapq.empty()){
 		
 		int now=mmapq.top();
 		mans.push_back(now);
+		rev[now]=cnt++;
 		mmapq.pop();
 		
 		
@@ -87,7 +89,7 @@ int main(){
 	mmap=vector<vector<int>>(n+1);
 	pmapin=vector<int>(n+1);
 	mmapin=vector<int>(n+1);
-	
+	rev=vector<int>(n+1);
 	for(int i=1;i<n;i++){
 		char temp;
 		cin>>temp;
@@ -128,7 +130,7 @@ int main(){
 	
 	cout.fill('0');
     for(int i=0;i<n;i++){
-		cout << setw(3) << mans[i];
+		cout << setw(3) << rev[pans[i]];
 	}    
     cout<<'\n';
 	
