@@ -30,6 +30,7 @@ void sol1(){
 		
 		int now=pmapq.top();
 		pans.push_back(now);
+		
 		pmapq.pop();
 		
 		for(int i=0;i<pmap[now].size();i++){
@@ -60,8 +61,8 @@ void sol2(){
 		mmapq.pop();
 		
 		
-		for(int i=0;i<mmap[now].size();i++){
-			int there=mmap[now][i];
+		for(int i=0;i<pmap[now].size();i++){
+			int there=pmap[now][i];
 			
 			mmapin[there]--;
 			if(mmapin[there]==0){
@@ -96,24 +97,22 @@ int main(){
 		if(temp=='<'){
 			pmap[i].push_back(i+1);
 			pmapin[i+1]++;
-			mmap[i+1].push_back(i);
-			mmapin[i]++;
+			mmapin[i+1]++;
 		}
 		else{
-			mmap[i].push_back(i+1);
-			mmapin[i+1]++;
+			
 			pmap[i+1].push_back(i);
 			pmapin[i]++;
+			mmapin[i]++;
 		}
 		
 	}
 	
 	for(int i=1;i<n+1;i++){
-		if(mmapin[i]==0){
-			mmapq.push(i);
-		}
+		
 		if(pmapin[i]==0){
 			pmapq.push(i);
+			mmapq.push(i);
 		}
 	}
 	
@@ -129,8 +128,8 @@ int main(){
     cout<<'\n';
 	
 	cout.fill('0');
-    for(int i=0;i<n;i++){
-		cout << setw(3) << rev[pans[i]];
+    for(int i=1;i<=n;i++){
+		cout << setw(3) << rev[i];
 	}    
     cout<<'\n';
 	
