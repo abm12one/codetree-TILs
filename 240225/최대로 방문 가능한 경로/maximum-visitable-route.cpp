@@ -54,7 +54,7 @@ int main(){
 	cin>>n>>m;
 	map=vector<vector<int>>(100001);
 	cache=vector<int>(100001,-1);
-	arr=vector<int>(100001);
+	arr=vector<int>(100001,0);
 	
 	for(int i=0;i<m;i++){
 		int a,b;
@@ -63,7 +63,7 @@ int main(){
 		
 	}
 	
-	for(int i=0;i<m;i++){
+	for(int i=0;i<100001;i++){
 		sort(map[i].begin(),map[i].end());
 	}
 	
