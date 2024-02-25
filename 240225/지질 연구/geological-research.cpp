@@ -44,7 +44,7 @@ int dp(int n){
 	if(cnt>1){
 		return ret=mmax+1;
 	}
-	return mmax;
+	return ret=mmax;
 	
 }
 
