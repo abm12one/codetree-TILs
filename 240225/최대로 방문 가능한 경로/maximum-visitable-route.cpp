@@ -24,9 +24,10 @@ int dp(int n){
 	if(ret!=-1){
 		return ret;
 	}
-	ret=1;
 	
-	int mmax=-1;
+	ret=0;
+	
+	int mmax=0;
 	for(int i=0;i<map[n].size();i++){
 		
 		int p=map[n][i];
@@ -36,10 +37,10 @@ int dp(int n){
 		}
 		
 	}
-	if(mmax==-1){
+	if(mmax==0){
 		return ret;
 	}
-	return ret+1;
+	return ret=ret+1;
 	
 }
 
@@ -65,9 +66,10 @@ int main(){
 	for(int i=0;i<m;i++){
 		sort(map[i].begin(),map[i].end());
 	}
+	
 	cache[1]=1;
 	
-	if(dp(n)==1){
+	if(dp(n)==0){
 		cout<<-1<<'\n';
 		return 0;
 	}
@@ -87,13 +89,13 @@ int main(){
 		r.push_back(now);
 		now=arr[now];
 	}
+	
 	r.push_back(1);
 	reverse(r.begin(),r.end());
 	cout<<r.size()<<'\n';
+	
 	for(int i=0;i<r.size();i++){
 		cout<<r[i]<<' ';
 	}	
-	
-
 	
 }
