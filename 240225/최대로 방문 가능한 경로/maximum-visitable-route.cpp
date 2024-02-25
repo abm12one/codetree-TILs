@@ -24,7 +24,7 @@ int dp(int n){
 	if(ret!=-1){
 		return ret;
 	}
-	ret=-1;
+	ret=1;
 	
 	int mmax=-1;
 	for(int i=0;i<map[n].size();i++){
@@ -67,7 +67,7 @@ int main(){
 	}
 	cache[1]=1;
 	
-	if(dp(n)==-1){
+	if(dp(n)==1){
 		cout<<-1<<'\n';
 		return 0;
 	}
@@ -89,7 +89,7 @@ int main(){
 	}
 	r.push_back(1);
 	reverse(r.begin(),r.end());
-	
+	cout<<r.size()<<'\n';
 	for(int i=0;i<r.size();i++){
 		cout<<r[i]<<' ';
 	}	
