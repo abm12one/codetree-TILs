@@ -26,7 +26,7 @@ int dp(int n){
 	}
 	ret=1;
 	
-	int mmax=1;
+	int mmax=-1;
 	int cnt=1;
 	
 	for(int i=0;i<map[n].size();i++){
@@ -43,6 +43,9 @@ int dp(int n){
 	
 	if(cnt>1){
 		return ret=mmax+1;
+	}
+	if(mmax==-1){
+		return ret=1;
 	}
 	return ret=mmax;
 	
@@ -70,7 +73,6 @@ int main(){
 	
 	int ans=0;
 	for(int i=1;i<n+1;i++){
-		
 		ans=max(ans,dp(i));
 		
 	}
