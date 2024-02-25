@@ -40,7 +40,7 @@ int dp(int n){
 	if(mmax==0){
 		return ret;
 	}
-	return ret=ret+1;
+	return ret=mmax+1;
 	
 }
 
