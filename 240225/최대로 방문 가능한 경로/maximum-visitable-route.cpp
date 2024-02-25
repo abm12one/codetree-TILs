@@ -52,9 +52,9 @@ int main(){
 	
 	int n,m;
 	cin>>n>>m;
-	map=vector<vector<int>>(100001);
-	cache=vector<int>(100001,-1);
-	arr=vector<int>(100001,0);
+	map=vector<vector<int>>(n+1);
+	cache=vector<int>(n+1,-1);
+	arr=vector<int>(n+1,0);
 	
 	for(int i=0;i<m;i++){
 		int a,b;
@@ -63,7 +63,7 @@ int main(){
 		
 	}
 	
-	for(int i=0;i<100001;i++){
+	for(int i=0;i<n+1;i++){
 		sort(map[i].begin(),map[i].end());
 	}
 	
