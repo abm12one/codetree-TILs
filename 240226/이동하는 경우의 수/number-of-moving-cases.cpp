@@ -62,11 +62,10 @@ int main(){
 	
 	for(int i=1;i<n+1;i++){
 		if(in[i]==0){
-			cout<<i<<' ';
+			
 			q.push(i);
 		}
 	}
-	cout<<'\n';
 	
 	while(!q.empty()){
 
