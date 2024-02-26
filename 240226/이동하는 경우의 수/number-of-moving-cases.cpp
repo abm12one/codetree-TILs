@@ -15,71 +15,91 @@
 
 using namespace std;
 
-int cnt;
+queue<int>q;
+vector<int>in;
+vector<int>in2;
+vector<int>cache;
+vector<int>visit;
 typedef struct{
 	int dest;
 	int dis;
+
 }node;
 
 vector<vector<node>>map;
-vector<int>cache;
-vector<vector<int>>visit;
-int dp(int n){
-	int &ret=cache[n];
-	if(ret!=-1){
-		return ret;
-	}
-	ret=0;
-	int mmax=0;
-	for(int i=0;i<map[n].size();i++){
-		int p=map[n][i].dest;
-		int d=map[n][i].dis;
-		mmax=max(mmax,dp(p)+d);
-
-	}
-	return ret=mmax;
-}
-
-
-void sol(int n){
-
-	for(int i=0;i<map[n].size();i++){
-		int p=map[n][i].dest;
-		int d=map[n][i].dis;
-		if(dp(n)==dp(p)+d&&visit[n][p]==0){
-			cnt++;
-			visit[n][p]=1;
-			sol(p);
-		}
-	}
-
-
-}
 
 int main(){
 
     ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
+	
 	int n,m;
 	cin>>n>>m;
-	visit=vector<vector<int>>(n+1,vector<int>(n+1,0));
+	in=vector<int>(n+1);
+	in2=vector<int>(n+1);
+	visit=vector<int>(n+1);
 	map=vector<vector<node>>(n+1);
-	cache=vector<int>(n+1,-1);
-	
-	cnt=0;
+	cache=vector<int>(n+1);
 
 	for(int i=0;i<m;i++){
+		
 		int a,b,d;
 		cin>>a>>b>>d;
 		map[a].push_back(node{b,d});
+		in[b]++;
+		in2[b]++;
 
 	}
-	cache[n]=0;
-	cout<<dp(1)<<' ';
+	
+	for(int i=1;i<n+1;i++){
+		if(in[i]==0){
+			q.push(i);
+			
+		}
+	}
 
-	sol(1);
-	cout<<cnt<<"\n";
+	while(!q.empty()){
 
+		int now=q.front();
+		q.pop();
+		for(int i=0;i<map[now].size();i++){
+			int there=map[now][i].dest;
+			int v=map[now][i].dis;
+			cache[there]=max(cache[there],cache[now]+v);
+			in[there]--;
+			if(in[there]==0){
+				q.push(there);
+			}
+		}
+	}
+	cout<<cache[n]<<' ';
+
+	for(int i=1;i<n+1;i++){
+		if(in2[i]==0){
+			q.push(i);
+			
+		}
+	}
+	int cnt=0;
+	while(!q.empty()){
+
+		int now=q.front();
+		q.pop();
+		for(int i=0;i<map[now].size();i++){
+			int there=map[now][i].dest;
+			int v=map[now][i].dis;
+			if(cache[there]==cache[now]+v)cnt++;
+			in2[there]--;
+			if(in2[there]==0){
+				q.push(there);
+			}
+		}
+	}
+	cout<<cnt<<'\n';
+
+	
+
+	
 
 }
