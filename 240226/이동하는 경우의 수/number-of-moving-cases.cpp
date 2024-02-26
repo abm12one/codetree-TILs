@@ -38,10 +38,9 @@ int main(){
 	int n,m;
 	cin>>n>>m;
 	in=vector<int>(n+1);
-	in2=vector<int>(n+1);
 	visit=vector<int>(n+1);
 	map=vector<vector<node>>(n+1);
-	cache=vector<int>(n+1);
+	cache=vector<int>(n+1,-1);
 	before=vector<vector<int>>(n+1);
 	for(int i=0;i<m;i++){
 		
@@ -49,7 +48,6 @@ int main(){
 		cin>>a>>b>>d;
 		map[a].push_back(node{b,d});
 		in[b]++;
-		in2[b]++;
 
 	}
 	
@@ -59,7 +57,9 @@ int main(){
 			
 		}
 	}
+
 	int cnt=0;
+
 	while(!q.empty()){
 
 		int now=q.front();
@@ -67,6 +67,8 @@ int main(){
 		for(int i=0;i<map[now].size();i++){
 			int there=map[now][i].dest;
 			int v=map[now][i].dis;
+			if(cache[now]==-1)continue;
+
 			if(cache[there]<cache[now]+v){
 				cache[there]=cache[now]+v;
 				before[there].clear();
@@ -99,7 +101,7 @@ int main(){
             if(visit[y]) 
                 continue;
 
-            visit[y] = true;
+            visit[y] = 1;
             q.push(y);
         }
     }
