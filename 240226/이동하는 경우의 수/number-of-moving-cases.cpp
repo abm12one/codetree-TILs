@@ -23,7 +23,7 @@ typedef struct{
 
 vector<vector<node>>map;
 vector<int>cache;
-
+vector<vector<int>>visit;
 int dp(int n){
 	int &ret=cache[n];
 	if(ret!=-1){
@@ -44,11 +44,12 @@ int dp(int n){
 void sol(int n){
 
 	for(int i=0;i<map[n].size();i++){
-		int pre=map[n][i].dest;
+		int p=map[n][i].dest;
 		int d=map[n][i].dis;
-		if(dp(n)==dp(pre)+d){
+		if(dp(n)==dp(p)+d&&visit[n][p]==0){
 			cnt++;
-			sol(pre);
+			visit[n][p]=1;
+			sol(p);
 		}
 	}
 
@@ -62,21 +63,22 @@ int main(){
 	cout.tie(NULL);
 	int n,m;
 	cin>>n>>m;
-	
+	visit=vector<vector<int>>(n+1,vector<int>(n+1,0));
 	map=vector<vector<node>>(n+1);
 	cache=vector<int>(n+1,-1);
+	
 	cnt=0;
 
 	for(int i=0;i<m;i++){
 		int a,b,d;
 		cin>>a>>b>>d;
-		map[b].push_back(node{a,d});
+		map[a].push_back(node{b,d});
 
 	}
+	cache[n]=0;
+	cout<<dp(1)<<' ';
 
-	cout<<dp(n)<<' ';
-
-	sol(n);
+	sol(1);
 	cout<<cnt<<"\n";
 
 
