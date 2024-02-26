@@ -51,50 +51,56 @@ int main(){
 		in[b]++;
 
 	}
-	for(int i = 1; i <= n; i++){
+	
+	for(int i=1;i<=n;i++){
 		 cache[i] = INT_MIN;
 	}
+	
     cache[1]=0;
+	
 	
 	
 	for(int i=1;i<n+1;i++){
 		if(in[i]==0){
+			cout<<i<<' ';
 			q.push(i);
-			
 		}
 	}
-
+	cout<<'\n';
 	
 	while(!q.empty()){
 
-		int now=q.front();
+		int x=q.front();
 		q.pop();
 		
-		for(int i=0;i<map[now].size();i++){
+		for(int i=0;i<map[x].size();i++){
 			
-			int there=map[now][i].dest;
-			int v=map[now][i].dis;
+			int y=map[x][i].dest;
+			int d=map[x][i].dis;
 			
-			if(cache[now]==INT_MIN)continue;
-
-			if(cache[there]<cache[now]+v){
-				cache[there]=cache[now]+v;
-				before[there].clear();
-                before[there].push_back(now);
+			if(cache[x]!=INT_MIN){
+				
+				if(cache[y]<cache[x]+d){
+					cache[y]=cache[x]+d;
+					before[y].clear();
+               		before[y].push_back(x);
+				}
+				else if(cache[y]==cache[x]+d){
+					before[y].push_back(x);
+				}	
+				
 			}
-			else if(cache[there]==cache[now]+v){
-				before[there].push_back(now);
-			}
 			
-			in[there]--;
+			in[y]--;
 			
-			if(in[there]==0){
-				q.push(there);
+			if(in[y]==0){
+				q.push(y);
 			}
 		}
 	}
 
 	cout<<cache[n]<<' ';
+	
 	int cnt=0;
 	q.push(n);
     visit[n] = 1;
