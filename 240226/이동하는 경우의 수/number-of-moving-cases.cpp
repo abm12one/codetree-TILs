@@ -59,7 +59,7 @@ int main(){
 	}
 
 	int cnt=0;
-
+	cache[1]=0;
 	while(!q.empty()){
 
 		int now=q.front();
