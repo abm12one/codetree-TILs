@@ -82,16 +82,16 @@ int main(){
 		cout<<cache[i]<<'\n';
 	}
 	*/
+
 	int now=1;
 	vector<int>r;
-	r.push_back(1);
 	while(1){
 		if(arr[now]==0)break;
 		r.push_back(now);
 		now=arr[now];
 	}
+    r.push_back(n);
 
-	reverse(r.begin(),r.end());
 	cout<<r.size()<<'\n';
 	
 	for(int i=0;i<r.size();i++){
