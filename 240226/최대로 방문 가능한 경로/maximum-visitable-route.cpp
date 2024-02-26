@@ -1,13 +1,13 @@
-#include< iostream>
-#include< vector>
-#include< algorithm>
-#include< queue>
-#include< stack>
-#include< string>
-#include< cstring>
-#include< cmath>
-#include< limits.h>
-#include< cassert>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<queue>
+#include<stack>
+#include<string>
+#include<cstring>
+#include<cmath>
+#include<limits.h>
+#include<cassert>
 //#include< unordered_map>
 //#include< map>
 //#include < unordered_set>
@@ -90,7 +90,7 @@ int main(){
 		r.push_back(now);
 		now=arr[now];
 	}
-    
+
 	reverse(r.begin(),r.end());
 	cout<<r.size()<<'\n';
 	
