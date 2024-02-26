@@ -17,7 +17,6 @@ using namespace std;
 
 queue<int>q;
 vector<int>in;
-vector<int>in2;
 vector<int>cache;
 vector<int>visit;
 vector<vector<int>> before;
@@ -40,7 +39,7 @@ int main(){
 	in=vector<int>(n+1);
 	visit=vector<int>(n+1);
 	map=vector<vector<node>>(n+1);
-	cache=vector<int>(n+1,-1);
+	cache=vector<int>(n+1);
 	before=vector<vector<int>>(n+1);
 	for(int i=0;i<m;i++){
 		
@@ -50,6 +49,11 @@ int main(){
 		in[b]++;
 
 	}
+	for(int i = 1; i <= n; i++){
+		 cache[i] = INT_MIN;
+	}
+    cache[1]=0;
+	
 	
 	for(int i=1;i<n+1;i++){
 		if(in[i]==0){
@@ -59,15 +63,17 @@ int main(){
 	}
 
 	int cnt=0;
-	cache[1]=0;
+	
 	while(!q.empty()){
 
 		int now=q.front();
 		q.pop();
+		
 		for(int i=0;i<map[now].size();i++){
+			
 			int there=map[now][i].dest;
 			int v=map[now][i].dis;
-			if(cache[now]==-1)continue;
+			if(cache[now]==INT_MIN)continue;
 
 			if(cache[there]<cache[now]+v){
 				cache[there]=cache[now]+v;
@@ -77,7 +83,9 @@ int main(){
 			else if(cache[there]==cache[now]+v){
 				before[there].push_back(now);
 			}
+			
 			in[there]--;
+			
 			if(in[there]==0){
 				q.push(there);
 			}
@@ -98,8 +106,7 @@ int main(){
 
             cnt++;
 
-            if(visit[y]) 
-                continue;
+            if(visit[y]) continue;
 
             visit[y] = 1;
             q.push(y);
@@ -107,8 +114,6 @@ int main(){
     }
 	cout<<cnt<<'\n';
 
-	
 
-	
 
 }
