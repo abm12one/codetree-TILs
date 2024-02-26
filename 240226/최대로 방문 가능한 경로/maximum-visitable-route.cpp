@@ -82,7 +82,7 @@ int main(){
 		cout<<cache[i]<<'\n';
 	}
 	*/
-	int now=n;
+	int now=1;
 	vector<int>r;
 	r.push_back(1);
 	while(1){
