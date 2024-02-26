@@ -20,6 +20,7 @@ vector<int>in;
 vector<int>in2;
 vector<int>cache;
 vector<int>visit;
+vector<vector<int>> before;
 typedef struct{
 	int dest;
 	int dis;
@@ -41,7 +42,7 @@ int main(){
 	visit=vector<int>(n+1);
 	map=vector<vector<node>>(n+1);
 	cache=vector<int>(n+1);
-
+	before=vector<vector<int>>(n+1);
 	for(int i=0;i<m;i++){
 		
 		int a,b,d;
@@ -58,29 +59,6 @@ int main(){
 			
 		}
 	}
-
-	while(!q.empty()){
-
-		int now=q.front();
-		q.pop();
-		for(int i=0;i<map[now].size();i++){
-			int there=map[now][i].dest;
-			int v=map[now][i].dis;
-			cache[there]=max(cache[there],cache[now]+v);
-			in[there]--;
-			if(in[there]==0){
-				q.push(there);
-			}
-		}
-	}
-	cout<<cache[n]<<' ';
-
-	for(int i=1;i<n+1;i++){
-		if(in2[i]==0){
-			q.push(i);
-			
-		}
-	}
 	int cnt=0;
 	while(!q.empty()){
 
@@ -89,13 +67,42 @@ int main(){
 		for(int i=0;i<map[now].size();i++){
 			int there=map[now][i].dest;
 			int v=map[now][i].dis;
-			if(cache[there]==cache[now]+v)cnt++;
-			in2[there]--;
-			if(in2[there]==0){
+			if(cache[there]<cache[now]+v){
+				cache[there]=cache[now]+v;
+				before[there].clear();
+                before[there].push_back(now);
+			}
+			else if(cache[there]==cache[now]+v){
+				before[there].push_back(now);
+			}
+			in[there]--;
+			if(in[there]==0){
 				q.push(there);
 			}
 		}
 	}
+
+	cout<<cache[n]<<' ';
+
+	q.push(n);
+    visit[n] = 1;
+
+    while(!q.empty()) {
+        int x = q.front();
+        q.pop();
+
+        for(int i = 0; i < before[x].size(); i++) {
+            int y = before[x][i];
+
+            cnt++;
+
+            if(visit[y]) 
+                continue;
+
+            visit[y] = true;
+            q.push(y);
+        }
+    }
 	cout<<cnt<<'\n';
 
 	
