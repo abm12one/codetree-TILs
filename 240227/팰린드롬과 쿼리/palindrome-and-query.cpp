@@ -61,14 +61,11 @@ int main(){
 		cin>>s>>e;
 		int c=(2*s-1+2*e-1)/2;
 		if(c+a[c]>=2*e-1){
-			cout<<"YES"<<"\n";
+			cout<<"Yes"<<"\n";
 		}
 		else{
-			cout<<"NO"<<"\n";
+			cout<<"No"<<"\n";
 		}
 	}
-	
-	
-	
-	
+
 }
