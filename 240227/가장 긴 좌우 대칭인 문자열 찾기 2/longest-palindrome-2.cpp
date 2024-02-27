@@ -15,7 +15,7 @@
 
 using namespace std;
 
-string str;
+string str,arr;
 int as;
 int ae;
 int pel(int s,int e){
@@ -40,7 +40,12 @@ int main(){
 	cin.tie(NULL);
 	cout.tie(NULL);
 	
-	cin>>str;
+	cin>>arr;
+	for(int i=0;i<arr.size();i++){
+		str+='#';
+		str+=arr[i];
+	}
+	str+='#';
 	
 	int ans=0;
 	int start;
@@ -57,19 +62,9 @@ int main(){
 		
 	}
 	
-	for(int i=0;i<str.size()-1;i++){
-		
-		int temp=pel(i,i+1);
-		
-		if(ans<temp){
-			ans=temp;
-			start=as;
-			end=ae;
-		}
-		
-	}
+	
 	//cout<<start<<' '<<end<<'\n';
-	cout<<ans<<'\n';
+	cout<<ans/2<<'\n';
 	
 	
 }
