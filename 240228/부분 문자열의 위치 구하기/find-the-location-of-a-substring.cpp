@@ -13,7 +13,7 @@
 //#include < unordered_set>
 #include<set>
 
-#define MAX_N 100000
+#define MAX_N 500,001
 
 using namespace std;
 
