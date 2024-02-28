@@ -25,18 +25,18 @@ int check(int c,int rad){
 	if(str[c]=='#'){
 		for(int i=c+1;i<=c+rad;i+=2){
 			if(str[i]==f){
-				return 0;
+				return i-(c+1);
 			}
 		}
 	}
 	else{
 		for(int i=c;i<=c+rad;i+=2){
 			if(str[i]==f){
-				return 0;
+				return i-c;
 			}
 		}
 	}
-	return 1;
+	return rad;
 }
 
 int main(){
@@ -86,9 +86,9 @@ int main(){
 	
 	for(int i=0;i<n;i++){
 		
-		if(check(i,a[i])){
-			ans=max(ans,a[i]);
-		}
+		
+		ans=max(ans,check(i,a[i]));
+		
 		
 	}
 	
