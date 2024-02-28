@@ -17,7 +17,27 @@ using namespace std;
 
 string str,arr;
 vector<int>a;
-vector<int>warr;
+
+char f;
+
+int check(int c,int rad){
+	
+	if(str[c]=='#'){
+		for(int i=c+1;i<=c+rad;i+=2){
+			if(str[i]==f){
+				return 0;
+			}
+		}
+	}
+	else{
+		for(int i=c;i<=c+rad;i+=2){
+			if(str[i]==f){
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
 
 int main(){
 
@@ -28,16 +48,13 @@ int main(){
 	int any;
 	cin>>any;
 	
-	char find;
-	cin>>find;
+	cin>>f;
 	
 	cin>>arr;
+	
 	for(int i=0;i<arr.size();i++){
 		str+='#';
 		str+=arr[i];
-		if(arr[i]==find){
-			warr.push_back(2*i+1);
-		}
 	}
 	str+='#';
 	
@@ -66,31 +83,15 @@ int main(){
 			
 	}
 	int ans=0;
-	int st;
-	int ed;
+	
 	for(int i=0;i<n;i++){
 		
-		int s=i-a[i];
-		int e=i+a[i];
-		int len=(e-s)/2;
-		int flag=0;
-		for(int j=0;j<warr.size();j++){
-			if(s<=warr[j]&&warr[j]<=e){
-				flag=1;
-				break;
-			}
-		}
-		if(flag==1)continue;
-		
-		if(ans<len){
-			ans=len;
-			st=s;
-			ed=e;
+		if(check(i,a[i])){
+			ans=max(ans,a[i]);
 		}
 		
 	}
-	//cout<<st<<' '<<ed<<'\n';
-	//cout<<str[st]<<' '<<str[ed]<<'\n';
+	
 	cout<<ans<<'\n';
 	
 	
