@@ -80,6 +80,7 @@ int main() {
         if(p_h[0] == t_h[0] && p_h[1] == t_h[1]){
 			exists = 1;
 			st=i;
+			break;
 		}
             
 		
