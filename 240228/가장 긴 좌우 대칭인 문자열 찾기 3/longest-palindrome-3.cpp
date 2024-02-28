@@ -11,7 +11,7 @@
 //#include< unordered_map>
 //#include< map>
 //#include < unordered_set>
-//#include< set>
+#include<set>
 
 using namespace std;
 
@@ -19,25 +19,28 @@ string str,arr;
 vector<int>a;
 
 char f;
+set<int>s;
 
-int check(int c,int rad){
+int check(int n){
 	
-	if(str[c]=='#'){
-		for(int i=c+1;i<=c+rad;i+=2){
-			if(str[i]==f){
-				return i-(c+1);
-			}
-		}
+	if(str[n]=='#'){
+		auto nc=s.upper_bound(n);
+		if(nc==s.end())return a[n];
+		int nextc=*nc;
+		//cout<<"큰거"<<nextc<<'\n';
+		return min(a[n],nextc-n-1);
 	}
 	else{
-		for(int i=c;i<=c+rad;i+=2){
-			if(str[i]==f){
-				return i-c;
-			}
-		}
+		auto nc=s.upper_bound(n);
+		if(nc==s.end())return a[n];
+		int nextc=*nc;
+		//cout<<"작은거"<<nextc<<'\n';
+		return min(a[n],nextc-n-1);
 	}
-	return rad;
+	
+	
 }
+
 
 int main(){
 
@@ -55,6 +58,9 @@ int main(){
 	for(int i=0;i<arr.size();i++){
 		str+='#';
 		str+=arr[i];
+		if(arr[i]==f){
+			s.insert(2*i+1);
+		}
 	}
 	str+='#';
 	
@@ -83,12 +89,16 @@ int main(){
 			
 	}
 	int ans=0;
-	
+	/*
+	for(auto it=s.begin();it!=s.end();it++){
+		cout<<*it<<' ';
+	}
+	cout<<'\n';
+	*/
 	for(int i=0;i<n;i++){
 		
 		if(str[i]==f)continue;
-		ans=max(ans,check(i,a[i]));
-		
+		ans=max(ans,check(i));
 		
 	}
 	
