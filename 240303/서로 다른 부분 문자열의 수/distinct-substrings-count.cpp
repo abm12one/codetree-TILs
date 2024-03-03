@@ -33,10 +33,9 @@ int ToInt(char c) {
     return c - 'a' + 1;
 }
 
- set<pair<long long, long long> > hs;
-
 // 길이가 l인 부분 문자열 중 2번 이상 등장하는 경우가 있는지 확인합니다.
 void Exists(int l) {
+	set<pair<long long, long long> > hs;
     // p_pow 값을 계산합니다.
     for(int k = 0; k < 2; k++) {
         // p_pow[i] = p^i % m
@@ -73,6 +72,7 @@ void Exists(int l) {
 
         hs.insert(make_pair(h[0], h[1]));
     }
+	ans+=hs.size();
 	return;
 
   
@@ -88,6 +88,6 @@ int main() {
 		Exists(i);
 	}
 
-    cout << hs.size();
+    cout << ans;
     return 0;
 }
