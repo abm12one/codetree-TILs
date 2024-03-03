@@ -8,9 +8,9 @@
 #include<cmath>
 #include<limits.h>
 #include<cassert>
-//#include< unordered_map>
+#include<unordered_map>
 //#include< map>
-//#include < unordered_set>
+#include<unordered_set>
 #include<set>
 #define MAX_N 100000
 
@@ -35,7 +35,7 @@ int ToInt(char c) {
 
 // 길이가 l인 부분 문자열 중 2번 이상 등장하는 경우가 있는지 확인합니다.
 void Exists(int l) {
-	set<pair<long long, long long> > hs;
+	unordered_set<pair<long long, long long> > hs;
     // p_pow 값을 계산합니다.
    
     long long h[2] = {};
