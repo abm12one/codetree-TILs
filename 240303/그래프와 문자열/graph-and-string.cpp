@@ -58,16 +58,10 @@ int check(vector<int>&t){
 	return 0;
 	
 }
-
+/*
 void bfs(vector<int>&t,int now,int num){
 	if(num==l){
-		/*
-		cout<<"now "<<now<<'\n';
-		for(int i=0;i<l;i++){
-			cout<<t[i]<<' ';
-		}
-		cout<<'\n';
-		*/
+		
 		check(t);
 		return;
 	}
@@ -82,7 +76,24 @@ void bfs(vector<int>&t,int now,int num){
 	return;
 	
 }
+*/
 
+void bfs2(vector<int>&t,int now,int num){
+	if(num==l){
+		
+		ans++;;
+		return;
+	}
+	
+	for(int i=0;i<map[now].size();i++){
+		int there=map[now][i].dest;
+		int td=map[now][i].d;
+		if(td!=ToInt(part[num]))continue;
+		bfs2(t,there,num+1);
+	}
+	return;
+	
+}
 
 
 
@@ -121,8 +132,7 @@ int main() {
    
 	
 	for(int i=1;i<=n;i++){
-
-		bfs(t,i,0);
+		bfs2(t,i,0);
 	}
 	cout<<ans<<'\n';
 	
