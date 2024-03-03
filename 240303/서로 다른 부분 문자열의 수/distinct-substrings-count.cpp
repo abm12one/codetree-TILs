@@ -37,14 +37,7 @@ int ToInt(char c) {
 void Exists(int l) {
 	set<pair<long long, long long> > hs;
     // p_pow 값을 계산합니다.
-    for(int k = 0; k < 2; k++) {
-        // p_pow[i] = p^i % m
-        p_pow[k][0] = 1;
-        for(int i = 1; i <= n; i++)
-            p_pow[k][i] = (p_pow[k][i - 1] * p[k]) % m[k];
-    }
-
-    // s에서 구간 [0, l - 1]에 해당하는 해싱값을 계산합니다.
+   
     long long h[2] = {};
     for(int k = 0; k < 2; k++) {
         for(int i = 0; i < l; i++)
@@ -83,6 +76,12 @@ int main() {
     cin >> s;
 
     n = (int) s.size();
+	for(int k = 0; k < 2; k++) {
+        // p_pow[i] = p^i % m
+        p_pow[k][0] = 1;
+        for(int i = 1; i <= n; i++)
+            p_pow[k][i] = (p_pow[k][i - 1] * p[k]) % m[k];
+    }
 
     for(int i=1;i<=n;i++){
 		Exists(i);
