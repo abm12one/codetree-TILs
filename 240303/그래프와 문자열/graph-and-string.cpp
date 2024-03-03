@@ -1,140 +1,103 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<queue>
-#include<stack>
-#include<string>
-#include<cstring>
-#include<cmath>
-#include<limits.h>
-#include<cassert>
-//#include< unordered_map>
-//#include< map>
-//#include < unordered_set>
-#include<set>
+#include <iostream>
+#include <string>
+#include <tuple>
+#include <vector>
 
-#define MAX_N 500001
+#define MAX_N 100000
 
 using namespace std;
 
-string part;
-vector<int>t;
+// 변수 선언
+string pattern;
+
+vector<pair<int, char> > edges[MAX_N + 1];
+
+char path[MAX_N + 1];
+
 int n, l;
+
+// 2개의 polynomial rolling 해싱을 위한 p, m 값을 정의합니다.
 int p[2] = {31, 37};
 int m[2] = {int(1e9) + 7, int(1e9) + 9};
 
-vector<long long>t_h;
-vector<long long>p_h;
+// p^i, 값을 m으로 나눈 나머지를 관리합니다.
 long long p_pow[2][MAX_N + 1];
 
-typedef struct{
-	int dest;
-	int d;
-}node;
+// 처음 주어진 패턴에 대한 해싱값을 관리합니다.
+long long p_h[2];
 
-vector<vector<node>>map;
+int ans;
 
-
+// 소문자 알파벳을 수로 변경합니다.
 int ToInt(char c) {
     return c - 'a' + 1;
 }
 
-int ans=0;
+void DFS(int x, int cnt, long long t_h1, long long t_h2) {
+    long long t_h[2] = {t_h1, t_h2};
 
-int check(vector<int>&t){
-	t_h = vector<long long>(2);
-	for(int k = 0; k < 2; k++) {
-        for(int i = 0; i < l; i++)
-            t_h[k] = (t_h[k] + t[i] * p_pow[k][l - 1 - i]) % m[k];
+    // 해싱값을 계산해줍니다.
+    if(cnt == l) {
+        // text에서 구간 [0, l - 1]에 해당하는 해싱값을 계산합니다.
+        for(int k = 0; k < 2; k++) {
+            for(int i = 0; i < l; i++)
+                t_h[k] = (t_h[k] + ToInt(path[i]) * p_pow[k][l - 1 - i]) % m[k];
+        }
     }
-	
-	//cout<<p_h[0]<<" "<<t_h[0]<<' '<<p_h[1]<<" "<<t_h[1]<<'\n';
-	
-	if(p_h[0] == t_h[0] && p_h[1] == t_h[1]){
-		ans++;
-		return 1; 	
-	}
-	
-	return 0;
-	
-}
-/*
-void bfs(vector<int>&t,int now,int num){
-	if(num==l){
-		
-		check(t);
-		return;
-	}
-	
-	for(int i=0;i<map[now].size();i++){
-		int there=map[now][i].dest;
-		int td=map[now][i].d;
-		t[num]=td;
-		bfs(t,there,num+1);
-		t[num]=0;
-	}
-	return;
-	
-}
-*/
+    else if(cnt > l) {
+        for(int k = 0; k < 2; k++) {
+            // 이전 [cnt - l - 1, cnt - 2]에 해당하는 해싱값은 t_h에 있습니다.
+            // 이전 값(t_h)은 (T[cnt - l - 1] * p^(l - 1) + T[cnt - l] * p^(l - 2) + ... + T[cnt - 2] * 1) % m입니다.
+            // 이제 t_h * p - T[cnt - l - 1] * p^l + T[cnt - 1]를 계산하면
+            // 새로 계산을 원하는 해싱값인 (T[cnt - l] * p^(l - 1) + T[cnt - l + 1] * p^(l - 2) + ... + T[cnt - 1] * 1) % m이 됩니다.
+            t_h[k] = (t_h[k] * p[k] - ToInt(path[cnt - l - 1]) * p_pow[k][l] + ToInt(path[cnt - 1])) % m[k];
+            // t_h값을 양수로 변환해줍니다.
+            if(t_h[k] < 0)
+                t_h[k] += m[k];
+        }
+    }
 
-void bfs2(vector<int>&t,int now,int num){
-	if(num==l){
-		
-		ans++;;
-		return;
-	}
-	
-	for(int i=0;i<map[now].size();i++){
-		int there=map[now][i].dest;
-		int td=map[now][i].d;
-		if(td!=ToInt(part[num]))continue;
-		bfs2(t,there,num+1);
-	}
-	return;
-	
+    // 일치하면 답을 갱신해줍니다.
+    if(t_h[0] == p_h[0] && t_h[1] == p_h[1])
+        ans++;
+
+    for(int i = 0; i < (int) edges[x].size(); i++) {
+        int y; char c;
+        tie(y, c) = edges[x][i];
+        path[cnt] = c;
+        DFS(y, cnt + 1, t_h[0], t_h[1]);
+    }
 }
-
-
 
 int main() {
-    
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	cin>>n>>part;
-	map=vector<vector<node>>(n+1,vector<node>());
-	for(int i=0;i<n-1;i++){
-		int a,b;
-		char ch;
-		cin>>a>>b>>ch;
-		
-		map[a].push_back(node{b,ToInt(ch)});
-		
-	}
+    // 입력:
+    cin >> n >> pattern;
+    l = (int) pattern.size();
 
-	l = (int) part.size();
-	t=vector<int>(l+1,0);
-    
-	for(int k = 0; k < 2; k++) {
-        
+    for(int i = 0; i < n - 1; i++) {
+        int x, y; char c;
+        cin >> x >> y >> c;
+        edges[x].push_back(make_pair(y, c));
+    }
+
+    // p_pow 값을 계산합니다.
+    for(int k = 0; k < 2; k++) {
+        // p_pow[i] = p^i % m
         p_pow[k][0] = 1;
         for(int i = 1; i <= n; i++)
             p_pow[k][i] = (p_pow[k][i - 1] * p[k]) % m[k];
     }
-	
-    p_h = vector<long long>(2);
+
+    // pattern에 대한 해싱값인 p_h값을 계산합니다.
+    // p_h = (P[0] * p^(l - 1) + P[1] * p^(l - 2) + ... + P[l - 1] * 1) % m
+    // 소문자 알파벳은 a부터 z까지 순서대로 1부터 26까지의 수와 대응됩니다.
     for(int k = 0; k < 2; k++) {
         for(int i = 0; i < l; i++)
-            p_h[k] = (p_h[k] + ToInt(part[i]) * p_pow[k][l - 1 - i]) % m[k];
+            p_h[k] = (p_h[k] + ToInt(pattern[i]) * p_pow[k][l - 1 - i]) % m[k];
     }
-   
-	
-	for(int i=1;i<=n;i++){
-		bfs2(t,i,0);
-	}
-	cout<<ans<<'\n';
-	
-    
+
+    DFS(1, 0, 0, 0);
+
+    cout << ans;
+    return 0;
 }
