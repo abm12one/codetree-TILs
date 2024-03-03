@@ -20,11 +20,11 @@ using namespace std;
 string s;
 
 int n;
-long long ans=0;
+int ans=0;
 // 2개의 polynomial rolling 해싱을 위한 p, m 값을 정의합니다.
 int p[2] = {31, 37};
 int m[2] = {int(1e9) + 7, int(1e9) + 9};
-vector<vector<long long>>dp;
+
 // p^i, 값을 m으로 나눈 나머지를 관리합니다.
 long long p_pow[2][MAX_N + 1];
 
@@ -39,21 +39,15 @@ void Exists(int l) {
     // p_pow 값을 계산합니다.
    
     long long h[2] = {};
-	
-	if(l==1){
-            for(int k=0; k<2; k++){
-                h[k] =  ToInt(s[0]) %m [k]; 
-                dp[k][1] = h[k]; 
-            }
-        }
-    else{
-        for(int k=0; k<2; k++){
-        	h[k] = (dp[k][l-1] * p[k] + ToInt(s[l-1])) % m[k]; 
-            dp[k][l] = h[k]; 
-        } 
+    for(int k = 0; k < 2; k++) {
+        for(int i = 0; i < l; i++)
+            h[k] = (h[k] + ToInt(s[i]) * p_pow[k][l - 1 - i]) % m[k];
     }
-	
+
+    // set에 넣어줍니다.
+   
 	hs.insert(make_pair(h[0], h[1]));
+    
 	
     // [i, i + l - 1] 구간을 부분문자열로 하는 경우를 전부 탐색합니다.
     for(int i = 1; i <= n - l; i++) {
@@ -78,7 +72,6 @@ int main() {
     cin >> s;
 
     n = (int) s.size();
-	dp=vector<vector<long long>>(2,vector<long long>(n+1));
 	for(int k = 0; k < 2; k++) {
         // p_pow[i] = p^i % m
         p_pow[k][0] = 1;
