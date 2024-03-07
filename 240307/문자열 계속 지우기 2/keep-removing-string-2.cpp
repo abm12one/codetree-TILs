@@ -58,12 +58,12 @@ int main() {
                     b="";
                 }
                 else{
-                    b=text.substr(i+1,n+1);
+                    b=text.substr(i+1);
                 }
                 text="";
                 text=a+b;
-                //cout<<text<<'\n';
                 j=f[j];
+                break;
             }
 
         }
@@ -73,7 +73,7 @@ int main() {
     }
     
     
-    cout<<text.substr(1,text.size());
+    cout<<text.substr(1);
   
 
 
