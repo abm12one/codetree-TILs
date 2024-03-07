@@ -26,11 +26,11 @@ int main() {
     
     int n=text.size();
     text='#'+text;
-    lo=0;
-    hi=n+1;
+    lo=1;
+    hi=n;
     vector<int>f(MAX_M+1);
 
-    while(lo<hi){
+    while(lo<=hi){
         string pattern="";
         int mid=(lo+hi)/2;
         for(int i=mid;i>=1;i--){
