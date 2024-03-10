@@ -26,12 +26,12 @@ bool compare(node n1,node n2){
 }
 
 vector<node>arr;
-vector<vector<int>>dp;
+vector<vector<long long>>dp;
 
-int dist(int a,int b){
-    int dy=abs(arr[a].y-arr[b].y);
-    int dx=abs(arr[a].x-arr[b].x);
-    return pow(dy,2)+pow(dx,2);
+long long dist(int a,int b){
+    long long dy=(long long)abs(arr[a].y-arr[b].y);
+    long long dx=(long long)abs(arr[a].x-arr[b].x);
+    return (long long)pow(dy,2)+pow(dx,2);
 }
 
 int main() {
@@ -55,7 +55,7 @@ int main() {
     }
     */
 
-    dp=vector<vector<int>>(n+1,vector<int>(n+1,(int)1e9));
+    dp=vector<vector<long long>>(n+1,vector<long long>(n+1,(long long)1e16));
 
     dp[1][1]=0;
 
@@ -72,7 +72,7 @@ int main() {
         }
     }
 
-    int ans=(int)1e9;
+    long long ans=(long long)1e16;
     for(int i=1;i<n;i++){
         ans=min(ans,dp[i][n]+dist(i,n));
     }
