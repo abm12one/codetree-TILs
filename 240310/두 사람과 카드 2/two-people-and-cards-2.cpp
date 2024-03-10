@@ -48,15 +48,15 @@ int main() {
     for(int i=0;i<n+1;i++){
         for(int j=0;j<n+1;j++){
             
-            if(s.find(j)!=s.end()){
-                continue;
-            }
             int k=max(i,j)+1;
             if(k==n+1){
                 continue;
             }
-            dp[i][k]=min(dp[i][k],dp[i][j]+dist(j,k));
             dp[k][j]=min(dp[k][j],dp[i][j]+dist(i,k));
+            if(s.find(k)!=s.end()){
+                continue;
+            }
+            dp[i][k]=min(dp[i][k],dp[i][j]+dist(j,k));
         }
     }
     int ans=(int)2e9;
