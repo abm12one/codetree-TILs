@@ -55,7 +55,7 @@ int main() {
     }
     */
 
-    dp=vector<vector<int>>(n+1,vector<int>(n+1,987654321));
+    dp=vector<vector<int>>(n+1,vector<int>(n+1,(int)1e9));
 
     dp[1][1]=0;
 
@@ -72,7 +72,7 @@ int main() {
         }
     }
 
-    int ans=9897654321;
+    int ans=(int)1e9;
     for(int i=1;i<n;i++){
         ans=min(ans,dp[i][n]+dist(i,n));
     }
