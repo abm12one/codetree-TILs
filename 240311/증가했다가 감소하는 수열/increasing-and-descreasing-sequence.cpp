@@ -12,44 +12,73 @@
 //#include<map>
 #include<unordered_set>
 #include<set>
-#define MAX_M 100000
+#define MAX_N 200
+
 
 using namespace std;
-vector<int>arr;
-vector<int>dif;
+
+const int MOD = 10007;
+
+
+int n;
+int points[MAX_N];
+
+
+int dp[MAX_N][MAX_N];
+
 int main() {
     
-    int n;
-    cin>>n;
-    arr=vector<int>(n);
-    
-    
-    for(int i=0;i<n;i++){
-        
-        
-        cin>>arr[i];
-        
-    }
+    cin >> n;
 
-    int ans=1;
-    int cnt=0;
-    if(arr[0]>arr[n-1]){
-        cout<<0<<'\n';
-    }
-   
-    else{
-        for(int i=1;i<n-1;i++){
-            if(arr[0]<arr[i]&&arr[i]<arr[n-1]){
-                cnt++;
-                //cout<<cnt<<' '<<arr[i]<<'\n';
-                ans*=3;
-                ans%=10007;
-            }
+    for(int i = 0; i < n; i++)
+        cin >> points[i];
+
+    
+    dp[0][0] = 1;
+
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
             
+            int next = max(i, j) + 1;
 
+            if(next == n)
+                continue;
+
+            
+            for(int k = next; k < n; k++) {
+
+                if(k == n - 1) {
+                    if(points[i] < points[k] && points[j] < points[k]) {
+                        dp[k][j] += dp[i][j];
+                        dp[k][j] %= MOD;
+
+                        dp[i][k] += dp[i][j];
+                        dp[i][k] %= MOD;
+                    }
+                    break;
+                }
+                if(points[i] < points[k]) {
+                    dp[k][j] += dp[i][j];
+                    dp[k][j] %= MOD;
+                }
+
+                
+                if(points[j] < points[k]) {
+                    dp[i][k] += dp[i][j];
+                    dp[i][k] %= MOD;
+                }
+                
+            }
         }
-        cout<<ans<<'\n';
     }
-    
-	
+
+    int ans = 0;
+    for(int i = 0; i < n; i++) {
+        ans += dp[i][n - 1];
+        ans %= MOD;
+    }
+
+    cout << ans;
+    return 0;
 }
