@@ -22,31 +22,30 @@ int main() {
     int n;
     cin>>n;
     arr=vector<int>(n);
-    dif=vector<int>(n);
+    
     
     for(int i=0;i<n;i++){
-        int temp;
-        cin>>temp;
         
-        arr[i]=temp;
-        dif[i]=temp;
+        
+        cin>>arr[i];
+        
     }
-    sort(dif.begin(),dif.end());
-    int flag=0;
-    for(int i=0;i<n;i++){
-        if(arr[i]!=dif[i]){
-            flag=1;
-        }
-    }
+
     int ans=1;
-    if(flag==1){
+    int cnt=0;
+    if(arr[0]>arr[n-1]){
         cout<<0<<'\n';
     }
    
     else{
-        for(int i=0;i<n-2;i++){
-            ans*=3;
-            ans%=10007;
+        for(int i=1;i<n-1;i++){
+            if(arr[0]<arr[i]&&arr[i]<arr[n-1]){
+                cnt++;
+                //cout<<cnt<<' '<<arr[i]<<'\n';
+                ans*=3;
+                ans%=10007;
+            }
+            
 
         }
         cout<<ans<<'\n';
