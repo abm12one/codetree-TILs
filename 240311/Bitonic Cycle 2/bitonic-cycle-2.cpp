@@ -71,7 +71,7 @@ int main() {
     }
 
     long long ans=(long long)2e9;
-    for(int i=1;i<n+1;i++){
+    for(int i=1;i<n;i++){
         ans=min(ans,dp[i][n][1]+dist(i,n));
         ans=min(ans,dp[i][n][0]);
         ans=min(ans,dp[n][i][1]+dist(i,n));
