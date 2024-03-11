@@ -55,6 +55,7 @@ int main() {
 
     for(int i=1;i<n+1;i++){
         for(int j=1;j<n+1;j++){
+
             int k=max(i,j)+1;
             if(k==n+1){
                 continue;
@@ -70,10 +71,11 @@ int main() {
     }
 
     int ans=(int)2e9;
-    for(int i=1;i<n;i++){
-        ans=min(ans,dp[i][n][0]);
+    for(int i=1;i<n+1;i++){
         ans=min(ans,dp[i][n][1]+dist(i,n));
-        ans=min(ans,dp[i][n][0]+dist(i,n));
+        ans=min(ans,dp[i][n][0]);
+        ans=min(ans,dp[n][i][1]+dist(i,n));
+        ans=min(ans,dp[n][i][0]);
     }
     cout<<ans<<'\n';
 
