@@ -49,41 +49,34 @@ int main() {
 
     sort(arr.begin(),arr.end(),compare);
 
-    dp=vector<vector<vector<long long>>>(n+1,vector<vector<long long>>(n+1,vector<long long>(4,(long long)2e9)));
+    dp=vector<vector<vector<long long>>>(n+1,vector<vector<long long>>(n+1,vector<long long>(2,(long long)2e9)));
 
     dp[1][1][0]=0;
+    for(int a=0;a<=1;a++){
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<n+1;j++){
+            
+                int k=max(i,j)+1;
+                if(k==n+1){
+                    continue;
+                }
+                dp[k][j][0]=min(dp[k][j][0],dp[i][j][0]+dist(i,k));
+                dp[i][k][0]=min(dp[i][k][0],dp[i][j][0]+dist(j,k));
+                if(a==0)continue;
+                dp[k][j][1]=min(dp[k][j][1],min(dp[i][j][0],dp[i][j][1]+dist(i,k)));
+                dp[i][k][1]=min(dp[i][k][1],min(dp[i][j][0],dp[i][j][1]+dist(j,k)));
 
-    for(int i=1;i<n+1;i++){
-        for(int j=1;j<n+1;j++){
-
-            int k=max(i,j)+1;
-            if(k==n+1){
-                continue;
             }
-            
-
-            dp[k][j][0]=min(dp[k][j][0],dp[i][j][0]+dist(i,k));
-            dp[i][k][0]=min(dp[i][k][0],dp[i][j][0]+dist(j,k));
-
-            dp[k][j][2]=min(dp[k][j][2],min(dp[i][j][2]+dist(i,k),dp[i][j][3]+dist(i,k)));
-            dp[i][k][2]=min(dp[i][k][2],min(dp[i][j][2]+dist(i,k),dp[i][j][3]+dist(j,k))); 
-
-            dp[k][j][3]=min(dp[k][j][3],dp[i][j][0]);
-            dp[i][k][3]=min(dp[i][k][3],dp[i][j][0]); 
-            
-                          
-            
-
         }
     }
-
     long long ans=(long long)2e9;
-    for(int i=1;i<n;i++){
-        ans=min(ans,dp[i][n][3]+dist(i,n));
-        ans=min(ans,dp[i][n][2]+dist(i,n));
+    for(int i=1;i<n+1;i++){
+        ans=min(ans,dp[i][n][1]+dist(i,n));
         ans=min(ans,dp[i][n][0]);
-        
+        ans=min(ans,dp[n][i][1]+dist(i,n));
+        ans=min(ans,dp[n][i][0]);
     }
     cout<<ans<<'\n';
 
+	
 }
