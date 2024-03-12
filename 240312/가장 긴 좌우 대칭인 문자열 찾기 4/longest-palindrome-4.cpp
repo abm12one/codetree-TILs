@@ -12,10 +12,10 @@
 //#include<map>
 #include<unordered_set>
 #include<set>
-#define MAX_M 100000
+#define MAX_N 5000
 
 using namespace std;
-vector<vector<int>>dp;
+bool dp[MAX_N][MAX_N];
 string str;
 int ans;
 int n;
@@ -25,15 +25,15 @@ int main() {
     cin>>str;
     n=str.size();
     ans=1;
-    dp=vector<vector<int>>(n,vector<int>(n,0));
+    
 
     for(int i=0;i<n;i++){
-        dp[i][i]=1;
+        dp[i][i] = true;
     }
 
     for(int i=0;i<n-1;i++){
         if(str[i]==str[i+1]){
-            dp[i][i+1]=1;
+            dp[i][i+1]=true;
             ans=2;
         }
     }
@@ -45,7 +45,7 @@ int main() {
             int j=i+gap-1;
 
             if(dp[i+1][j-1]&&str[i]==str[j]){
-                dp[i][j]=1;
+                dp[i][j]=true;
                 ans=gap;
             }
 
