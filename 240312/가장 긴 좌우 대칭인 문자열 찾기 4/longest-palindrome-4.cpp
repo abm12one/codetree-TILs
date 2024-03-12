@@ -16,15 +16,16 @@
 
 using namespace std;
 vector<vector<int>>dp;
+string str;
 int ans;
 int n;
 int main() {
 
-    string str;
+    
     cin>>str;
     n=str.size();
     ans=1;
-    dp=vector<vector<int>>(n+1,vector<int>(n+1,0));
+    dp=vector<vector<int>>(n,vector<int>(n,0));
 
     for(int i=0;i<n;i++){
         dp[i][i]=1;
@@ -38,8 +39,11 @@ int main() {
     }
 
     for(int gap=3;gap<=n;gap++){
+
         for(int i=0;i<=n-gap;i++){
+
             int j=i+gap-1;
+
             if(dp[i+1][j-1]&&str[i]==str[j]){
                 dp[i][j]=1;
                 ans=gap;
@@ -49,6 +53,7 @@ int main() {
     }
 
     cout<<ans<<'\n';
+    return 0;
 
 
 
