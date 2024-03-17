@@ -1,7 +1,7 @@
 #include <iostream>
 
 #define MAX_N 500
-#define MAX_K 500
+#define MAX_K 1000
 
 using namespace std;
 
