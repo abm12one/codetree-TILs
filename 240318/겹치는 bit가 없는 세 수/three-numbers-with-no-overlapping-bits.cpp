@@ -18,17 +18,14 @@ using namespace std;
 
 vector<int>arr;
 int isok(int a,int b){
-    int ret=arr[a];
-    ret&=~arr[b];
-    ret|=arr[b];
-    return ret;
+    if((a|b)==(a+b)){
+        
+        return 1;
+    }
+    
+    return 0;
+}
 
-}
-int hap(int a,int b){
-    int ret=arr[a];
-    ret+=arr[b];
-    return ret;
-}
 int main() {
     
     int n;
@@ -47,11 +44,11 @@ int main() {
     for(int i=0;i<n-2;i++){
         for(int j=i+1;j<n-1;j++){
             for(int k=j+1;k<n;k++){
-                if(isok(i,j)!=hap(i,j))continue;
-                if(isok(i,k)!=hap(i,k))continue;
-                if(isok(j,k)!=hap(j,k))continue;
-                flag=1;
-                ans=(arr[i]|arr[j])|arr[k];
+                
+                if(!isok(arr[i],arr[j]))continue;
+                if(!isok(arr[i]+arr[j],arr[k]))continue;
+                
+                ans=max(ans,arr[i]+arr[j]+arr[k]);
                 break;
             }
         }
