@@ -54,8 +54,25 @@ void sol(int st,int now,int cnt){
     }
 
     if(now==m*n)return;
-    
-    sol(st,now+1,cnt);
+    int flag=1;
+    int u=now-m;
+    if(u<0){}
+
+    else{
+        if(st&(1<<u)==0)flag=0;
+    }
+
+    int l=now-1;
+
+    if(now%m==0){}
+    else{
+       if(st&(1<<l)==0)flag=0;
+    }
+
+    if(flag==1){
+        sol(st,now+1,cnt);
+    }
+   
     
     int next=push(st,now);
 
