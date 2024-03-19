@@ -16,30 +16,27 @@
 using namespace std;
 
 vector<vector<int>>map;
+vector<vector<int>>dp;
 
 int n;
 
-int ans=987654321;
+void sol(){
 
-void sol(int now,int mark,int dist){
-    
-    if(mark==((1<<n)-1)){
-        
-        if(map[now][0]==0)return;
-        ans=min(ans,dist+map[now][0]);
-        return;
-    }
-    for(int next=0;next<n;next++){
-        if(mark&(1<<next)){
-            continue;
+    dp[1][0]=0;
+    for(int i=0;i<(1<<n);i++){
+        for(int j=0;j<n;j++){
+            if(i&(1<<j)==0)continue;
+
+            for(int k=0;k<n;k++){
+                if(i&(1<<k))continue;
+                if(map[j][k]==0)continue;
+
+                dp[i+(1<<k)][k]=min(dp[i+(1<<k)][k],dp[i][j]+map[j][k]);
+
+            }
+
         }
-        
-        if(now==next)continue;
-        if(map[now][next]==0)continue;
-
-        sol(next,mark|(1<<next),dist+map[now][next]);
     }
-    return;
 
 }
 
@@ -49,16 +46,24 @@ int main() {
     cin>>n;
     
     map=vector<vector<int>>(n,vector<int>(n));
+    dp=vector<vector<int>>((1<<n),vector<int>(n,(int)2e9));
    
-
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
             cin>>map[i][j];
         }
     }
+    sol();
+    int ans=(int)1e9;
+    for(int i=1;i<n;i++){
+        if(map[i][0]==0)continue;
+        ans=min(ans,dp[(1<<n)-1][i]+map[i][0]);
 
-    sol(0,(1<<0),0);
 
+
+    }
     cout<<ans<<'\n';
+    
+
  
 }
