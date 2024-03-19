@@ -19,20 +19,27 @@ vector<vector<int>>map;
 
 int n;
 
-int sol(int now,int mark){
-    if(mark==(1<<n)-1){
-        return map[now][0];
+int ans=987654321;
+
+void sol(int now,int mark,int dist){
+    
+    if(mark==((1<<n)-1)){
+        
+        if(map[now][0]==0)return;
+        ans=min(ans,dist+map[now][0]);
+        return;
     }
-
-    int ret=987654321;
-
     for(int next=0;next<n;next++){
-        if(mark&(1<<next))continue;
+        if(mark&(1<<next)){
+            continue;
+        }
+        
+        if(now==next)continue;
         if(map[now][next]==0)continue;
-        ret=min(ret,map[now][next]+sol(next,mark|(1<<next)));
-    }
-    return ret;
 
+        sol(next,mark|(1<<next),dist+map[now][next]);
+    }
+    return;
 
 }
 
@@ -42,7 +49,7 @@ int main() {
     cin>>n;
     
     map=vector<vector<int>>(n,vector<int>(n));
-    
+   
 
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
@@ -50,6 +57,8 @@ int main() {
         }
     }
 
-    cout<<sol(0,1);
+    sol(0,(1<<0),0);
+
+    cout<<ans<<'\n';
  
 }
