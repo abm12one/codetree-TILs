@@ -28,6 +28,7 @@ int sol(int now,int mark){
 
     for(int next=0;next<n;next++){
         if(mark&(1<<next))continue;
+        if(map[now][next]==0)continue;
         ret=min(ret,map[now][next]+sol(next,mark|(1<<next)));
     }
     return ret;
