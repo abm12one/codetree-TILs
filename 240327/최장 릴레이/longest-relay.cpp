@@ -32,7 +32,7 @@ int mdis(int visit,int now){
 int sol(int visit,int now){
     
     int dis=mdis(visit,now);
-    int ret=1;
+    int ret=0;
     for(int i=0;i<n;i++){
         if(visit&(1<<i))continue;
         if(map[now][i]<=dis)continue;
@@ -57,7 +57,7 @@ int main() {
         }
     }
 
-    cout<<sol(1,0);
+    cout<<sol(1,0)+1;
 
 
     
