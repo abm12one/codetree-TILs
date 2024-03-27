@@ -34,7 +34,18 @@ int main() {
     for(int i=0;i<m;i++){
         int a,b,c;
         cin>>a>>b>>c;
-        map[a][b]=c;
+        if(map[a][b]==0){
+            map[a][b]=c;
+        }
+        else{
+            map[a][b]=min(map[a][b],c);
+        }
+        if(map[b][a]==0){
+            map[b][a]=c;
+        }
+        else{
+            map[b][a]=min(map[b][a],c);
+        }
     }
 
     dis[1]=0;
@@ -44,7 +55,7 @@ int main() {
         int mdis=2e9;
         int mid=-1;
         for(int i=1;i<=n;i++){
-            if(visit[i]==1)continue;
+            if(visit[i])continue;
             if(dis[i]<mdis){
                 mdis=dis[i];
                 mid=i;
