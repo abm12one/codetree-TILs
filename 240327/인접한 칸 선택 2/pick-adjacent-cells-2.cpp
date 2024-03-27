@@ -30,11 +30,11 @@ int main() {
 
     cin>>n>>m;
 
-    map=vector<vector<int>>(n+1,vector<int>(m));
-    dp=vector<vector<int>>(n+1,vector<int>(1<<m,-1));
+    map=vector<vector<int>>(n,vector<int>(m+1));
+    dp=vector<vector<int>>(m+1,vector<int>(1<<n,-1));
 
-    for(int i=1;i<=n;i++){
-        for(int j=0;j<m;j++){
+    for(int i=0;i<n;i++){
+        for(int j=1;j<=m;j++){
             cin>>map[i][j];
 
         }
@@ -42,18 +42,18 @@ int main() {
 
     dp[0][0]=0;
     
-    for(int i=0;i<n;i++){
+    for(int i=0;i<m;i++){
 
-        for(int j=0;j<(1<<m);j++){
+        for(int j=0;j<(1<<n);j++){
             
             if(dp[i][j]==-1)continue;
 
-            for(int k=0;k<(1<<m);k++){
+            for(int k=0;k<(1<<n);k++){
                 
                 if(j&k)continue;
 
                 int flag=0;
-                for(int l=0;l<m-1;l++){
+                for(int l=0;l<n-1;l++){
                     if((k&(1<<l))&&(k&(1<<(l+1)))){
                         flag=1;
                         break;
@@ -64,8 +64,8 @@ int main() {
                 }
 
                 int f=0;
-                for(int l=0;l<m;l++){
-                    if((k&(1<<l))&&map[i+1][l]==1){
+                for(int l=0;l<n;l++){
+                    if((k&(1<<l))&&map[l][i+1]==1){
                         f=1;
                         break;
                     }
@@ -74,9 +74,9 @@ int main() {
                     continue;
                 }
                 int num=0;
-                for(int l=0;l<m;l++){
+                for(int l=0;l<n;l++){
                     if(k&(1<<l)){
-                        num+=map[i+1][l];
+                        num+=map[l][i+1];
                     }
                 }
 
@@ -89,8 +89,8 @@ int main() {
 
     }
     int ans=0;
-    for(int i=0;i<(1<<m);i++){
-        ans=max(ans,dp[n][i]);
+    for(int i=0;i<(1<<n);i++){
+        ans=max(ans,dp[m][i]);
     }
     cout<<ans<<'\n';
 
