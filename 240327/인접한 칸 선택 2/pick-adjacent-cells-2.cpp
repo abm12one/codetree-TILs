@@ -22,11 +22,7 @@ int n,m;
 
 int cnt(int lo,int num){
     int ret=0;
-    for(int i=0;i<m;i++){
-        if(num&(1<<i)){
-            ret+=map[lo][i];
-        }
-    }
+    
     return ret;
 }
 
@@ -77,8 +73,15 @@ int main() {
                 if(f==1){
                     continue;
                 }
+                int num=0;
+                for(int l=0;l<m;l++){
+                    if(k&(1<<l)){
+                        num+=map[i+1][l];
+                    }
+                }
 
-                dp[i+1][k]=max(dp[i+1][k],dp[i][j]+cnt(i+1,k));
+
+                dp[i+1][k]=max(dp[i+1][k],dp[i][j]+num);
 
             }
 
