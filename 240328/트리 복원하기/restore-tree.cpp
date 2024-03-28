@@ -15,6 +15,7 @@
 
 using namespace std;
 
+int n;
 vector<vector<int>>map;
 vector<int>visit;
 vector<int>dis;
@@ -22,7 +23,7 @@ priority_queue<tuple<int,int,int>,vector<tuple<int,int,int>>,greater<tuple<int,i
 
 int main() {
 
-    int n;
+    
     cin>>n;
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     dis=vector<int>(n+1,1e9);
@@ -48,8 +49,12 @@ int main() {
         if(d>dis[now])continue;
         if(visit[now])continue;
         visit[now]=1;
-
-        ans.push_back(make_tuple(pre,now,d));
+        if(pre<now){
+            ans.push_back(make_tuple(pre,now,d));
+        }
+        else{
+            ans.push_back(make_tuple(now,pre,d));
+        }
 
         for(int i=1;i<n+1;i++){
             if(visit[i])continue;
