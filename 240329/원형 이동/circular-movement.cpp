@@ -29,13 +29,23 @@ int main() {
 
     dis=vector<int>(n+1,1e9);
     visit=vector<int>(n+1,0);
-    map=vector<vector<int>>(n+1,vector<int>(n+1,0));
+    map=vector<vector<int>>(n+1,vector<int>(n+1,1e9));
 
     for(int i=1;i<=n;i++){
         int t;
         cin>>t;
         map[0][i]=t;
         map[i][0]=t;
+    }
+
+    for(int i=1;i<=n;i++){
+        if(i==n){
+            map[i][1]=0;
+            map[1][i]=0;
+            continue;
+        }
+        map[i][i+1]=0;
+        map[i+1][i]=0;
     }
 
     for(int i=0;i<m;i++){
@@ -47,7 +57,7 @@ int main() {
 
     dis[0]=0;
     pq.push(make_pair(0,0));
-    int ans=0;
+    long long ans=0;
 
     while(!pq.empty()){
         
