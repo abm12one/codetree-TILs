@@ -63,7 +63,7 @@ int main() {
 
 
     }
-    int sum=0;
+    long long sum=0;
     for(int i=0;i<n-1;i++){
         sum+=k*i;
     }
