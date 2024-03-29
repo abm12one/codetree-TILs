@@ -59,6 +59,10 @@ int main() {
         if(visit[now])continue;
         visit[now]=1;
         ans+=d;
+        if(ans>k){
+            cout<<0;
+            return 0;
+        }
 
         for(int i=0;i<n+1;i++){
             if(visit[i])continue;
@@ -77,7 +81,7 @@ int main() {
     else{
         cout<<1;
     }
-
+    return 0;
 
     
 
