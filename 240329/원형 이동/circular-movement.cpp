@@ -41,8 +41,8 @@ int main() {
     for(int i=0;i<m;i++){
         int a,b;
         cin>>a>>b;
-        map[a][b]=1e9;
-        map[b][a]=1e9;
+        map[a][b]=k+1;
+        map[b][a]=k+1;
     }
 
     dis[0]=0;
