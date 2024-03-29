@@ -28,7 +28,7 @@ int main() {
 
     cin>>n>>m>>k;
     map=vector<vector<pair<int,int>>>(n+1);
-    dis=vector<int>(n+1,1e9);
+    dis=vector<int>(n+1,1e9+5);
     visit=vector<int>(n+1,0);
     for(int i=0;i<m;i++){
         int a,b,c;
