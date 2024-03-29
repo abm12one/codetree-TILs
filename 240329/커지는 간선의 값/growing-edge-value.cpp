@@ -13,8 +13,6 @@
 #include<unordered_set>
 #include<set>
 
-#define MAX_K 100
-
 using namespace std;
 
 int n,m,k;
@@ -40,7 +38,7 @@ int main() {
 
     pq.push(make_pair(0,1));
     dis[1]=0;
-    int ans=0;
+    long long ans=0;
     while(!pq.empty()){
         int d,now;
         tie(d,now)=pq.top();
@@ -65,7 +63,7 @@ int main() {
     }
     long long sum=0;
     for(int i=0;i<n-1;i++){
-        sum+=k*i;
+        sum+=(long long)(k*i);
     }
     cout<<sum+ans;
 
