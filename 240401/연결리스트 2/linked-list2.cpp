@@ -25,15 +25,6 @@ struct node{
 
 node* nodes[10005]={};
 
-void connect(node*s,node*e){
-    if(s!=nullptr){
-        s->next=e;
-    }
-    if(e!=nullptr){
-        e->prev=s;
-    }
-}
-
 void insertprev(node*t,node*now){
     now->prev=t->prev;
     now->next=t;
@@ -71,7 +62,7 @@ void pop(node *s){
     }
     s->prev=nullptr;
     s->next=nullptr;
-    return;
+    
 
 }
 
@@ -85,7 +76,7 @@ int main(){
     }
 
     for(int k=0;k<q;k++){
-        int t,i,j;
+        int t,i;
         cin>>t>>i;
         if(t==1){
             
@@ -93,10 +84,12 @@ int main(){
 
         }
         else if(t==2){
+            int j;
             cin>>j;
             insertprev(nodes[i],nodes[j]);
         }
         else if(t==3){
+            int j;
             cin>>j;
             insertnext(nodes[i],nodes[j]);
         }
