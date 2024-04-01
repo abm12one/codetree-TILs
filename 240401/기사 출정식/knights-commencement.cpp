@@ -14,7 +14,7 @@ struct node{
     node(int data):data(data),prev(nullptr),next(nullptr){};
 };
 
-node* nodes[100001];
+node* nodes[100000001];
 
 void connect(node *s,node*e){
     if(s!=nullptr){
