@@ -23,7 +23,7 @@ struct node{
     node(int data):data(data),prev(nullptr),next(nullptr){};  
 };
 
-node* nodes[10005]={};
+node* nodes[100005]={};
 
 void insertprev(node*t,node*now){
     now->prev=t->prev;
