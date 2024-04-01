@@ -47,8 +47,9 @@ void insertprev(node*t,node*now){
     
 }
 void insertnext(node*t,node*now){
-    now->next=t->next;
+    
     now->prev=t;
+    now->next=t->next;
 
     if(now->prev!=nullptr){
         now->prev->next=now;
