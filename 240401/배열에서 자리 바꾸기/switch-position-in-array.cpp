@@ -37,10 +37,6 @@ void connect(node *s,node *e){
 
 void swap(node* a,node* b,node* c,node* d){
     
-    if(head->data==a->data){
-        head=c;
-    }
-    
     
     node *after_prevA = c->prev;
 	node *after_nextB = d->next;
@@ -88,7 +84,11 @@ int main(){
         swap(nodes[a],nodes[b],nodes[c],nodes[d]);
     }
     
-    node *cur=head;
+    node *cur=nodes[1];
+
+    while(cur->prev!=nullptr){
+        cur=cur->prev;
+    }
 
     while(cur!=nullptr){
         cout<<cur->data<<' ';
