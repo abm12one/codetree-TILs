@@ -6,6 +6,7 @@
 
 using namespace std;
 vector<int>arr;
+
 struct node{
     int data;
     node*prev;
@@ -31,8 +32,7 @@ void pr(node* now){
 }
 
 void pop(node *s){
-    s->prev->next=s->next;
-    s->next->prev=s->prev;
+    connect(s->prev,s->next);
     s->prev=nullptr;
     s->next=nullptr;
 
