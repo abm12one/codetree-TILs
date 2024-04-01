@@ -33,7 +33,7 @@ void insertprev(node*s,node*target){
 
 void printcur(node*cur){
     if(cur->prev==nullptr){
-        cout<<"(Null)"<<"\n";
+        cout<<"(Null)"<<" ";
     }
     else{
         cout<<cur->prev->data<<" ";
