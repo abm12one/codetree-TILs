@@ -78,9 +78,15 @@ void popRangeAndInsertPrev(Node *a, Node *b, Node *c) {
     int lineNumC = lineNum[c->id];
 
     // a번 사람이 해당 줄의 맨 앞이었다면, 해당 줄의 맨 앞 사람을 b번 사람의 뒤로 변경합니다.
-    if (head[lineNumA] == a) head[lineNumA] = b->next;
+    if (head[lineNumA] == a){
+        head[lineNumA] = b->next;
+        b->next->prev=nullptr;
+    } 
     // b번 사람이 해당 줄의 맨 끝이었다면, 해당 줄의 맨 끝 사람을 a번 사람의 앞으로 변경합니다.
-    if (tail[lineNumA] == b) tail[lineNumA] = nullptr;
+    if (tail[lineNumA] == b) {
+        tail[lineNumA] = a->prev;
+        a->prev->next=nullptr;
+    }
 
     // a번 사람부터 b번 사람까지를 줄에서 뺍니다.
     // 이때 a번 사람의 이전 사람과 b번 사람의 다음 사람을 연결합니다.
