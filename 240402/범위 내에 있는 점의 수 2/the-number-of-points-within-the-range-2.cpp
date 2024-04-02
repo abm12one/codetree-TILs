@@ -11,8 +11,8 @@ int main() {
     int n,q;
     cin>>n>>q;
 
-    arr=vector<int>(100001);
-    psum=vector<int>(100001);
+    arr=vector<int>(1000001);
+    psum=vector<int>(1000001);
 
     for(int i=0;i<n;i++){
         int t;
@@ -20,7 +20,7 @@ int main() {
         arr[t]=1;
         
     }
-    for(int i=1;i<=100000;i++){
+    for(int i=1;i<=1000000;i++){
         psum[i]=psum[i-1]+arr[i];
     }
     for(int i=0;i<q;i++){
