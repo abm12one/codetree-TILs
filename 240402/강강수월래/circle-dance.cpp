@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
-
+#include <unordered_map>
 using namespace std;
+
+unordered_map<int,int>ston;
+
 struct node{
     int data;
     node*prev;
@@ -11,7 +14,6 @@ struct node{
 };
 
 node* nodes[100001];
-vector<int>arr;
 
 void connect(node*s,node*e){
     if(s!=nullptr){
@@ -62,7 +64,7 @@ void pr(node*s){
         cur=cur->next;
     }
 
-    pri(nodes[mnum]);
+    pri(nodes[ston[mnum]]);
 
 
 }
@@ -73,27 +75,31 @@ int main() {
     int n,m,q;
     cin>>n>>m>>q;
 
-    for(int i=1;i<=n;i++){
-        nodes[i]=new node(i);
-    }
-
+    int sum=1;
     //setting
     for(int i=0;i<m;i++){
         
         int t;
         cin>>t;
 
-        arr=vector<int>(t+1);
+        int ntemp=sum;
 
-        for(int j=1;j<=t;j++){
-            cin>>arr[j];
+
+        for(int j=0;j<t;j++){
+            int temp;
+            cin>>temp;
+
+            ston[temp]=sum;
+            nodes[sum]=new node(temp);
+            sum++;
+
+        }
+
+        for(int j=0;j<t-1;j++){
+            connect(nodes[ntemp+j],nodes[ntemp+j+1]);
+        }
+        connect(nodes[ntemp+t-1],nodes[ntemp]);
         
-        }
-         
-        for(int j=1;j<t;j++){
-            connect(nodes[arr[j]],nodes[arr[j+1]]);
-        }
-        connect(nodes[arr[t]],nodes[arr[1]]);
     }
 
 
@@ -103,19 +109,24 @@ int main() {
         if(t==1){
             int a,b;
             cin>>a>>b;
-            hap(nodes[a],nodes[b]);
+            int na=ston[a];
+            int nb=ston[b];
+            hap(nodes[na],nodes[nb]);
 
         }
         else if(t==2){
             int a,b;
             cin>>a>>b;
-            divide(nodes[a],nodes[b]);
+            int na=ston[a];
+            int nb=ston[b];
+            divide(nodes[na],nodes[nb]);
 
         }
         else if(t==3){
             int a;
             cin>>a;
-            pr(nodes[a]);
+            int na=ston[a];
+            pr(nodes[na]);
         }
 
 
