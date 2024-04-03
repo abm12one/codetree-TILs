@@ -65,14 +65,14 @@ int main() {
         tie(a,b)=arr[i];
         int y=m[a];
         int x=m[b];
-        gp[y][x]++;
+        psum[y][x]++;
     }
 
    
     
     for(int i=1;i<=num;i++){
         for(int j=1;j<=num;j++){
-            psum[i][j]=psum[i][j-1]+psum[i-1][j]-psum[i-1][j-1]+gp[i][j];
+            psum[i][j]+=psum[i][j-1]+psum[i-1][j]-psum[i-1][j-1];
         }
     }
     
