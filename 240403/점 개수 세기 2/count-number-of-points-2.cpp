@@ -35,7 +35,7 @@ int sol(int y1,int x1,int y2,int x2){
     int uy=upp(y2);
     int ux=upp(x2);
 
-    return psum[uy][ux]-psum[uy][lx]-psum[ly][uy]+psum[ly][lx];
+    return psum[uy][ux]-psum[uy][lx-1]-psum[ly-1][uy]+psum[ly-1][lx-1];
 
 
 }
