@@ -7,7 +7,6 @@ using namespace std;
 set<int>s;
 unordered_map<int,int>m;
 vector<pair<int,int>>arr;
-vector<vector<int>>gp;
 vector<vector<int>>psum;
 
 int n,q;
@@ -35,7 +34,7 @@ int sol(int y1,int x1,int y2,int x2){
     int uy=upp(y2);
     int ux=upp(x2);
 
-    return psum[uy][ux]-psum[uy][lx-1]-psum[ly-1][uy]+psum[ly-1][lx-1];
+    return psum[uy][ux]-psum[uy][lx-1]-psum[ly-1][ux]+psum[ly-1][lx-1];
 
 
 }
@@ -58,7 +57,7 @@ int main() {
     for(auto it=s.begin();it!=s.end();it++){
         m[*it]=num++;
     }
-    gp=vector<vector<int>>(num+1,vector<int>(num+1));
+    
     psum=vector<vector<int>>(num+1,vector<int>(num+1));
     for(int i=0;i<n;i++){
         int a,b;
