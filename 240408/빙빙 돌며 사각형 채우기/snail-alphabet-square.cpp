@@ -48,7 +48,8 @@ int main() {
 
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            char c='A'+map[i][j]-1;
+            char c='A'+((map[i][j]-1)%26);
+
             cout<<c<<' ';
         }
         cout<<'\n';
