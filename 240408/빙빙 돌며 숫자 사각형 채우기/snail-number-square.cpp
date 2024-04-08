@@ -20,7 +20,7 @@ int main() {
 
     cin>>n>>m;
 
-    map=vector<vector<int>>(n,vector<int>(n));
+    map=vector<vector<int>>(n,vector<int>(m));
 
     int y=0;
     int x=0;
