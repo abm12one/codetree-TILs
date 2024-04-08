@@ -37,27 +37,27 @@ void setst(int st){
 
 }
 
-void changed(int m,int d){
+int changed(int m,int d){
     if(m==0){
         if(d==0){
-            d=1;
+            return 1;
         }
         if(d==1){
-            d=0;
+            return 0;
         }
         if(d==2){
-            d=3;
+            return 3;
         }
         if(d==3){
-            d=2;
+            return 2;
         }
         
         
     }
     else if(m==1){
-        d=3-d;
+        return 3-d;
     }
-    return ;
+    
 }
 
 int range(int y,int x){
@@ -103,12 +103,13 @@ int main() {
         ans++;
 
         int mir=map[y][x];
-        changed(mir,d);
-        int ny=y+dy[d];
-        int nx=x+dx[d];
+        int nd=changed(mir,d);
+        int ny=y+dy[nd];
+        int nx=x+dx[nd];
         if(!range(ny,nx))break;
         y=ny;
         x=nx;
+        d=nd;
 
         
 
