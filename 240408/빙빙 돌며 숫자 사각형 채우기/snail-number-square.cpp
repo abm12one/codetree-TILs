@@ -29,7 +29,7 @@ int main() {
     int d=0;
 
     while(1){
-
+        if(map[y][x]==n*m)break;
         int ny=y+dy[d];
         int nx=x+dx[d];
 
@@ -39,7 +39,7 @@ int main() {
         }
 
         map[ny][nx]=map[y][x]+1;
-        if(map[ny][nx]==n*m)break;
+        
         y=ny;
         x=nx;
         
