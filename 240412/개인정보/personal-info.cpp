@@ -49,6 +49,8 @@ int main() {
     sort(arr.begin(),arr.end(),cmp);
 
     for(int i=0;i<n;i++){
+        cout<<fixed;
+        cout.precision(1);
         cout<<arr[i].name<<' '<<arr[i].height<<' '<<arr[i].weight<<'\n';
     }
     cout<<'\n';
@@ -57,6 +59,8 @@ int main() {
     sort(arr.begin(),arr.end(),cmp2);
 
     for(int i=0;i<n;i++){
+        cout<<fixed;
+        cout.precision(1);
         cout<<arr[i].name<<' '<<arr[i].height<<' '<<arr[i].weight<<'\n';
     }
 
