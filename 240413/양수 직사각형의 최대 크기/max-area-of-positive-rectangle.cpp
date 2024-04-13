@@ -16,10 +16,10 @@ int ispos(int y,int x,int i,int j){
 }
 
 int find(int y,int x){
-    int ret=0;
+    int ret=-1;
     for(int i=1;i<=y;i++){
         for(int j=1;j<=x;j++){
-            if(!ispos(y,x,i,j));
+            if(!ispos(y,x,i,j))continue;;
             ret=max(ret,(y-i+1)*(x-j+1));
         }
     }
@@ -45,7 +45,7 @@ int main() {
         }
     }
 
-    int ans=0;
+    int ans=-1;
     
     for(int i=1;i<=n;i++){
         for(int j=1;j<=k;j++){
