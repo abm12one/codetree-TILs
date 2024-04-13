@@ -24,6 +24,9 @@ void checky(int y){
         temp=map[y][i];
 
     }
+    if(cnt>=m){
+        f=1; 
+    }
     if(f==1){
         ans++;
     }
@@ -47,6 +50,9 @@ void checkx(int x){
         }
         temp=map[i][x];
 
+    }
+    if(cnt>=m){
+        f=1; 
     }
     if(f==1){
         ans++;
