@@ -9,6 +9,7 @@ int ans=0;
 void checky(int y){
     int temp=map[y][0];
     int cnt=1;
+    int f=0;
     for(int i=1;i<n;i++){
         if(temp==map[y][i]){
             cnt++;
@@ -16,10 +17,14 @@ void checky(int y){
         else{
             cnt=1;
         }
+        if(cnt>=m){
+            f=1;
+            break;
+        }
         temp=map[y][i];
 
     }
-    if(cnt>=m){
+    if(f==1){
         ans++;
     }
     return;
@@ -28,6 +33,7 @@ void checky(int y){
 void checkx(int x){
     int temp=map[0][x];
     int cnt=1;
+    int f=0;
     for(int i=1;i<n;i++){
         if(temp==map[i][x]){
             cnt++;
@@ -35,13 +41,18 @@ void checkx(int x){
         else{
             cnt=1;
         }
+        if(cnt>=m){
+            f=1;
+            break;
+        }
         temp=map[i][x];
 
     }
-    if(cnt>=m){
+    if(f==1){
         ans++;
     }
     return;
+    
 
 }
 
