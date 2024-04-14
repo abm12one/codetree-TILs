@@ -23,6 +23,12 @@ void sol(int a,int b){
 int main() {
     int n,m;
     cin>>n>>m;
+
+    if(m==1){
+        cout<<0;
+        return 0;
+    }
+
     arr=vector<int>(n+1);
     for(int i=1;i<=n;i++){
         cin>>arr[i];
