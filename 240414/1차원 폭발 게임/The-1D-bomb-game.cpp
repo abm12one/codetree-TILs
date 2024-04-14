@@ -40,7 +40,7 @@ int main() {
         int e=-1;
         int temp=arr[1];
         s=1;
-
+        int f=0;
         int a=0;
         int b=0;
 
@@ -51,7 +51,6 @@ int main() {
                     e=i-1;
                     a=s;
                     b=e;
-                    s=i;
                 }
                 e=i-1;
                 s=i;
@@ -60,12 +59,16 @@ int main() {
                 
             }
             else if(arr[i]==temp){
+                if(a!=0||b!=0){
+                    f=1;
+                    break;
+                }
                 cnt++;
             }
             
         }
 
-        if(cnt>=m){
+        if(f==0&&cnt>=m){
             a=s;
             b=sn;
         }
@@ -73,8 +76,6 @@ int main() {
         if(a==0&&b==0){
             break;
         }
-        
-
         sol(a,b);
 
         
