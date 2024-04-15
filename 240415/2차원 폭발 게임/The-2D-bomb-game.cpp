@@ -117,11 +117,13 @@ int main() {
         }
     }
     while(k--){
-        //cout<<k<<'\n';
-        bomb();
-        //pr();
-        godown();
-        //pr();
+
+        while(1){
+            int tn=ans;
+            bomb();
+            godown();
+            if(tn==ans)break;
+        }
         rotate();
         //pr();
         godown();
