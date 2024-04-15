@@ -8,14 +8,22 @@ vector<vector<int>>map;
 
 
 void shiftr(int y){
-    vector<int>arr(4);
+    vector<int>arr2(4);
     for(int i=0;i<4;i++){
-        arr[i]=map[y][i];
+        arr2[i]=map[y][i];
+    }
+    int s=0;
+    vector<int>arr(4);{
+        for(int i=0;i<4;i++){
+            if(arr2[i]==0)continue;
+            arr[s]=arr2[i];
+            s++;
+        }
     }
     for(int i=0;i<4;i++){
         map[y][i]=0;
     }
-    for(int i=3;i>=0;i--){
+    for(int i=3;i>=1;i--){
         if(arr[i]==arr[i-1]){
             arr[i]+=arr[i-1];
             arr[i-1]=0;
@@ -23,7 +31,7 @@ void shiftr(int y){
         }
 
     }
-    int s=3;
+    s=3;
     for(int i=3;i>=0;i--){
         if(arr[i]==0)continue;
         map[y][s]=arr[i];
@@ -31,9 +39,17 @@ void shiftr(int y){
     }
 }
 void shiftl(int y){
-    vector<int>arr(4);
+    vector<int>arr2(4);
     for(int i=0;i<4;i++){
-        arr[i]=map[y][i];
+        arr2[i]=map[y][i];
+    }
+    int s=0;
+    vector<int>arr(4);{
+        for(int i=0;i<4;i++){
+            if(arr2[i]==0)continue;
+            arr[s]=arr2[i];
+            s++;
+        }
     }
     for(int i=0;i<4;i++){
         map[y][i]=0;
@@ -46,7 +62,7 @@ void shiftl(int y){
         }
 
     }
-    int s=0;
+    s=0;
     for(int i=0;i<4;i++){
         if(arr[i]==0)continue;
         map[y][s]=arr[i];
@@ -57,9 +73,17 @@ void shiftl(int y){
 
 }
 void shiftu(int x){
-    vector<int>arr(4);
+    vector<int>arr2(4);
     for(int i=0;i<4;i++){
-        arr[i]=map[i][x];
+        arr2[i]=map[i][x];
+    }
+    int s=0;
+    vector<int>arr(4);{
+        for(int i=0;i<4;i++){
+            if(arr2[i]==0)continue;
+            arr[s]=arr2[i];
+            s++;
+        }
     }
     for(int i=0;i<4;i++){
         map[i][x]=0;
@@ -72,7 +96,7 @@ void shiftu(int x){
         }
 
     }
-    int s=0;
+    s=0;
     for(int i=0;i<4;i++){
         if(arr[i]==0)continue;
         map[s][x]=arr[i];
@@ -80,14 +104,23 @@ void shiftu(int x){
     }
 }
 void shiftd(int x){
-    vector<int>arr(4);
+    vector<int>arr2(4);
     for(int i=0;i<4;i++){
-        arr[i]=map[i][x];
+        arr2[i]=map[i][x];
     }
+    int s=0;
+    vector<int>arr(4);{
+        for(int i=0;i<4;i++){
+            if(arr2[i]==0)continue;
+            arr[s]=arr2[i];
+            s++;
+        }
+    }
+
     for(int i=0;i<4;i++){
         map[i][x]=0;
     }
-    for(int i=3;i>=0;i--){
+    for(int i=3;i>=1;i--){
         if(arr[i]==arr[i-1]){
             arr[i]+=arr[i-1];
             arr[i-1]=0;
@@ -95,7 +128,7 @@ void shiftd(int x){
         }
 
     }
-    int s=3;
+    s=3;
     for(int i=3;i>=0;i--){
         if(arr[i]==0)continue;
         map[s][x]=arr[i];
