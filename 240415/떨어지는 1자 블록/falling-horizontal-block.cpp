@@ -13,6 +13,12 @@ int isok(int y){
     }
     return 1;
 }
+int isdown(int y){
+    for(int i=y;i>=1;i--){
+        if(map[i][k]!=0)return 0;
+    }
+    return 1;
+}
 
 void pr(int y){
     for(int i=k;i<=k+m-1;i++){
@@ -33,7 +39,7 @@ int main() {
     }
 
     for(int i=n;i>=1;i--){
-        if(isok(i)==1){
+        if(isok(i)&&isdown(i)){
             //cout<<i<<'\n';
             pr(i);
             break;
