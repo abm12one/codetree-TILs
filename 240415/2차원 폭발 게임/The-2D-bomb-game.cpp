@@ -104,6 +104,10 @@ void pr(){
 int main() {
     
     cin>>n>>m>>k;
+    if(m==1){
+        cout<<0;
+        return 0;
+    }
     ans=n*n;
     map=vector<vector<int>>(n+1,vector<int>(n+1));
 
