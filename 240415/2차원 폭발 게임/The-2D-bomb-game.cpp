@@ -129,8 +129,12 @@ int main() {
         godown();
         //pr();
     }
-    bomb();
-
+    while(1){
+        int tn=ans;
+        bomb();
+        godown();
+        if(tn==ans)break;
+    }
     cout<<ans;
     
 
