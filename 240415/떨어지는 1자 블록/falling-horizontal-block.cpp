@@ -15,7 +15,10 @@ int isok(int y){
 }
 int isdown(int y){
     for(int i=y;i>=1;i--){
-        if(map[i][k]!=0)return 0;
+        for(int j=k;j<=k+m-1;j++){
+            if(map[i][j]!=0)return 0;
+        }
+       
     }
     return 1;
 }
