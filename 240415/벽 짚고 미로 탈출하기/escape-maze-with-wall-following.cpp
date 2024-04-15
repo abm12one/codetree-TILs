@@ -24,7 +24,7 @@ int main() {
     
     
     cin>>n;
-    
+    int cnt=0;
     cin>>y>>x;
     map=vector<vector<int>>(n+2,vector<int>(n+2));
     for(int i=1;i<=n;i++){
@@ -36,6 +36,7 @@ int main() {
             }
             else if(c=='.'){
                 map[i][j]=0;
+                cnt++;
             }
             
         }
@@ -44,18 +45,32 @@ int main() {
     int t=0;
     int num=0;
     while(1){
-        //cout<<y<<' '<<x<<' '<<t<<" "<<dir<<'\n';
-        int ny=y+dy[dir];
-        int nx=x+dx[dir];
-        int cny=y+cdy[dir];
-        int cnx=x+cdx[dir];
+        
+        int ny,nx,cny,cnx;
+        int fcnt=0;
+        while(1){
+            if(fcnt>4){
+                cout<<-1;
+                return 0;
+            }
+            ny=y+dy[dir];
+            nx=x+dx[dir];
 
-        if(map[ny][nx]==1){
-            dir=(dir-1+4)%4;
-            continue;
+            cny=y+cdy[dir];
+            cnx=x+cdx[dir];
+
+            if(map[ny][nx]==1){
+                dir=(dir-1+4)%4;
+                fcnt++;
+                continue;
+            }
+            else{
+                break;
+            }
         }
+        
 
-        else if(map[cny][cnx]==1){
+        if(map[cny][cnx]==1){
             y=ny;
             x=nx;
             t+=1;
@@ -73,11 +88,11 @@ int main() {
                 break;
             }
         }
-        num++;
-        if(num>n*n){
+        if(t>n*n){
             cout<<-1;
             return 0;
         }
+        
         
 
     }
