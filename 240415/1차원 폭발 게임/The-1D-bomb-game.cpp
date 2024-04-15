@@ -41,6 +41,11 @@ void recycle(){
 int main() {
     
     cin>>n>>m;
+
+    if(m==1){
+        cout<<0;
+        return 0;
+    }
     sn=n;
     arr=vector<int>(n);
     
