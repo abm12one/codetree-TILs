@@ -9,6 +9,7 @@ vector<vector<int>>map;
 vector<int>visit;
 int ans=0;
 void dfs(int n){
+    ans++;
     visit[n]=1;
     for(int i=0;i<map[n].size();i++){
         int next=map[n][i];
@@ -34,13 +35,8 @@ int main() {
         map[b].push_back(a);
     }
 
-    for(int i=1;i<=n;i++){
-        if(visit[i]==0){
-            dfs(i);
-            ans++;
-        }
-    }
-    cout<<ans;
+    dfs(1);
+    cout<<ans-1;
 
 
 }
