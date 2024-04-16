@@ -38,7 +38,7 @@ void dfs(int y,int x){
 }
 
 int pcnt=0;
-int maxk=0;
+int maxk=1;
 
 void pr(){
     for(int i=1;i<=n;i++){
