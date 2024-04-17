@@ -2,18 +2,10 @@
 #include <vector>
 #include <tuple>
 #include <list>
-#include <unordered_set>
+#include <set>
 
 using namespace std;
 
-namespace std {
-    template <> struct hash<pair<int, int> > {
-        inline size_t operator()(const pair<int, int> &v) const {
-            hash<int> int_hasher;
-            return int_hasher(v.first) ^ int_hasher(v.second);
-        }
-    };
-}
 
 int n,m,k;
 int y,x;
@@ -23,8 +15,7 @@ int dy[4]={-1,0,1,0};
 int dx[4]={0,1,0,-1};
 vector<vector<int>>map;
 list<pair<int,int>>snake;
-unordered_set<pair<int,int>>body;
-
+set<pair<int,int>>body;
 
 int isrange(int y,int x){
     if(x<1||x>n)return 0;
