@@ -15,8 +15,8 @@ tuple<int,int,int> state;
 
 int range(int y,int x){
 
-    if(y<0||y>n)return 0;
-    if(x<0||x>n)return 0;
+    if(y<1||y>n)return 0;
+    if(x<1||x>n)return 0;
     return 1;
 
 }
