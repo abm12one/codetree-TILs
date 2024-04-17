@@ -41,7 +41,7 @@ void dfs(int y,int x,int d){
 }
 
 void sol(int y,int x,int d){
-    t=1;
+    t=0;
     dfs(y,x,d);
     ans=max(ans,t);
 }
@@ -51,7 +51,7 @@ int main() {
 
    
     cin>>n;
-    map=vector<vector<int>>(n+1,vector<int>(n+1));
+    map=vector<vector<int>>(n+2,vector<int>(n+2));
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             cin>>map[i][j];
@@ -59,10 +59,10 @@ int main() {
     }
 
     for(int i=1;i<=n;i++){
-        sol(i,1,1);
-        sol(i,n,3);
-        sol(1,i,2);
-        sol(n,i,0);
+        sol(i,0,1);
+        sol(i,n+1,3);
+        sol(0,i,2);
+        sol(n+1,i,0);
     }
     cout<<ans;
 
