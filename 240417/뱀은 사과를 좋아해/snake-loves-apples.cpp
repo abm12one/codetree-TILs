@@ -39,7 +39,7 @@ void move(int d,int p){
         int ny=y+dy[d];
         int nx=x+dx[d];
         if(!isrange(ny,nx)){
-            cout<<"out"<<'\n';
+            //cout<<"out"<<'\n';
             stop=1;
             return;
         }
