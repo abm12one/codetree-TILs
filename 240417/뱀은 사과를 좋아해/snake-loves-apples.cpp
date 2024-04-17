@@ -39,28 +39,37 @@ void move(int d,int p){
         int ny=y+dy[d];
         int nx=x+dx[d];
         if(!isrange(ny,nx)){
-            //cout<<"out"<<'\n';
-            stop=1;
-            return;
-        }
-        if(body.find(make_pair(ny,nx))!=body.end()){
-            //cout<<ny<<' '<<nx<<'\n';
-            //cout<<"twist"<<'\n';
+            cout<<"out"<<'\n';
             stop=1;
             return;
         }
         
         if(map[ny][nx]==1){
+            if(body.find(make_pair(ny,nx))!=body.end()){
+                //cout<<ny<<' '<<nx<<'\n';
+                //cout<<"twist"<<'\n';
+                stop=1;
+                return;
+            }
+
             snake.push_front(make_pair(ny,nx));
             body.insert(make_pair(ny,nx));
             map[ny][nx]=0;
             
         }
         else{
-            snake.push_front(make_pair(ny,nx));
-            body.insert(make_pair(ny,nx));
+
             body.erase(*snake.rbegin());
             snake.pop_back();
+            if(body.find(make_pair(ny,nx))!=body.end()){
+                //cout<<ny<<' '<<nx<<'\n';
+                //cout<<"twist"<<'\n';
+                stop=1;
+                return;
+            }            
+            snake.push_front(make_pair(ny,nx));
+            body.insert(make_pair(ny,nx));
+            
             
         }
         y=ny;
