@@ -2,10 +2,18 @@
 #include <vector>
 #include <tuple>
 #include <algorithm>
-#include <set>
+#include <unordered_set>
 using namespace std;
 
-set<pair<int,int>>point;
+namespace std {
+    template <> struct hash<pair<int, int> > {
+        inline size_t operator()(const pair<int, int> &v) const {
+            hash<int> int_hasher;
+            return int_hasher(v.first) ^ int_hasher(v.second);
+        }
+    };
+}
+
 int n;
 vector<pair<int,int>>marvel;
 vector<int>weight;
@@ -50,7 +58,7 @@ void sol(int time){
     }
     sort(arr.begin(),arr.end(),greater<pair<int,int>>());
     
-    set<pair<int,int>>point;
+    unordered_set<pair<int,int>>point;
 
     for(int i=0;i<arr.size();i++){
         int w,id;
