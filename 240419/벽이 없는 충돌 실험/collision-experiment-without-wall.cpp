@@ -2,23 +2,14 @@
 #include <vector>
 #include <tuple>
 #include <algorithm>
-#include <unordered_set>
+#include <set>
 using namespace std;
 
-namespace std {
-    template <> struct hash<pair<int, int> > {
-        inline size_t operator()(const pair<int, int> &v) const {
-            hash<int> int_hasher;
-            return int_hasher(v.first) ^ int_hasher(v.second);
-        }
-    };
-}
-
+set<pair<int,int>>point;
 int n;
-vector<pair<int,int>>marvel;
+vector<tuple<int,int,int>>marvel;
 vector<int>weight;
 vector<int>dir;
-vector<int>pos;
 vector<vector<vector<pair<int,int>>>>temp;
 int dy[4]={-1,0,1,0};
 int dx[4]={0,1,0,-1};
@@ -35,7 +26,7 @@ void shift(int y,int x,int id){
     
     int ny=y+dy[dir[id]];
     int nx=x+dx[dir[id]];
-    marvel[id]=make_pair(ny,nx);
+    marvel[id]=make_tuple(ny,nx,1);
 
 }
 int ans=-1;
@@ -43,31 +34,30 @@ int ans=-1;
 void sol(int time){
     
     for(int i=1;i<=n;i++){
-        int y,x;
-        tie(y,x)=marvel[i];
-        if(pos[i]==0)continue;
+        int y,x,pos;
+        tie(y,x,pos)=marvel[i];
+        if(pos==0)continue;
         shift(y,x,i);
     }
 
     vector<pair<int,int>>arr;
     for(int i=1;i<=n;i++){
-        int y,x;
-        tie(y,x)=marvel[i];
-        if(pos[i]==0)continue;
+        int y,x,pos;
+        tie(y,x,pos)=marvel[i];
+        if(pos==0)continue;
         arr.push_back(make_pair(weight[i],i));
     }
     sort(arr.begin(),arr.end(),greater<pair<int,int>>());
     
-    unordered_set<pair<int,int>>point;
+    set<pair<int,int>>point;
 
     for(int i=0;i<arr.size();i++){
         int w,id;
         tie(w,id)=arr[i];
-        int y,x;
-        tie(y,x)=marvel[id];
+        int y,x,pos;
+        tie(y,x,pos)=marvel[id];
         if(point.find(make_pair(y,x))!=point.end()){
-            pos[id]=0; 
-            marvel[id]=make_pair(y,x);
+            marvel[id]=make_tuple(y,x,0);
             ans=time;
         }
         else{
@@ -85,20 +75,18 @@ int main() {
     cin>>t;
     while(t--){
         ans=-1;
-        marvel.clear();
+        marvel=vector<tuple<int,int,int>>();
         cin>>n;
-        marvel.push_back(make_pair(0,0));
+        marvel.push_back(make_tuple(0,0,0));
         weight=vector<int>(n+1);
         dir=vector<int>(n+1);
-        pos=vector<int>(n+1,1);
-        pos[0]=0;
 
         for(int i=1;i<=n;i++){
             int y,x;
             char d;
             cin>>x>>y>>weight[i]>>d;
             dir[i]=direct(d);
-            marvel.push_back(make_pair(-y*2,2*x));
+            marvel.push_back(make_tuple(-y*2,2*x,1));
         
         }
 
@@ -110,10 +98,6 @@ int main() {
         
 
     }
-
-
-
-
 
     
 }
