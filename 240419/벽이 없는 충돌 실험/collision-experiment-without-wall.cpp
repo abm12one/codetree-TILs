@@ -75,7 +75,7 @@ int main() {
     cin>>t;
     while(t--){
         ans=-1;
-        marvel=vector<tuple<int,int,int>>();
+        marvel.clear();
         cin>>n;
         marvel.push_back(make_tuple(0,0,0));
         weight=vector<int>(n+1);
@@ -98,6 +98,10 @@ int main() {
         
 
     }
+
+
+
+
 
     
 }
