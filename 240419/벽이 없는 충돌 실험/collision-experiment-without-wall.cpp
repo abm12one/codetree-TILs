@@ -58,7 +58,7 @@ void sol(int time){
         int y,x;
         tie(y,x)=marvel[id];
         if(point.find(make_pair(y,x))!=point.end()){
-            pos[i]=0; 
+            pos[id]=0; 
             marvel[id]=make_pair(y,x);
             ans=time;
         }
