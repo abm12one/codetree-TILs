@@ -5,10 +5,8 @@
 #include <set>
 using namespace std;
 
-vector<vector<int>>map;
 set<pair<int,int>>point;
 int n;
-
 vector<tuple<int,int,int>>marvel;
 vector<int>weight;
 vector<int>dir;
@@ -32,6 +30,7 @@ void shift(int y,int x,int id){
 
 }
 int ans=-1;
+
 void sol(int time){
     
     for(int i=1;i<=n;i++){
@@ -75,6 +74,7 @@ int main() {
     int t;
     cin>>t;
     while(t--){
+        ans=-1;
         marvel.clear();
         cin>>n;
         marvel.push_back(make_tuple(0,0,0));
@@ -93,18 +93,9 @@ int main() {
         for(int i=1;i<=4000;i++){
             sol(i);
         }
-        if(t==-1){
-            cout<<-1;
-        }
-        else{
-            cout<<ans<<"\n";
-        }
         
-
+        cout<<ans<<"\n";
         
-
-
-
 
     }
 
