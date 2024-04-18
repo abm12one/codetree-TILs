@@ -109,7 +109,7 @@ int main(){
             map[r][c]=dir(d);    
         }
         //pr();
-        int rep=n*n;
+        int rep=2*n+1;
         while(rep--){
             sol();
             //pr();
