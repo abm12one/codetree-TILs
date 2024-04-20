@@ -20,36 +20,37 @@ int range(int y,int x){
 int ans=0;
 int ret;
 void sol(){
-    
+    int ret=0;
+    queue<pair<int,int>>q;
+    visit=vector<vector<int>>(n+1,vector<int>(n+1));
     for(int t=0;t<arr.size();t++){
-        ret=0;
-        queue<pair<int,int>>q;
-        visit=vector<vector<int>>(n+1,vector<int>(n+1));
+        
         int r,c;
         tie(r,c)=arr[t];
         visit[r][c]=1;
         ret++;
         q.push(make_pair(r,c));
-        while(!q.empty()){
-            int y,x;
-            tie(y,x)=q.front();
-            q.pop();
-            for(int i=0;i<4;i++){
-                int ny=y+dy[i];
-                int nx=x+dx[i];
-                if(!range(ny,nx))continue;
-                if(visit[ny][nx]==0&&map[ny][nx]==0){
-                    visit[ny][nx]=1;
-                    q.push(make_pair(ny,nx));
-                    ret++;
-                }
-            }
-            
-        }
-        //cout<<ret<<'\n';
-        
-        ans=max(ans,ret);
     }
+    while(!q.empty()){
+        int y,x;
+        tie(y,x)=q.front();
+        q.pop();
+        for(int i=0;i<4;i++){
+            int ny=y+dy[i];
+            int nx=x+dx[i];
+            if(!range(ny,nx))continue;
+            if(visit[ny][nx]==0&&map[ny][nx]==0){
+                visit[ny][nx]=1;
+                q.push(make_pair(ny,nx));
+                ret++;
+            }
+        }
+            
+    }
+    //cout<<ret<<'\n';
+        
+    ans=max(ans,ret);
+    
     //cout<<'\n';
     
     return ;
@@ -70,7 +71,8 @@ int cnt=1;
 void bt(int y,int x,int num){
     //cout<<y<<' '<<x<<"\n";
     if(num==m){
-    
+        //cout<<"#"<<cnt<<"\n";
+        //cnt++;
         //pr();
         sol();
 
