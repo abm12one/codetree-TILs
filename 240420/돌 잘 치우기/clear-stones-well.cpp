@@ -111,16 +111,7 @@ int main() {
         arr.push_back(make_pair(y,x));
     }
     int f=0;
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=n;j++){
-            if(map[i][j]==1){
-                map[i][j]=0;
-                bt(i,j,1);
-                map[i][j]=1;
-            }
-        }
-        
-    }
+    bt(0,0,0);
     cout<<ans;
     
 
