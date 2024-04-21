@@ -65,7 +65,7 @@ int main() {
     }
     cout<<"\n";
     */
-    if(visit[fy][fx]!=0){
+    if(visit[fy][fx]!=-1){
         cout<<visit[fy][fx];
     }
     else{
