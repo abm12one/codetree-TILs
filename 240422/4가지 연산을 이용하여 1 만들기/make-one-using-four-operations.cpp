@@ -18,14 +18,7 @@ int main() {
         int now=q.front();
         q.pop();
         //
-        if(now+1<=n+1&&visit[now+1]==-1){
-            q.push(now+1);
-            visit[now+1]=visit[now]+1;
-        }
-        if(now-1>0&&visit[now+1]==-1){
-            q.push(now-1);
-            visit[now-1]=visit[now]+1;
-        }
+        
         if(now%2==0&&now/2>0&&visit[now/2]==-1){
             q.push(now/2);
             visit[now/2]=visit[now]+1;
@@ -34,8 +27,17 @@ int main() {
             q.push(now/3);
             visit[now/3]=visit[now]+1;
         }
+        if(now+1<=n+1&&visit[now+1]==-1){
+            q.push(now+1);
+            visit[now+1]=visit[now]+1;
+        }
+        if(now-1>0&&visit[now-1]==-1){
+            q.push(now-1);
+            visit[now-1]=visit[now]+1;
+        }
 
 
     }
-    cout<<visit[1];
+    
+    cout<<visit[1]<<"\n";
 }
