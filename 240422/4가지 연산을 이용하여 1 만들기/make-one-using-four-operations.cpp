@@ -5,7 +5,7 @@ int n;
 vector<int>arr;
 void sol(){
 
-    for(int i=2;i<=n+1;i++){
+    for(int i=2;i<=3*n+1;i++){
         arr[i]=arr[i-1]+1;
         if(i%2==0){
             arr[i]=min(arr[i],arr[i/2]+1);
@@ -15,7 +15,7 @@ void sol(){
         }
     }
 
-    for(int i=n;i>=1;i--){
+    for(int i=3*n;i>=1;i--){
         arr[i]=min(arr[i],arr[i+1]+1);
     }
     return;
@@ -25,7 +25,7 @@ void sol(){
 int main() {
     
     cin>>n;
-    arr=vector<int>(n+2);
+    arr=vector<int>(3*n+2);
     arr[1]=0;
 
     sol();
