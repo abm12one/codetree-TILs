@@ -18,7 +18,7 @@ int main() {
         int now=q.front();
         q.pop();
         //
-        if(now+1<n+1&&visit[now+1]==-1){
+        if(now+1<=n+1&&visit[now+1]==-1){
             q.push(now+1);
             visit[now+1]=visit[now]+1;
         }
