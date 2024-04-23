@@ -1,0 +1,105 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <tuple>
+#include <cmath>
+using namespace std;
+int n,m,c;
+vector<vector<int>>map;
+vector<vector<int>>psum;
+vector<vector<int>>p;
+vector<int>wh;
+int ans=0;
+
+int find(int y,int x){
+    vector<int>arr;
+    for(int i=x;i<=x+m-1;i++){
+        arr.push_back(map[y][i]);
+    }
+    sort(arr.begin(),arr.end(),greater<int>());
+    int sum=0;
+    int ret=0;
+    for(int i=0;i<m;i++){
+        if(sum+arr[i]>c)continue;
+        sum+=arr[i];
+        ret+=pow(arr[i],2);
+    }
+    return ret;
+
+}
+void sol(){
+    int y1=wh[0];
+    int y2=wh[1];
+    int ret1=0;
+    for(int i=1;i<=n-m+1;i++){
+        int t=p[y1][i+m-1]-p[y1][i-1];
+        if(t>c){
+            int temp=find(y1,i);
+            ret1=max(ret1,temp);
+            //cout<<"#1 1 "<<i<<" "<<temp<<'\n';
+        }
+        else{
+            int temp=psum[y1][i+m-1]-psum[y1][i-1];
+            ret1=max(ret1,temp);
+            //cout<<"#1 2 "<<i<<" "<<temp<<'\n';
+        }
+        
+    }
+    int ret2=0;
+    for(int i=1;i<=n-m+1;i++){
+        int t=p[y2][i+m-1]-p[y2][i-1];
+        if(t>c){
+            int temp=find(y2,i);
+            ret2=max(ret2,temp);
+            //cout<<"#2 1 "<<i<<" "<<temp<<'\n';
+        }
+        else{
+            int temp=psum[y2][i+m-1]-psum[y2][i-1];
+            ret2=max(ret2,temp);  
+            //cout<<"#2 2 "<<i<<" "<<temp<<'\n';
+        }
+       
+    }
+    //cout<<ret1<<'\n';
+    //cout<<ret2<<'\n';
+    //cout<<'\n';
+    ans=max(ans,ret1+ret2);
+    return;
+    
+
+}
+
+void bt(int now,int num){
+    if(num==2){
+        
+        sol();
+        
+        
+        return;
+    }
+    for(int i=now+1;i<=n;i++){
+        wh.push_back(i);
+        bt(i,num+1);
+        wh.pop_back();
+    }
+    return;
+
+
+}
+int main() {
+    
+    cin>>n>>m>>c;
+    map=vector<vector<int>>(n+1,vector<int>(n+1));
+    psum=vector<vector<int>>(n+1,vector<int>(n+1));
+    p=vector<vector<int>>(n+1,vector<int>(n+1));
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            cin>>map[i][j];
+            psum[i][j]=psum[i][j-1]+pow(map[i][j],2);
+            p[i][j]=p[i][j-1]+map[i][j];
+        }
+    }
+
+    bt(0,0);
+    cout<<ans;
+}
