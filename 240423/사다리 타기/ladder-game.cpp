@@ -73,7 +73,7 @@ void bt(int now,int cnt){
     }
     */
 
-    if(cnt!=0&&check()&&alluse()){
+    if(check()){
         ans=min(ans,cnt);
     }
     
@@ -121,15 +121,11 @@ int main() {
        tie(b,a)=arr[i];
        twistorigin(a);
     }
-    /*
-    for(int i=1;i<=n;i++){
-        cout<<origin[i]<<' ';
-    }
-    cout<<'\n';
-    cout<<'\n';
-    */
+    
+    
     sort(arr.begin(),arr.end());
+    
     bt(-1,0);
     cout<<ans;
-
+   
 }
