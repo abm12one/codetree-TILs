@@ -10,28 +10,33 @@ vector<vector<int>>psum;
 vector<vector<int>>p;
 vector<int>wh;
 int ans=0;
+vector<int>arr;
+int result;
+void btt(int now,int sum,int hap){
+
+    if(hap>c){
+        return;
+    }
+    result=max(result,sum);
+
+    for(int i=now+1;i<arr.size();i++){
+        
+        btt(i,sum+pow(arr[i],2),hap+arr[i]);
+
+    }
+    return;
+
+}
 
 int find(int y,int x){
-    vector<int>arr;
+    arr=vector<int>();
     for(int i=x;i<=x+m-1;i++){
         arr.push_back(map[y][i]);
     }
     sort(arr.begin(),arr.end(),greater<int>());
-    int sum=0;
-    int ret=0;
-    int result=0;
-    for(int s=0;s<=m-1;s++){
-        sum=0;
-        ret=0;
-        for(int i=s;i<m;i++){
-            if(sum+arr[i]>c)continue;
-            sum+=arr[i];
-            ret+=pow(arr[i],2);
-        }
-        result=max(result,ret);
-
-    }
     
+    result=0;
+    btt(-1,0,0);
     
     return result;
 
@@ -141,10 +146,7 @@ void bt(int now,int num){
             //cout<<wh[0]<<' '<<wh[1]<<'\n';
             sol();
         }
-        
-        
-    
-        
+
         return;
     }
     for(int i=now;i<=n;i++){
