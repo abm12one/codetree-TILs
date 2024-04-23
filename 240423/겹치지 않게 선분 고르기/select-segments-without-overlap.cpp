@@ -3,47 +3,38 @@
 #include <tuple>
 #include <algorithm>
 using namespace std;
-int n;
-vector<int>visit;
+
 vector<pair<int,int>>arr;
-int ans=0;
+int n;
+int s=0;
+int e=0;
+void sol(){
+    int cnt=0;
+    for(int i=0;i<n;i++){
+        int nowe,nows;
+        tie(nowe,nows)=arr[i];
 
-
-
-void bt(int now,int cnt){
-    ans=max(ans,cnt);
-
-    for(int i=now+1;i<n;i++){
-        int a,b;
-        tie(a,b)=arr[i];
-        if(visit[a]==0&&visit[b]==0){
-            visit[a]=1;
-            visit[b]=1;
-            bt(i,cnt+1);
-            visit[a]=0;
-            visit[b]=0;
+        if(nows>e){
+            cnt++;
+            e=nowe;
 
         }
-
     }
-    return;
+    cout<<cnt;
+    return ;
 
 }
 
 
-int main() {
-    
-    cin>>n;
-    visit=vector<int>(1001);
-    for(int i=0;i<n;i++){
-        int a,b;
-        cin>>a>>b;
-        arr.push_back(make_pair(a,b));
+int main(){
 
+    cin>>n;
+    for(int i=0;i<n;i++){
+        int s,e;
+        cin>>s>>e;
+        arr.push_back(make_pair(e,s));
     }
     sort(arr.begin(),arr.end());
-
-    bt(-1,0);
-    cout<<ans;
+    sol();
 
 }
