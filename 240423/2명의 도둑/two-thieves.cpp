@@ -19,12 +19,21 @@ int find(int y,int x){
     sort(arr.begin(),arr.end(),greater<int>());
     int sum=0;
     int ret=0;
-    for(int i=0;i<m;i++){
-        if(sum+arr[i]>c)continue;
-        sum+=arr[i];
-        ret+=pow(arr[i],2);
+    int result=0;
+    for(int s=0;s<=m-1;s++){
+        sum=0;
+        ret=0;
+        for(int i=s;i<m;i++){
+            if(sum+arr[i]>c)continue;
+            sum+=arr[i];
+            ret+=pow(arr[i],2);
+        }
+        result=max(result,ret);
+
     }
-    return ret;
+    
+    
+    return result;
 
 }
 
@@ -129,6 +138,7 @@ void bt(int now,int num){
             sol2(wh[0]);
         }
         else{
+            //cout<<wh[0]<<' '<<wh[1]<<'\n';
             sol();
         }
         
