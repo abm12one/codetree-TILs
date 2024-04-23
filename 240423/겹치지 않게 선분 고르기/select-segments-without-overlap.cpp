@@ -34,7 +34,7 @@ void bt(int now,int cnt){
 int main() {
     
     cin>>n;
-    visit=vector<int>(16);
+    visit=vector<int>(1001);
     for(int i=0;i<n;i++){
         int a,b;
         cin>>a>>b;
