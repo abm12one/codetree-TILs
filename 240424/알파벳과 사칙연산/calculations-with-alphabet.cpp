@@ -20,7 +20,7 @@ int c2num(char c){
     else if(c=='e')return 4;
     else if(c=='f')return 5;
 }
-int ans=0;
+int ans=-987654321;
 void sol(){
 
     int sum=arr[num[0]];
