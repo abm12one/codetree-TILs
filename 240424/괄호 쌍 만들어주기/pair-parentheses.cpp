@@ -1,22 +1,37 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-int f=0;
-int s=0;
+vector<int>f;
+vector<int>s;
+int ans=0;
+void sol(){
+    
+    for(int i=0;i<f.size();i++){
+        for(int j=0;j<s.size();j++){
+            if(f[i]<s[j]){
+                ans++;
+            }
+        }
+    }
+    return;
+}
+
+
 int main() {
     string str;
     cin>>str;
     for(int i=0;i<str.size()-1;i++){
         if(str[i]=='('){
             if(str[i]==str[i+1]){
-                f++;
+                f.push_back(i);
             }
         }
         else if(str[i]==')'){
             if(str[i]==str[i+1]){
-                s++;
+                s.push_back(i);
             }
         }
     }
-    cout<<s*f;
+    sol();
+    cout<<ans;
 }
