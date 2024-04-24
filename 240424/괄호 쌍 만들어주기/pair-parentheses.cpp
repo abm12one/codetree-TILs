@@ -9,8 +9,10 @@ void sol(){
     for(int i=0;i<f.size();i++){
         for(int j=0;j<s.size();j++){
             if(f[i]<s[j]){
-                ans++;
+                ans+=s.size()-j;
+                break;
             }
+            
         }
     }
     return;
