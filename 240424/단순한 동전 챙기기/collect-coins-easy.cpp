@@ -4,7 +4,7 @@
 #include <cmath>
 using namespace std;
 int n,m;
-int ncnt;
+
 vector<int>arr;
 vector<int>ret;
 vector<vector<int>>map;
@@ -59,7 +59,10 @@ void bt(int now,int cnt){
         //pr2();
         return;
     }
-    for(int i=now+1;i<=ncnt;i++){
+    for(int i=now+1;i<=9;i++){
+        int y,x;
+        tie(y,x)=num[i];
+        if(y==0&&x==0)continue;
         ret.push_back(i);
         bt(i,cnt+1);
         ret.pop_back();
@@ -71,10 +74,13 @@ void bt(int now,int cnt){
 int main() {
     int n;
     cin>>n;
-    ncnt=0;
+
     num=vector<pair<int,int>>(11);
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     se=vector<pair<int,int>>(2);
+    for(int i=0;i<11;i++){
+        num[i]=make_pair(0,0);
+    }
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             char c;
@@ -84,7 +90,7 @@ int main() {
             else if(c=='E'){num[10]=make_pair(i,j);}
             else{
                 map[i][j]=c-'0';
-                ncnt++;
+
                 num[map[i][j]]=make_pair(i,j);
             }
             
@@ -92,7 +98,7 @@ int main() {
     }
 
     bt(0,0);
-    if(ans=987654321){
+    if(ans==987654321){
         cout<<-1;
     }
     else{
