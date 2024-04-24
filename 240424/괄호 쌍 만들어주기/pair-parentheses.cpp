@@ -3,7 +3,7 @@
 using namespace std;
 vector<int>f;
 vector<int>s;
-int ans=0;
+long ans=0;
 void sol(){
     
     for(int i=0;i<f.size();i++){
