@@ -107,7 +107,7 @@ void moveyellow(int n){
     for(int i=5;i>=2;i--){
         for(int j=0;j<4;j++){
             yellow[i][j]=yellow[i-n][j];
-            red[i-n][j]=0;
+            yellow[i-n][j]=0;
         }
     }
     return;
@@ -189,11 +189,12 @@ int main() {
         int t,y,x;
         cin>>t>>y>>x;
         set(t,y,x);
-        sol();
         sol2();
+        sol();
         //pr();
     }
     cout<<ans<<"\n";
+    
     int cnt=0;
     for(int i=0;i<4;i++){
         for(int j=2;j<6;j++){
@@ -210,5 +211,6 @@ int main() {
         }
     }
     cout<<cnt;
+    
 
 }
