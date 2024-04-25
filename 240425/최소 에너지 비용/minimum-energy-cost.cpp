@@ -37,12 +37,12 @@ int main() {
    
 
     int e=n;
-    int ans=0;
+    long ans=0;
     for(int i=0;i<arr.size();i++){
         int id,ch;
         tie(ch,id)=arr[i];
         if(id<e){
-            ans+=ch*(p[e-1]-p[id-1]);
+            ans+=(long)ch*(p[e-1]-p[id-1]);
             //cout<<e<<" "<<id<<'\n';
             //cout<<ans<<'\n';
             e=id;
