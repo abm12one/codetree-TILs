@@ -58,13 +58,13 @@ int bt(vector<vector<int>>&map,vector<tuple<int,int,int>>&th){
     
     int cy,cx,cd;
     tie(cy,cx,cd)=th[17];
-    
+    int f=0;
     for(int i=1;i<=3;i++){
 
         int ny=cy+dy[cd]*i;
         int nx=cx+dy[cd]*i;
-        if(!isrange(ny,nx))continue;
-        
+        if(!isrange(ny,nx)||map[ny][nx]==0)continue;
+        f=1;
         int next=map[ny][nx];
         pos[next]=0;
         map[cy][cx]=0;
@@ -79,6 +79,7 @@ int bt(vector<vector<int>>&map,vector<tuple<int,int,int>>&th){
         th[17]=make_tuple(cy,cx,cd);
 
     }
+    if(f==0)return 0;
     
     /*
     for(int i=1;i<=4;i++){
