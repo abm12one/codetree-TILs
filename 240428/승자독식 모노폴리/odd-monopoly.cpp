@@ -58,7 +58,7 @@ pair<int,int> getnext(int p,int d){
         tie(nextp,nextt)=map[ny][nx];
 
         if(nextp==p){
-            dir[p]=priordir[p][d][i];
+            //dir[p]=priordir[p][d][i];
             return make_pair(ny,nx);
         }
         
