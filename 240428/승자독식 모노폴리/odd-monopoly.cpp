@@ -47,18 +47,30 @@ pair<int,int> getnext(int p,int d){
             pos[p]=0;
             return make_pair(-1,-1);
         }
-
-        else if(ntime>=k+nextt){
+        else if(ntime>k+nextt){
             dir[p]=priordir[p][d][i];
             return make_pair(ny,nx);
         }
-        else if(ntime<k+nextt){
+        else if(ntime<=k+nextt){
             continue;
         }
     }
-    int cd=contractdir(d);
-    dir[p]=cd;
-    return make_pair(y+dy[cd],x+dx[cd]);
+    for(int i=0;i<4;i++){
+        int ny=y+dy[priordir[p][d][i]];
+        int nx=x+dx[priordir[p][d][i]];
+        if(!isrange(ny,nx))continue;
+
+        int nextp,nextt;
+        tie(nextp,nextt)=map[ny][nx];
+
+        if(nextp==p){
+            dir[p]=priordir[p][d][i];
+            return make_pair(ny,nx);
+        }
+        
+    }
+
+    
 }
 
 void sol(){
@@ -151,6 +163,7 @@ int main(){
     for(ntime=1;ntime<=1000;ntime++){
 
         sol();
+        //pr();
         if(isok()){
             cout<<ntime;
             return 0;
