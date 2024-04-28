@@ -163,9 +163,9 @@ void pr(){
             int p,d;
             
             tie(p,d)=contract[i][j];
-            if(p==401)cout<<0<<' ';
+            if(p==401)cout<<0<<","<<0<<' ';
             else{
-                cout<<p<<' ';
+                cout<<p<<","<<d<<' ';
             }
             
         }
@@ -212,7 +212,12 @@ int main() {
     // 계속 시뮬레이션을 반복합니다.
 	while(!End()) {
 		Simulate();
+        cout<<elapsed_time+1<<"\n";
+        
         pr();
+        
+        
+        
         elapsed_time++;
     }
 	
@@ -234,6 +239,7 @@ int dy[4]={-1,1,0,0};
 int dx[4]={0,0,-1,1};
 vector<int>dir;
 vector<int>pos;
+vector<vector<int>>pre;
 vector<vector<pair<int,int>>>map;
 vector<pair<int,int>>player;
 vector<vector<vector<int>>>priordir;
@@ -262,7 +268,7 @@ pair<int,int> getnext(int p,int d){
             return make_pair(ny,nx);
         }
         
-        else if(nextt==ntime){
+        else if(nextt==ntime&&pre[ny][nx]+k<ntime){
             pos[p]=0;
             return make_pair(-1,-1);
         }
@@ -340,12 +346,24 @@ void pr2(){
     cout<<'\n';
 }
 
+void setting(){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            int p,t;
+            tie(p,t)=map[i][j];
+            pre[i][j]=t;
+        }
+    }
+    return;
+}
+
 int main(){
     
     cin>>n>>m>>k;
     dir=vector<int>(m+1);
     pos=vector<int>(m+1,1);
     player=vector<pair<int,int>>(m+1);
+    pre=vector<vector<int>>(n,vector<int>(n));
     map=vector<vector<pair<int,int>>>(n,vector<pair<int,int>>(n));
     priordir=vector<vector<vector<int>>>(m+1,vector<vector<int>>(4,vector<int>(4)));
     for(int i=0;i<n;i++){
@@ -378,12 +396,17 @@ int main(){
             }
         }
     }
-    
+
+
     
     for(ntime=1;ntime<=1000;ntime++){
         //cout<<"#"<<ntime<<'\n';
+        //setting();
         sol();
+        
         //pr();
+        
+        
         if(isok()){
             cout<<ntime;
             return 0;
