@@ -375,7 +375,7 @@ int main(){
                 player[p]=make_pair(i,j);
             }
             else{
-                map[i][j]=make_pair(0,0);
+                map[i][j]=make_pair(0,-k);
             }
         }
         
@@ -401,7 +401,7 @@ int main(){
     
     for(ntime=1;ntime<=1000;ntime++){
         //cout<<"#"<<ntime<<'\n';
-        //setting();
+        setting();
         sol();
         
         //pr();
