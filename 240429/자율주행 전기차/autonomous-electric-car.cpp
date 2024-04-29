@@ -83,7 +83,7 @@ int bfs(int id){
         }
 
     }
-    return 0;
+    return -1;
 }
 
 pair<int,int> find(int cy,int cx){
@@ -128,10 +128,11 @@ pair<int,int> find(int cy,int cx){
     
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            if(temp[i][j]==0)continue;
-            if(visit[i][j]<ret){
-                ret=visit[i][j];
-                ans=temp[i][j];
+            if(temp[i][j]!=0&&visit[i][j]!=0){
+                if(visit[i][j]<ret){
+                    ret=visit[i][j];
+                    ans=temp[i][j];
+                }
             }
         }
     }
@@ -142,8 +143,9 @@ pair<int,int> find(int cy,int cx){
         }
         cout<<'\n';
     }
-    cout<<'\n';
     */
+    
+    
     exist[ans]=0;
     return make_pair(ans,ret-1);
 
@@ -161,10 +163,19 @@ void sol(){
     int pid=0,oil=0;
     tie(pid,oil)=find(cary,carx);
     //cout<<pid<<" "<<oil<<'\n';
-    
+    //cout<<'\n';
+    if(pid==0){
+        flag=1;
+        return;
+    }
     c-=oil;
     //cout<<c<<"\n";
     int useoil=bfs(pid);
+    //cout<<useoil<<"\n";
+    if(useoil==-1){
+        flag=1;
+        return;
+    }
     if(useoil>c){
         flag=1;
     }
