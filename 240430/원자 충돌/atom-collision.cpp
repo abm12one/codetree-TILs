@@ -127,7 +127,12 @@ int check(){
     int cnt=0;
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            cnt+=map[i][j].size();
+            if(map[i][j].size()==0)continue;
+            for(int k=0;k<map[i][j].size();k++){
+                int w,s,d;
+                tie(w,s,d)=map[i][j][k];
+                cnt+=w;
+            }
         }
         
     }
