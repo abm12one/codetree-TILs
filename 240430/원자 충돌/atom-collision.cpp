@@ -5,7 +5,7 @@ using namespace std;
 int n,m,k;
 
 vector<vector<vector<tuple<int,int,int>>>>map;
-vector<vector<vector<tuple<int,int,int>>>>temp;
+
 int dy[8]={-1,-1,0,1,1,1,0,-1};
 int dx[8]={0,1,1,1,0,-1,-1,-1};
 
@@ -35,6 +35,7 @@ pair<int,int>getnext(int y,int x,int s,int d){
 
 
 void move(){
+    vector<vector<vector<tuple<int,int,int>>>>temp(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
 
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
@@ -143,7 +144,7 @@ int main() {
     
    
     cin>>n>>m>>k;
-    temp=vector<vector<vector<tuple<int,int,int>>>>(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
+
     map=vector<vector<vector<tuple<int,int,int>>>>(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
 
     for(int i=0;i<m;i++){
