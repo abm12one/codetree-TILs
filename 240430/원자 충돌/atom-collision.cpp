@@ -10,26 +10,9 @@ int dy[8]={-1,-1,0,1,1,1,0,-1};
 int dx[8]={0,1,1,1,0,-1,-1,-1};
 
 pair<int,int>getnext(int y,int x,int s,int d){
-    int ny;
-    int nx;
-    for(int i=0;i<s;i++){
-        ny=y+dy[d];
-        nx=x+dx[d];
-        if(ny>n){
-            ny=1;
-        }
-        else if(ny<1){
-            ny=n;
-        }
-        if(nx>n){
-            nx=1;
-        }
-        else if(nx<1){
-            nx=n;
-        }
-        y=ny;
-        x=nx;
-    }
+    int ny=(y-1 + dy[d] * s + n * s)%n + 1;
+    int nx=(x-1 + dx[d] * s + n * s)%n + 1;
+    
     return make_pair(ny,nx);
 }
 
