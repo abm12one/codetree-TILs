@@ -35,7 +35,6 @@ pair<int,int>getnext(int y,int x,int s,int d){
 
 
 void move(){
-    vector<vector<vector<tuple<int,int,int>>>>temp(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
 
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
