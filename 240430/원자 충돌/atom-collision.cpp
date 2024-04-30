@@ -5,7 +5,7 @@ using namespace std;
 int n,m,k;
 
 vector<vector<vector<tuple<int,int,int>>>>map;
-
+vector<vector<vector<tuple<int,int,int>>>>temp;
 int dy[8]={-1,-1,0,1,1,1,0,-1};
 int dx[8]={0,1,1,1,0,-1,-1,-1};
 
@@ -144,7 +144,7 @@ int main() {
     
    
     cin>>n>>m>>k;
-
+    temp=vector<vector<vector<tuple<int,int,int>>>>(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
     map=vector<vector<vector<tuple<int,int,int>>>>(n+1,vector<vector<tuple<int,int,int>>>(n+1,vector<tuple<int,int,int>>()));
 
     for(int i=0;i<m;i++){
