@@ -45,7 +45,7 @@ void dfs(int y,int x,int d,int c){
             dfs(y,x-1,d,c-1);
         }
         if(wall[y+1][x]!=1&&wall[y+1][x]!=3&&wall[y+1][x]!=2&&wall[y+1][x]!=3){
-            dfs(y-1,x-1,d,c-1);
+            dfs(y+1,x-1,d,c-1);
         }
     }
 
@@ -98,7 +98,7 @@ void hap(){
 
 void blow(){
     for(int i=0;i<aircon.size();i++){
-        temp=vector<vector<int>>(n+1,vector<int>(n+1));
+        temp=vector<vector<int>>(n+1,vector<int>(n+1,0));
         int y,x,d;
         tie(y,x,d)=aircon[i];
         if(d-2==0){
@@ -114,7 +114,7 @@ void blow(){
             dfs(y+1,x,d-2,5);
         }
         hap();
-        //pr();
+        pr();
     }
 }
 
