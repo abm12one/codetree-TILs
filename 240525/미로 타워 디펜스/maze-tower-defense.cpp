@@ -62,6 +62,7 @@ void pr(){
         
     }
     cout<<'\n';
+    cout<<'\n';
     return;
 }
 
@@ -136,7 +137,7 @@ void shr(int s,int cnt){
 }
 
 int com(){
-    int cnt=1;
+    int cnt=0;
     int s=0;
     int f=0;
     for(int i=0;i<arr.size();i++){
@@ -184,14 +185,16 @@ void sol(int d,int p){
         compact();
 
     }
+    //pr();
     
     exp();
-    
+    //pr();
     
    
     
    
     put();
+    //pr();
     
 }
 
