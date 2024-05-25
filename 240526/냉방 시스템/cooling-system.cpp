@@ -177,12 +177,22 @@ void hot(){
 
 void sol(){
     blow();
-    pr();
+    //pr();
     mix();
-    pr();
+    //pr();
     hot();
 }
-
+int check(){
+    
+    for(int i=0;i<office.size();i++){
+        int y,x;
+        tie(y,x)=office[i];
+        if(cold[y][x]<k){
+            return 0;
+        }
+    }
+    return 1;
+}
 int main() {
     
     cin>>n>>m>>k;
@@ -212,7 +222,17 @@ int main() {
             wall[y][x]+=2;
         }
     }
-    sol();
+    int ans=-1;
+    for(int i=1;i<=100;i++){
+        sol();
+        if(check()){
+            ans=i;
+            break;
+        }
+    }
+    cout<<ans;
+
+    
 
 
 
