@@ -201,7 +201,7 @@ int main() {
 
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     cold=vector<vector<int>>(n+1,vector<int>(n+1));
-    wall=vector<vector<int>>(n+2,vector<int>(n+2));
+    wall=vector<vector<int>>(n+1,vector<int>(n+1));
 
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
