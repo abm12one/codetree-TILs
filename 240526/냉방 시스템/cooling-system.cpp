@@ -84,7 +84,7 @@ void dfs(int y,int x,int d,int c){
             dfs(y+1,x+1,d,c-1);
         }
     }
-    
+    return;
 }
 
 void hap(){
@@ -114,7 +114,7 @@ void blow(){
             dfs(y+1,x,d-2,5);
         }
         hap();
-        pr();
+        //pr();
     }
 }
 
@@ -169,6 +169,7 @@ void hot(){
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             if(i==1||i==n||j==1||j==n){
+                if(cold[i][j]==0)continue;
                 cold[i][j]--;
             }
         }
@@ -181,6 +182,7 @@ void sol(){
     mix();
     //pr();
     hot();
+    //pr();
 }
 int check(){
     
@@ -199,7 +201,7 @@ int main() {
 
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     cold=vector<vector<int>>(n+1,vector<int>(n+1));
-    wall=vector<vector<int>>(n+1,vector<int>(n+1));
+    wall=vector<vector<int>>(n+2,vector<int>(n+2));
 
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
@@ -222,6 +224,7 @@ int main() {
             wall[y][x]+=2;
         }
     }
+    
     int ans=-1;
     for(int i=1;i<=100;i++){
         sol();
@@ -230,7 +233,9 @@ int main() {
             break;
         }
     }
+    
     cout<<ans;
+    
 
     
 
