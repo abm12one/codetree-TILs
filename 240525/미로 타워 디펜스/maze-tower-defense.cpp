@@ -111,19 +111,15 @@ void exp(){
     
     temp.push_back(cnt);
     temp.push_back(arr[s]);
-    /*   
-    for(int i=0;i<temp.size();i++){
-        cout<<temp[i]<<' ';
-    }
-    cout<<'\n';
-    */
+    
     arr=temp;
     return;
 }
 
 void put(){
     map=vector<vector<int>>(n,vector<int>(n));
-    for(int i=0;i<arr.size();i++){
+    int s=min(arr.size(),spin.size());
+    for(int i=0;i<s;i++){
         int y,x;
         tie(y,x)=spin[i];
         map[y][x]=arr[i];
@@ -188,11 +184,15 @@ void sol(int d,int p){
         compact();
 
     }
-    //pr();
+    
     exp();
-    //pr();
+    
+    
+   
+    
+   
     put();
-    //pr2();
+    
 }
 
 int main() {
@@ -208,6 +208,7 @@ int main() {
     for(int i=0;i<m;i++){
         cin>>d>>p;
         sol(d,p);
+        
     }
 
     cout<<ans;
