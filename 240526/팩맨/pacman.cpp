@@ -133,7 +133,7 @@ void pmove(){
     int ny=y+dy[f];
     int nx=x+dx[f];
     if(map[ny][nx]>0){
-        dead[ny][nx]=2;
+        dead[ny][nx]=3;
         map[ny][nx]=0;
     }
     y=ny;
@@ -142,7 +142,7 @@ void pmove(){
     ny=y+dy[s];
     nx=x+dx[s];
     if(map[ny][nx]>0){
-        dead[ny][nx]=2;
+        dead[ny][nx]=3;
         map[ny][nx]=0;
     }
     y=ny;
@@ -151,7 +151,7 @@ void pmove(){
     ny=y+dy[t];
     nx=x+dx[t];
     if(map[ny][nx]>0){
-        dead[ny][nx]=2;
+        dead[ny][nx]=3;
         map[ny][nx]=0;
     }
     y=ny;
