@@ -17,6 +17,14 @@ int range(int y,int x){
 int dy[4]={-1,0,1,0};
 int dx[4]={0,1,0,-1};
 int d=0;
+void pr3(){
+    for(int i=0;i<path.size();i++){
+        int y,x,d;
+        tie(y,x,d)=path[i];
+        cout<<y<<" "<<x<<' '<<d<<"\n";
+    }
+    return;
+}
 void pr(){
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
@@ -125,12 +133,13 @@ void sett(){
     path.push_back(make_tuple(3,3,0));
     setting();
     setting2();
+    path.pop_back();
     
     return;
 }
 
 int dist(int cy,int cx,int y,int x){
-    int dis=abs(cy-cx)+abs(y-x);
+    int dis=abs(cy-y)+abs(cx-x);
     if(dis<=3)return 1;
     return 0;
 }
@@ -151,22 +160,25 @@ void move(int now){
         }
         int ny=y+dy[d];
         int nx=x+dx[d];
-        //cout<<ny<<" "<<nx<<'\n';
+        
         if(!range(ny,nx)){
             d=(d+6)%4;
             ny=y+dy[d];
             nx=x+dx[d];
         }
+        //cout<<ny<<" "<<nx<<'\n';
         if(ny==cy&&nx==cx){
             map[y][x]++;
             thief[i]=make_tuple(y,x,d);
             //cout<<y<<" "<<x<<" "<<d<<'\n';
+            //cout<<'\n';
            
         }
         else{
             map[ny][nx]++;
             thief[i]=make_tuple(ny,nx,d);
             //cout<<ny<<" "<<nx<<" "<<d<<'\n';
+            //cout<<'\n';
             
         }
         
@@ -233,11 +245,13 @@ int main() {
     }
 
     sett();
-
+    
     for(int i=0;i<k;i++){
         int now=i%path.size();
         sol(i+1,now);
     }
+    
+    //pr3();
     /*
     for(int i=0;i<path.size();i++){
         int y,x,d;
