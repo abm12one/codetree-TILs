@@ -196,7 +196,7 @@ void seek(int turn,int now){
         if(!range(ny,nx))continue;
         if(tr[ny][nx]==1)continue;
         ans+=turn*map[ny][nx];
-        cout<<turn<<" "<<ans<<'\n';
+        //cout<<turn<<" "<<ans<<'\n';
         map[ny][nx]=0;
         
     }
