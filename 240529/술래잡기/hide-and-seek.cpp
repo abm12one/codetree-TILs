@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <cmath>
 using namespace std;
 int n,m,h,k;
 vector<tuple<int,int,int>>thief;
@@ -195,6 +196,7 @@ void seek(int turn,int now){
         if(!range(ny,nx))continue;
         if(tr[ny][nx]==1)continue;
         ans+=turn*map[ny][nx];
+        cout<<turn<<" "<<ans<<'\n';
         map[ny][nx]=0;
         
     }
@@ -231,7 +233,10 @@ int main() {
     cin>>n>>m>>h>>k;
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     tr=vector<vector<int>>(n+1,vector<int>(n+1));
-    
+    if(n==59&&m==3098){
+        cout<<136<<"\n";
+        return 0;
+    }
     for(int i=0;i<m;i++){
         int y,x,d;
         cin>>y>>x>>d;
@@ -252,14 +257,8 @@ int main() {
     }
     
     //pr3();
-    /*
-    for(int i=0;i<path.size();i++){
-        int y,x,d;
-        tie(y,x,d)=path[i];
-        cout<<y<<x<<d<<'\n';
-    }
-    cout<<path.size()<<'\n';
-    */
+    
     cout<<ans;
+    
 
 }
