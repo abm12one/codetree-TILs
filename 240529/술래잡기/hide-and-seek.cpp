@@ -3,6 +3,7 @@
 #include <tuple>
 #include <cmath>
 using namespace std;
+
 int n,m,h,k;
 vector<tuple<int,int,int>>thief;
 vector<tuple<int,int,int>>temp;
@@ -10,6 +11,7 @@ vector<vector<int>>tr;
 vector<vector<int>>map;
 vector<tuple<int,int,int>>path;
 vector<tuple<int,int,int>>path2;
+
 int range(int y,int x){
     if(y<1||y>n)return 0;
     if(x<1||x>n)return 0;
@@ -141,8 +143,7 @@ void sett(){
 
 int dist(int cy,int cx,int y,int x){
     int dis=abs(cy-y)+abs(cx-x);
-    if(dis<=3)return 1;
-    return 0;
+    return dis;
 }
 
 void move(int now){
@@ -155,8 +156,9 @@ void move(int now){
         int y,x,d;
         tie(y,x,d)=thief[i];
         //cout<<y<<' '<<x<<' '<<d<<'\n';
-        if(!dist(cy,cx,y,x)){
+        if(dist(cy,cx,y,x)>3){
             map[y][x]++;
+            thief[i]=make_tuple(y,x,d);
             continue;
         }
         int ny=y+dy[d];
@@ -179,8 +181,7 @@ void move(int now){
             map[ny][nx]++;
             thief[i]=make_tuple(ny,nx,d);
             //cout<<ny<<" "<<nx<<" "<<d<<'\n';
-            //cout<<'\n';
-            
+            //cout<<'\n';   
         }
         
     }
@@ -233,10 +234,7 @@ int main() {
     cin>>n>>m>>h>>k;
     map=vector<vector<int>>(n+1,vector<int>(n+1));
     tr=vector<vector<int>>(n+1,vector<int>(n+1));
-    if(n==59&&m==3098){
-        cout<<136<<"\n";
-        return 0;
-    }
+    
     for(int i=0;i<m;i++){
         int y,x,d;
         cin>>y>>x>>d;
