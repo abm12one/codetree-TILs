@@ -76,7 +76,7 @@ void growchild(){
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
 
-            if(map[i][j]==0||fkill[i][j]!=0)continue;
+            if(map[i][j]<=0)continue;
             int cnt=0;
             
             for(int k=0;k<4;k++){
@@ -180,8 +180,11 @@ void findbug(){
 
         }
     }
+    if(my==-1&&mx==-1)return;
+
     ans+=mcnt;
     kill(my,mx,k);
+    
     return;
 }
 
@@ -192,6 +195,7 @@ void blow(){
             fkill[i][j]--;
         }
     }
+    return;
 }
 
 void sol(){
