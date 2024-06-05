@@ -64,34 +64,36 @@ void init(){
 }
 
 pair<int,int> rcheck(int turn){
+    
+    int t=(turn-1)%(4*n)+1;
 
-    if(turn>=1&&turn<=n){
-        int now=turn-1;
+    if(t>=1&&t<=n){
+        int now=t-1;
         for(int i=0;i<n;i++){
             if(map[now][i]>0&&map[now][i]<4){
                 return make_pair(now,i);
             }
         }
     }
-    else if(turn>=n+1&&turn<=2*n){
-        int now=turn-n-1;
+    else if(t>=n+1&&t<=2*n){
+        int now=t-n-1;
         for(int i=n-1;i>=0;i--){
             if(map[i][now]>0&&map[i][now]<4){
                 return make_pair(i,now);
             }
         }
     }
-    else if(turn>=2*n+1&&turn<=3*n){
-        int now=turn-(2*n)-1;
+    else if(t>=2*n+1&&t<=3*n){
+        int now=t-(2*n)-1;
         for(int i=n-1;i>=0;i--){
             if(map[n-1-now][i]>0&&map[n-1-now][i]<4){
                 return make_pair(n-1-now,i);
             }
         }
     }
-    else if(turn>=3*n+1&&turn<=4*n){
-        int now=turn-3*n-1;
-        for(int i=n-1;i>=0;i--){
+    else if(t>=3*n+1&&t<=4*n){
+        int now=t-3*n-1;
+        for(int i=0;i<n;i++){
             if(map[i][n-1-now]>0&&map[i][n-1-now]<4){
                 return make_pair(i,n-1-now);
             }
@@ -198,12 +200,16 @@ int main() {
     
     for(int t=1;t<=k;t++){
         moveall();
-        
+        //pr();
         int y=-1,x=-1;
         tie(y,x)=rcheck(t);
         if(y==-1&&x==-1)continue;
+        
+        //cout<<"round"<<t<<'\n';
         //cout<<y<<" "<<x<<'\n';
+        
         rever(group[y][x],y,x);
+
         //cout<<ans<<'\n';
         //pr();
         
