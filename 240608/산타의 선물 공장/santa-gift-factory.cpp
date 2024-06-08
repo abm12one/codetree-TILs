@@ -124,6 +124,16 @@ void erase(int rid){
         belt.erase(rid);
         return;
     }
+
+    else if(head[now]==rid){
+        //cout<<"yes"<<"\n";
+        int prehead=head[now];
+        head[now]=nxt[prehead];
+        belt.erase(rid);
+        nxt.erase(prehead);
+        pre.erase(head[now]);
+
+    }
     
 
     int prev=pre[rid];
@@ -142,8 +152,11 @@ void check(int fid){
         return;
     }
 
+
     int now=belt[fid];
     cout<<now<<'\n';
+
+    
 
     int pretail=tail[now];
     int prehead=head[now];
