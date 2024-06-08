@@ -115,7 +115,16 @@ void erase(int rid){
         cout<<-1<<'\n';
         return;
     }
+
     cout<<rid<<'\n';
+    int now=belt[rid];
+    
+    if(head[now]==rid&&tail[now]==rid){
+        head[now]=-1;
+        return;
+    }
+    
+
     int prev=pre[rid];
     int next=nxt[rid];
     pre[next]=prev;
@@ -156,13 +165,13 @@ void check(int fid){
 
 void move(int now,int next){
     int here=head[now];
-
+    
     while(1){
-        
+        belt[here]=next;
         if(nxt.find(here)==nxt.end()){
             break;
         }
-        belt[here]=next;
+        
         here=nxt[here];
     }
 
