@@ -61,9 +61,25 @@ void hacha(int wmax){
     long ret=0;
     for(int i=1;i<=m;i++){
         if(malf[i]==1)continue;
+        if(head[i]==-1){
+            //cout<<0<<"\n";
+            continue;
+        }
+        
         int nowid=head[i];
         int noww=boxw[nowid];
-        
+        //cout<<noww<<' ';
+        if(nxt.find(nowid)==nxt.end()){
+            if(noww>wmax){
+                continue;
+            }
+            else{
+                ret+=noww;
+                belt.erase(head[i]);
+                head[i]=-1;
+                continue;
+            }
+        }
         if(noww>wmax){
             int prehead=head[i];
             head[i]=nxt[prehead];
@@ -87,6 +103,7 @@ void hacha(int wmax){
         }
 
     }
+    //cout<<" "<<'\n';
     cout<<ret<<'\n';
     
     return;
@@ -149,6 +166,12 @@ void move(int now,int next){
         here=nxt[here];
     }
 
+    if(head[next]==-1){
+        head[next]=head[now];
+        tail[next]=tail[now];
+        return;
+    }
+
     int nowhead=head[now];
     int nexttail=tail[next];
     nxt[nexttail]=nowhead;
@@ -167,6 +190,7 @@ void as(int bnum){
     malf[bnum]=1;
     
     cout<<bnum<<'\n';
+    if(head[bnum]==-1)return;
     
     for(int i=bnum+1;i<=m;i++){
         if(malf[i]==0){
@@ -188,6 +212,10 @@ void as(int bnum){
 
 void pri(int now){
     int here=head[now];
+    if(here==-1){
+        cout<<0<<"\n";
+        return;
+    }
     //cout<<head[now]<<"  "<<tail[now]<<"\n";
     while(1){
         
@@ -204,7 +232,10 @@ void pri(int now){
 
 void pr(){
     for(int i=1;i<=m;i++){
-        if(malf[i]==1)continue;
+        if(malf[i]==1){
+            cout<<0<<'\n';
+            continue;
+        }
         pri(i);
     }
 }
@@ -247,6 +278,7 @@ int main(){
             cin>>bnum;
             as(bnum);
         }
+        //cout<<'\n';
         //pr();
         //cout<<'\n';
         
