@@ -1,227 +1,222 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
-#include <map>
+#include <unordered_map>
 using namespace std;
 int q;
 int n,m;
-vector<vector<pair<long,long>>>belt;
-vector<long>id;
-vector<long>weight;
-
-vector<pair<long,long>>temp;
-vector<int>malfun;
-map<long,int>smap;
-
+vector<int>id;
+vector<int>w;
+vector<int>head;
+vector<int>tail;
+unordered_map<int,int>boxw;
+unordered_map<int,int>pre,nxt;
+unordered_map<int,int>belt;
+vector<int>malf;
 void sett(int n,int m){
-    
-    belt=vector<vector<pair<long,long>>>(m+1,vector<pair<long,long>>());
-    id=vector<long>(n+1);
-    weight=vector<long>(n+1);
-    
+    id=vector<int>(n+1);
+    w=vector<int>(n+1);
+    malf=vector<int>(m+1);
+    head=vector<int>(m+1);
+    tail=vector<int>(m+1);
     for(int i=1;i<=n;i++){
         cin>>id[i];
     }
-
     for(int i=1;i<=n;i++){
-        cin>>weight[i];
+        cin>>w[i];
     }
-
+    for(int i=1;i<=n;i++){
+        boxw[id[i]]=w[i];
+    }
     int s=1;
-    
+
     for(int i=1;i<=m;i++){
-        for(int j=1;j<=n/m;j++){
-            smap[id[s]]=i;
-            belt[i].push_back(make_pair(id[s],weight[s]));
+        head[i]=id[s];
+        belt[id[s]]=i;
+        
+        s++;
+        for(int j=2;j<=n/m;j++){
+            int now=s;
+            belt[id[s]]=i;
+            
+            nxt[id[s-1]]=id[s];
+            pre[id[s]]=id[s-1];
             s++;
         }
-    }
+        tail[i]=id[s-1];
 
-    
+        
+        
+    }
 
     return;
 
+
 }
-//2
+
 void hacha(int wmax){
-    long ret=0;
+    
+    //cout<<wmax<<'\n';
+    
+    int ret=0;
     for(int i=1;i<=m;i++){
-        if(malfun[i]==1)continue;
-        if(belt[i].size()==0)continue;
-        long fid;
-        long fw;
-        tie(fid,fw)=belt[i][0];
+        if(malf[i]==1)continue;
+        int nowid=head[i];
+        int noww=boxw[nowid];
         
-        ret+=fw;
-        if(fw>wmax){
-            belt[i].push_back(make_pair(fid,fw));
-            ret-=fw;
+        if(noww>wmax){
+            int prehead=head[i];
+            head[i]=nxt[prehead];
+            nxt.erase(prehead);
+            pre.erase(head[i]);
+
+            int pretail=tail[i];
+            nxt[pretail]=prehead;
+            pre[prehead]=pretail;
+            tail[i]=prehead;
+
         }
         else{
-            smap.erase(fid);
-        }
-        
-        temp=vector<pair<long,long>>();
-        
-        for(int j=1;j<belt[i].size();j++){
-            temp.push_back(belt[i][j]);
-        }
+            ret+=noww;
+            belt.erase(head[i]);
 
-        belt[i]=temp;
+            int prehead=head[i];
+            head[i]=nxt[head[i]];
+            nxt.erase(prehead);
+            pre.erase(head[i]);
+        }
 
     }
     cout<<ret<<'\n';
-    return;
-}
-
-void boxerase(int b,int now){
-
-    for(int i=now+1;i<belt[b].size();i++){
-        long nid,nw;
-        tie(nid,nw)=belt[b][i];
-        belt[b][i-1]=make_pair(nid,nw);
-    }
-
-    belt[b].pop_back();
-    return;
-
-}
-//3
-void erase(long rid){
     
-    if(smap.find(rid)==smap.end()){
-        cout<<-1<<'\n';
-        return ;
-    }
-    long b=smap[rid];
-
-    for(int i=0;i<belt[b].size();i++){
-        long id,w;
-        tie(id,w)=belt[b][i];
-        if(id==rid){
-            
-            boxerase(b,i);
-            smap.erase(rid);
-            cout<<rid<<'\n';
-            return ;
-        }
-    }
-    
-
-    return;
-}
-
-void move(int b,int now){
-    
-    temp=vector<pair<long,long>>();
-    for(int i=now;i<belt[b].size();i++){
-        temp.push_back(belt[b][i]);
-    }
-
-
-    for(int i=0;i<now;i++){
-        temp.push_back(belt[b][i]);
-    }
-
-    
-
-    belt[b]=temp;
-    return;
-
-
-}
-//4
-void check(long fid){
-    
-    
-    if(smap.find(fid)==smap.end()){
-        cout<<-1<<'\n';
-        return ;
-    }
-    long b=smap[fid];
-    cout<<b<<"\n";
-
-    for(int i=0;i<belt[b].size();i++){
-        long id,w;
-        tie(id,w)=belt[b][i];
-        if(id==fid){
-            
-            move(b,i);
-            
-            return;
-                
-        }
-       
-    }
-
     return;
 
 }
 
-void change(int next,int now){
-
-    for(int i=0;i<belt[now].size();i++){
-        belt[next].push_back(belt[now][i]);
-        long id,w;
-        tie(id,w)=belt[now][i];
-        smap[id]=next;
-    }
-    return;
-}
-//5
-void as(int bnum){
-    if(malfun[bnum]==1){
+void erase(int rid){
+    if(belt.find(rid)==belt.end()){
         cout<<-1<<'\n';
         return;
     }
-    malfun[bnum]=1;
+    cout<<rid<<'\n';
+    int prev=pre[rid];
+    int next=nxt[rid];
+    pre[next]=prev;
+    nxt[prev]=next;
+    nxt.erase(rid);
+    pre.erase(rid);
+    belt.erase(rid);
+    return;
+}
+
+void check(int fid){
+    if(belt.find(fid)==belt.end()){
+        cout<<-1<<'\n';
+        return;
+    }
+
+    int now=belt[fid];
+    cout<<now<<'\n';
+
+    int pretail=tail[now];
+    int prehead=head[now];
+
+    nxt[pretail]=prehead;
+    pre[prehead]=pretail;
+
+    int newtail=pre[fid];
+    int newhead=fid;
+
+    nxt.erase(newtail);
+    pre.erase(newhead);
+    head[now]=newhead;
+    tail[now]=newtail;
+
+    return;
+
+
+}
+
+void move(int now,int next){
+    int here=head[now];
+
+    while(1){
+        
+        if(nxt.find(here)==nxt.end()){
+            break;
+        }
+        belt[here]=next;
+        here=nxt[here];
+    }
+
+    int nowhead=head[now];
+    int nexttail=tail[next];
+    nxt[nexttail]=nowhead;
+    pre[nowhead]=nexttail;
+    tail[next]=tail[now];
+    return;
+
+}
+
+void as(int bnum){
+    
+    if(malf[bnum]==1){
+        cout<<-1<<"\n";
+        return;
+    }
+    malf[bnum]=1;
+    
+    cout<<bnum<<'\n';
+    
     for(int i=bnum+1;i<=m;i++){
-        if(malfun[i]==0){
-            change(i,bnum);
-            cout<<bnum<<"\n";
+        if(malf[i]==0){
+            move(bnum,i);
             return;
         }
-        
     }
 
-    for(int i=1;i<=bnum;i++){
-        if(malfun[i]==0){
-            change(i,bnum);
-            cout<<bnum<<"\n";
+    for(int i=1;i<bnum;i++){
+        if(malf[i]==0){
+            move(bnum,i);
             return;
         }
+    }
+    
+    return;
+   
+}
+
+void pri(int now){
+    int here=head[now];
+    //cout<<head[now]<<"  "<<tail[now]<<"\n";
+    while(1){
         
+        cout<<here<<' ';
+        if(nxt.find(here)==nxt.end()){
+            break;
+        }
+        here=nxt[here];
     }
 
-    cout<<-1<<'\n';
-    return; 
-
-
-
+    cout<<'\n';
+    return;
 }
 
 void pr(){
     for(int i=1;i<=m;i++){
-        for(int j=0;j<belt[i].size();j++){
-            long id,w;
-            tie(id,w)=belt[i][j];
-            cout<<id<<" ";
-        }
-        cout<<'\n';
+        if(malf[i]==1)continue;
+        pri(i);
     }
-    cout<<'\n';
-    cout<<'\n';
-    return;
-    
 }
 
-int main() {
-    
+int main(){
+    int q;
     cin>>q;
-    malfun=vector<int>(m+1,0);
     for(int i=0;i<q;i++){
         int com;
         cin>>com;
+        
+       
         if(com==100){
             
             cin>>n>>m;
@@ -229,19 +224,20 @@ int main() {
         }
         
         else if(com==200){
-            long wmax;
+            int wmax;
             cin>>wmax;
             hacha(wmax);
         }
         
+       
         else if(com==300){
-            long rid;
+            int rid;
             cin>>rid;
             erase(rid);
         }
-
+        
         else if(com==400){
-            long fid;
+            int fid;
             cin>>fid;
             check(fid);
         }
@@ -252,7 +248,8 @@ int main() {
             as(bnum);
         }
         //pr();
-
+        //cout<<'\n';
+        
     }
     return 0;
 
