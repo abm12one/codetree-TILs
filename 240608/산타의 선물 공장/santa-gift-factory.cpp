@@ -42,11 +42,12 @@ void sett(int n,int m){
     return;
 
 }
-
+//2
 void hacha(int wmax){
     int ret=0;
     for(int i=1;i<=m;i++){
         if(malfun[i]==1)continue;
+        if(belt[i].size()==0)continue;
         int fid;
         int fw;
         tie(fid,fw)=belt[i][0];
@@ -85,7 +86,7 @@ void boxerase(int b,int now){
     return;
 
 }
-
+//3
 void erase(int rid){
     
     if(smap.find(rid)==smap.end()){
@@ -113,23 +114,23 @@ void erase(int rid){
 void move(int b,int now){
     
     temp=vector<pair<int,int>>();
-    
-    for(int i=0;i<=now;i++){
-        int id,w;
-        tie(id,w)=belt[b][i];
-        smap.erase(id);
-    }
-
-    for(int i=now+1;i<belt[b].size();i++){
+    for(int i=now;i<belt[b].size();i++){
         temp.push_back(belt[b][i]);
     }
+
+
+    for(int i=0;i<now;i++){
+        temp.push_back(belt[b][i]);
+    }
+
+    
 
     belt[b]=temp;
     return;
 
 
 }
-
+//4
 void check(int fid){
     
     
@@ -146,6 +147,7 @@ void check(int fid){
         if(id==fid){
             
             move(b,i);
+            
             return;
                 
         }
@@ -160,10 +162,13 @@ void change(int next,int now){
 
     for(int i=0;i<belt[now].size();i++){
         belt[next].push_back(belt[now][i]);
+        int id,w;
+        tie(id,w)=belt[now][i];
+        smap[id]=next;
     }
     return;
 }
-
+//5
 void as(int bnum){
     if(malfun[bnum]==1){
         cout<<-1<<'\n';
@@ -193,6 +198,21 @@ void as(int bnum){
 
 
 
+}
+
+void pr(){
+    for(int i=1;i<=m;i++){
+        for(int j=0;j<belt[i].size();j++){
+            int id,w;
+            tie(id,w)=belt[i][j];
+            cout<<id<<" ";
+        }
+        cout<<'\n';
+    }
+    cout<<'\n';
+    cout<<'\n';
+    return;
+    
 }
 
 int main() {
@@ -231,7 +251,7 @@ int main() {
             cin>>bnum;
             as(bnum);
         }
-        
+        //pr();
 
     }
     return 0;
