@@ -58,7 +58,7 @@ void hacha(int wmax){
     
     //cout<<wmax<<'\n';
     
-    int ret=0;
+    long ret=0;
     for(int i=1;i<=m;i++){
         if(malf[i]==1)continue;
         int nowid=head[i];
