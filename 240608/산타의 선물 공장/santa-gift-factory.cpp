@@ -121,6 +121,7 @@ void erase(int rid){
     
     if(head[now]==rid&&tail[now]==rid){
         head[now]=-1;
+        belt.erase(rid);
         return;
     }
     
