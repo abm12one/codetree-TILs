@@ -35,8 +35,8 @@ void bfs(int py,int px){
             int ny=y+dy[d];
             int nx=x+dx[d];
             if(!range(ny,nx))continue;
-            if(visit[ny][nx]!=0)continue;
             if(map[ny][nx]==2)continue;
+            if(visit[ny][nx]!=0)continue;
             visit[ny][nx]=visit[y][x]+1;
             q.push(make_pair(ny,nx));
 
@@ -51,7 +51,7 @@ void bfs(int py,int px){
 void pr(){
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            cout<<visit[i][j]<<' ';
+            cout<<map[i][j]<<' ';
         }
         cout<<'\n';
     }
@@ -69,8 +69,9 @@ void sol(){
         int cy,cx;
         tie(cy,cx)=con[i];
 
-        if(py==-1&&px==-1)continue;
         if(people[i]==con[i])continue;
+        if(py==-1&&px==-1)continue;
+        
 
         
         bfs(cy,cx);
@@ -84,6 +85,7 @@ void sol(){
             int ny=py+dy[d];
             int nx=px+dx[d];
             if(!range(ny,nx))continue;
+            if(visit[ny][nx]==0)continue;
             if(map[ny][nx]==2)continue;
             if(mmin>visit[ny][nx]){
                 mmin=visit[ny][nx];
@@ -105,10 +107,11 @@ void sol(){
         }
     }
 
+    if(curtime>m)return;
+
     int mmin=987654321;
     int ansy=-1;
     int ansx=-1;
-    if(curtime>m)return;
     int py,px;
     tie(py,px)=con[curtime];
     bfs(py,px);
@@ -184,6 +187,8 @@ int main() {
         curtime++;
         sol();
         //prs();
+        //cout<<"   "<<curtime<<"\n";
+        //pr();
         if(check())break;
     }
     cout<<curtime<<'\n';
