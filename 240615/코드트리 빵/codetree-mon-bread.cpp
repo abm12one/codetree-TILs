@@ -6,24 +6,52 @@ using namespace std;
 
 int n,m;
 vector<vector<int>>map;
-vector<vector<int>>mvisit;
-vector<vector<int>>home;
+vector<vector<int>>tmap;
 vector<vector<int>>visit;
-vector<pair<int,int>>conv;
-
-int dy[4]={-1,0,0,1};
-int dx[4]={0,-1,1,0};
-int ans=0;
-
+vector<pair<int,int>>con;
+vector<pair<int,int>>people;
+int curtime=0;
 int range(int y,int x){
     if(y<1||y>n)return 0;
     if(x<1||x>n)return 0;
     return 1;
 }
-void pr2(){
+
+int dy[4]={-1,0,0,1};
+int dx[4]={0,-1,1,0};
+
+void bfs(int py,int px){
+    
+    visit=vector<vector<int>>(n+1,vector<int>(n+1));
+    queue<pair<int,int>>q;
+    q.push(make_pair(py,px));
+    visit[py][px]=1;
+
+    while(!q.empty()){
+        int y,x;
+        tie(y,x)=q.front();
+        q.pop();
+        for(int d=0;d<4;d++){
+            int ny=y+dy[d];
+            int nx=x+dx[d];
+            if(!range(ny,nx))continue;
+            if(visit[ny][nx]!=0)continue;
+            if(map[ny][nx]==2)continue;
+            visit[ny][nx]=visit[y][x]+1;
+            q.push(make_pair(ny,nx));
+
+        }
+    }
+    return;
+
+
+
+}
+
+void pr(){
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            cout<<visit[i][j]<<' '; 
+            cout<<visit[i][j]<<' ';
         }
         cout<<'\n';
     }
@@ -32,49 +60,96 @@ void pr2(){
     return;
 }
 
-void sol(int t){
 
-    int sy,sx;
-    tie(sy,sx)=conv[t];
+void sol(){
+    for(int i=1;i<=m;i++){
+        int py,px;
+        tie(py,px)=people[i];
 
-    queue<pair<int,int>>q;
-    visit=vector<vector<int>>(n+1,vector<int>(n+1));
-    q.push(make_pair(sy,sx));
-    visit[sy][sx]=t;
-    
-    while(!q.empty()){
-        int y,x;
-        tie(y,x)=q.front();
-        q.pop();
-        for(int i=0;i<4;i++){
-            int ny=y+dy[i];
-            int nx=x+dx[i];
+        int cy,cx;
+        tie(cy,cx)=con[i];
 
+        if(py==-1&&px==-1)continue;
+        if(people[i]==con[i])continue;
+
+        
+        bfs(cy,cx);
+        //pr();
+        //cout<<i<<" "<<py<<" "<<px<<"\n";
+        int mmin=987654321;
+        int ansy=-1;
+        int ansx=-1;
+
+        for(int d=0;d<4;d++){
+            int ny=py+dy[d];
+            int nx=px+dx[d];
             if(!range(ny,nx))continue;
-            if(visit[ny][nx]!=0)continue;
-            
-            if(mvisit[ny][nx]!=0&&mvisit[ny][nx]<=visit[y][x]+1)continue;
-            if(home[ny][nx]!=0)continue;
-            if(map[ny][nx]==1){
-                home[ny][nx]=1;
-                mvisit[sy][sx]=visit[y][x]+1;
-                visit[ny][nx]=visit[y][x]+1;
-                ans=max(ans,mvisit[sy][sx]);
-                //pr2();
-                return;
+            if(map[ny][nx]==2)continue;
+            if(mmin>visit[ny][nx]){
+                mmin=visit[ny][nx];
+                ansy=ny;
+                ansx=nx;
             }
-            visit[ny][nx]=visit[y][x]+1;
-            q.push(make_pair(ny,nx));
+        }
+        //cout<<"next"<<ansy<<" "<<ansx<<"\n";
+
+        people[i]=make_pair(ansy,ansx);
+
+    }
+
+    for(int i=1;i<=m;i++){
+        if(people[i]==con[i]){
+            int py, px;
+            tie(py, px) = people[i];
+            map[py][px]=2;
         }
     }
+
+    int mmin=987654321;
+    int ansy=-1;
+    int ansx=-1;
+    if(curtime>m)return;
+    int py,px;
+    tie(py,px)=con[curtime];
+    bfs(py,px);
+
+    for(int i = 1; i <=n; i++) {
+        for(int j = 1; j <=n; j++) {
+            if(visit[i][j] && map[i][j] == 1 && mmin > visit[i][j]) {
+                mmin= visit[i][j];
+                ansy= i; ansx = j;
+            }
+        }
+    }
+
+    people[curtime]=make_pair(ansy,ansx);
+    map[ansy][ansx]=2;
     
     return;
+
 }
 
-void pr(){
+int check(){
+    for(int i=1;i<=m;i++){
+        if(people[i]!=con[i]){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void prs(){
+    tmap=vector<vector<int>>(n+1,vector<int>(n+1));
+    for(int i=1;i<=m;i++){
+        int y,x;
+        tie(y,x)=people[i];
+        if(y==-1)continue;
+        tmap[y][x]=i;
+
+    }
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            cout<<mvisit[i][j]<<' '; 
+            cout<<tmap[i][j]<<' ';
         }
         cout<<'\n';
     }
@@ -87,9 +162,9 @@ int main() {
     
     cin>>n>>m;
     map=vector<vector<int>>(n+1,vector<int>(n+1));
-    home=vector<vector<int>>(n+1,vector<int>(n+1));
-    mvisit=vector<vector<int>>(n+1,vector<int>(n+1));
-    conv=vector<pair<int,int>>(m+1);
+    tmap=vector<vector<int>>(n+1,vector<int>(n+1));
+    con=vector<pair<int,int>>(m+1);
+    people=vector<pair<int,int>>(m+1);
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             cin>>map[i][j];
@@ -99,15 +174,19 @@ int main() {
     for(int i=1;i<=m;i++){
         int y,x;
         cin>>y>>x;
-        conv[i]=make_pair(y,x);
-    }
+        con[i]=make_pair(y,x);
+    }   
+    for(int i=1;i<=m;i++){
+        people[i]=make_pair(-1,-1);
+    } 
     
-    for(int t=1;t<=m;t++){
-        if(t<=m){
-            sol(t);
-            //pr();
-        }
+    while(1){
+        curtime++;
+        sol();
+        //prs();
+        if(check())break;
     }
-    cout<<ans<<'\n';
-    
+    cout<<curtime<<'\n';
+
+
 }
