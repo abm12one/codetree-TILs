@@ -155,7 +155,7 @@ int main() {
                 else{
                     connect(ptr,shelf[b].head);
                     shelf[b].s++;
-                    shelf[b].tail=ptr;
+                    shelf[b].head=ptr;
                 }
             }
 
