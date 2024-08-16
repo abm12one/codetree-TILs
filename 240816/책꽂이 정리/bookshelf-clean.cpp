@@ -38,9 +38,10 @@ void connect(node*a,node*b){
 void pr(){
     //cout<<"pr"<<"\n";
     for(int i=1;i<=k;i++){
+        //cout<<i<<"qjs"<<"\n";
         int siz=shelf[i].s;
         if(siz==0){
-            cout<<"0"<<"\n";
+            cout<<0<<'\n';
             continue;
         }
         //cout<<siz<<" "<<shelf[i].head->data<<" "<<shelf[i].tail->data<<'\n';
@@ -74,15 +75,17 @@ int main() {
     shelf[1].s=n;
     shelf[1].head=book[1];
     shelf[1].tail=book[n];
-
+    
     int k;
     cin>>k;
     for(int i=0;i<k;i++){
         int c,a,b;
         cin>>c>>a>>b;
         //cout<<i+1<<"번째 "<<c<<" "<<a<<" "<<b<<"\n";
+        
         if(c==1){
             int shelfsiz=shelf[a].s;
+           
             if(shelfsiz==0){
                 continue;
             }
@@ -120,6 +123,7 @@ int main() {
         }
         else if(c==2){
             int shelfsiz=shelf[a].s;
+            
             if(shelfsiz==0){
                 continue;
             }
@@ -157,27 +161,68 @@ int main() {
 
         }
         else if(c==3){
-            if(a==b)continue;
-            node *ptr=shelf[a].tail;
-            connect(ptr,shelf[b].head);
-            shelf[b].s+=shelf[a].s;
-            shelf[b].head=shelf[a].head;
-            shelf[a].s=0;
-            shelf[a].head=shelf[a].tail=nullptr;
+            if(a==b){
+               
+                continue; 
+            }
+            if(shelf[a].s==0){
+                
+                continue;
+            }
+             if(shelf[b].s==0){
+                shelf[b].s=shelf[a].s;
+                shelf[b].head=shelf[a].head;
+                shelf[b].tail=shelf[a].tail;
+                shelf[a].s=0;
+                shelf[a].head=shelf[a].tail=nullptr;
+
+            }
+            else{
+                node *ptr=shelf[a].tail;
+                connect(ptr,shelf[b].head);
+                shelf[b].s+=shelf[a].s;
+                shelf[b].head=shelf[a].head;
+                shelf[a].s=0;
+                shelf[a].head=shelf[a].tail=nullptr;
+            }
+            
             
         }
         else if(c==4){
-            if(a==b)continue;
-            node *ptr=shelf[a].head;
-            connect(shelf[b].tail,ptr);
-            shelf[b].s+=shelf[a].s;
-            shelf[b].tail=shelf[a].tail;
-            shelf[a].s=0;
-            shelf[a].head=shelf[a].tail=nullptr;
+            if(a==b){
+               
+                continue; 
+            }
+            
+            if(shelf[a].s==0){
+                
+                continue;
+            }
+            
+            if(shelf[b].s==0){
+                shelf[b].s=shelf[a].s;
+                shelf[b].head=shelf[a].head;
+                shelf[b].tail=shelf[a].tail;
+                shelf[a].s=0;
+                shelf[a].head=shelf[a].tail=nullptr;
+
+            }
+            else{
+                node *ptr=shelf[a].head;
+                connect(shelf[b].tail,ptr);
+                shelf[b].s+=shelf[a].s;
+                shelf[b].tail=shelf[a].tail;
+                shelf[a].s=0;
+                shelf[a].head=shelf[a].tail=nullptr;
+            }
+            
         }
         
         
+        
+        
     }
-    pr(); 
+    pr();
+    
 
 }
