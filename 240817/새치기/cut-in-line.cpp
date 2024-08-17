@@ -52,9 +52,11 @@ void pr(){
 }
 
 int main() {
+    
     ios_base :: sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+
     cin>>n>>m>>q;
 
     narr=vector<node*>(n+1);
@@ -68,7 +70,7 @@ int main() {
     for(int i=1;i<=m;i++){
         int s;
         cin>>s;
-        
+        if(s==-1)continue;
         vector<int>arr(s,0);
         for(int j=0;j<s;j++){
             cin>>arr[j];
@@ -105,8 +107,6 @@ int main() {
                 node*ap=narr[a]->prev;
                 node*an=narr[a]->next;
                 connect(ap,an);
-                low[p].head=ap;
-                low[p].tail=an;
             }
 
             int pb=pos[b];
@@ -160,8 +160,6 @@ int main() {
                 node*ap=narr[a]->prev;
                 node*bn=narr[b]->next;
                 connect(ap,bn);
-                low[p].head=ap;
-                low[p].tail=bn;
             }
 
             int pc=pos[c];
