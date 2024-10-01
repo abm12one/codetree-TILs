@@ -61,7 +61,12 @@ int put(int p,int d,int num){
     }
    
     while(1){
-       
+
+        if(canmovedown(ty,tx)){
+            ty+=1;
+            continue;
+        }
+
         if(canmoveleft(ty,tx)){
             
             ty+=1;
@@ -78,11 +83,6 @@ int put(int p,int d,int num){
             continue;
         }
 
-        if(canmovedown(ty,tx)){
-           
-            ty+=1;
-            continue;
-        }
         
         break;
 
