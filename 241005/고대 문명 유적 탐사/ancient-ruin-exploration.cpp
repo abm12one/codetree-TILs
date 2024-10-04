@@ -100,7 +100,7 @@ void solve() {
 				if (k == 3)continue;
 				int wid = find();
 				if (wid == 0)continue;
-				pq.push(make_tuple(wid,-k,-i,-j));
+				pq.push(make_tuple(wid,-k,-j,-i));
 				
 				
 			}
@@ -177,8 +177,8 @@ int main() {
 		solve();
 		
 		if (pq.empty())break;
-		int a, d, y, x;
-		tie(a, d, y, x) = pq.top();
+		int a, d, x, y;
+		tie(a, d, x, y) = pq.top();
 	
 		//cout << a << " " << -d << " " << -y << " " << -x << "\n";
 		
