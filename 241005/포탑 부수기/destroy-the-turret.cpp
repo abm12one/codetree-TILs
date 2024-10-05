@@ -160,6 +160,7 @@ int main() {
 		lastatt[sy][sx] = turn;
 		int ey, ex;
 		tie(ey, ex) = finddest();
+		if (ey == sy && ex == sx) break;
 		map[sy][sx] += (n + m);
 		//pmap();
 		if (findpath(sy, sx, ey, ex) == 0) {
