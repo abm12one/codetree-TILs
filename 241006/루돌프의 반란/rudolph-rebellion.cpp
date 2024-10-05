@@ -199,13 +199,12 @@ void santamove() {
 		santa[i] = make_pair(nexty,nextx);
 		//cout << i << " " << nexty << " " << nextx << '\n';
 		rd = (nextd + 2) % 4;
+		map[sy][sx] = 0;
+		map[nexty][nextx] = i;
 		if (nexty ==ry && nextx==rx) {
 			chkscoll(i);
 		}
-		else{
-			map[sy][sx]=0;
-			map[nexty][nextx]=i;
-		}
+		
 	}
 
 }
