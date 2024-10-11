@@ -139,6 +139,7 @@ int main() {
 	for (int i = 0; i < q; i++) {
 		int id, d;
 		cin >> id >> d;
+		if (kp[id] <= 0)continue;
 		//cout << "# " << i<< '\n';
 		setkmap();
 		//pkmap();
