@@ -72,8 +72,8 @@ tuple<int,int,int> findrc() {
 			nx = max(1, ex - d);
 		}
 		else if (py > ey && px > ex) {
-			ny = max(1, ey - d);
-			nx = max(1, ex - d);
+			ny = max(1, py - d);
+			nx = max(1, px - d);
 		}
 		int nd= max(max(abs(ny - py), abs(nx - px)),max(abs(ny - ey), abs(nx - ex)))+1;
 		//cout << "push " << " " << ny << " " << nx <<" "<<nd<< '\n';
