@@ -77,9 +77,6 @@ void move(int id,int now, int d) {
 			int nowx = x + cc;
 			int ny = nowy + dy[d];
 			int nx = nowx + dx[d];
-			if (!range(ny, nx)) continue;
-			if (map[ny][nx] == 2)continue;
-			if (kmap[ny][nx] == 0)continue;
 			int nid = kmap[ny][nx];
 			if (visit[nid] == 1)continue;
 			move(id,nid, d);
