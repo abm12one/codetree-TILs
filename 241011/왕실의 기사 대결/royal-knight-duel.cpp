@@ -53,11 +53,8 @@ int canmove(int id,int d) {
 			int nowx = x + cc;
 			int ny = nowy+dy[d];
 			int nx = nowx + dx[d];
-			if (!range(ny, nx)) {
-				ret = 0;
-				continue;
-			}
-			if (map[ny][nx] == 2)ret = 0;
+			if (!range(ny, nx)) return 0;
+			if (map[ny][nx] == 2)return 0;
 			if (kmap[ny][nx] == 0)continue;
 			int nid = kmap[ny][nx];
 			if (visit[nid] == 1)continue;
@@ -75,7 +72,7 @@ void move(int id,int now, int d) {
 	int r, c;
 	tie(r, c) = kshield[now];
 	for (int rr = 0; rr < r; rr++) {
-		for (int cc = 0; cc <= c; cc++) {
+		for (int cc = 0; cc < c; cc++) {
 			int nowy = y + rr;
 			int nowx = x + cc;
 			int ny = nowy + dy[d];
