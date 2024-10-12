@@ -59,7 +59,8 @@ void find(int id) {
 int findlen(int sy,int sx,int id) {
 	int cy, cx;
 	tie(cy, cx) = conv[id];
-	visit = vector<vector<int>>(n + 1, vector<int>(n + 1));
+	if (sy == cy && sx == cx)return 0;
+	visit = vector<vector<int>>(n + 1, vector<int>(n + 1,0));
 	queue<tuple<int, int, int>>q;
 	visit[sy][sx] = 1;
 	q.push(make_tuple(sy, sx, 0));
@@ -81,7 +82,7 @@ int findlen(int sy,int sx,int id) {
 			}
 		}
 	}
-	return 0;
+	return 987654321;
 
 }
 
@@ -99,6 +100,7 @@ void move(int id) {
 		if (!range(ny, nx))continue;
 		if (map[ny][nx] == 1)continue;
 		int l=findlen(ny, nx, id);
+		
 		if (mlen > l) {
 			mlen = l;
 			ry=ny;
@@ -157,7 +159,7 @@ int main() {
 	t= 0;
 	while (1) {
 		if (pcnt == m)break;
-		if (t == 10)break;
+		//if (t == 10)break;
 		t++;
 		//cout << "# " << t << '\n';
 		//움직여
