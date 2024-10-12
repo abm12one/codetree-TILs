@@ -12,8 +12,8 @@ vector<pair<int, int>>conv;
 vector<pair<int, int>>player;
 vector<int>pexit;
 int t;
-int dy[4] = {-1,0,1,0};
-int dx[4] = {0,1,0,-1};
+int dy[4] = {-1,0,0,1};
+int dx[4] = {0,1,-1,0};
 int pcnt;
 int range(int y,int x) {
 	if (y<1 || y>n)return 0;
@@ -88,7 +88,7 @@ int findlen(int sy,int sx,int id) {
 
 
 void move(int id) {
-	//cout << id << " move" << '\n';
+	cout << id << " move" << '\n';
 	int y, x;
 	tie(y, x) = player[id];
 	int ry=-1;
@@ -108,7 +108,7 @@ void move(int id) {
 		}
 	}
 	player[id] = make_pair(ry,rx);
-	//cout << id << " " << ry << " " << rx << '\n';
+	cout << id << " " << ry << " " << rx << '\n';
 	return;
 }
 
@@ -161,7 +161,7 @@ int main() {
 		if (pcnt == m)break;
 		//if (t == 10)break;
 		t++;
-		//cout << "# " << t << '\n';
+		cout << "# " << t << '\n';
 		//움직여
 		for (int i = 1; i <= m; i++) {
 			if (pexit[i] == 1)continue;
@@ -194,8 +194,8 @@ int main() {
 		if (t <= m) {
 			find(t);
 		}
-		//posp();
-		//pmap();
+		posp();
+		pmap();
 	}
 	cout << t << '\n';
 
