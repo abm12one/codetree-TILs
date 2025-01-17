@@ -30,6 +30,7 @@ static int pseudo_rand(void)
 #include<tuple>
 #include<set>
 #include<algorithm>
+#include <bitset>
 using namespace std;
 
 static int Map[MAX_N][MAX_N];
@@ -38,8 +39,9 @@ static int Pieces[MAX_M][MAX_M];
 vector<vector<int>>map;
 vector<vector<int>>cmap;
 vector<vector<int>>pmap;
-vector<set<int>>puzzle;
-set<int>oripart;
+vector<bitset<400>>puzzle;
+//bitset<400> puzzle[4];
+bitset<400> oripart;
 int n, m;
 
 
@@ -83,32 +85,27 @@ pair<int, int>rr(int y,int x) {
 	return make_pair(x,m-1-y);
 }
 void sett(vector<vector<int>>pmap,int k) {
-	//cout << k << "번째" << '\n';
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < m; j++) {
+	puzzle[k].reset(); // 초기화
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < m; ++j) {
 			if (pmap[i][j] == 1) {
-				puzzle[k].insert(m * i + j);
-				//cout << m * i + j << ' ';
+				puzzle[k].set(i * m + j); // 비트를 설정
 			}
 		}
 	}
-	//cout << '\n';
 	return;
 	
 }
 
 void settmap(int y,int x) {
-	oripart = set<int>();
-	//cout << "origin "<<y<<" "<<x << '\n';
-	for (int i = 0; i < m; i++) {
-		for (int j = 0; j < m; j++) {
-			if (map[y+i][x+j] == 1) {
-				oripart.insert(m * i + j);
-				//cout << m * i + j << ' ';
+	oripart.reset(); // 초기화
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < m; ++j) {
+			if (map[y + i][x + j] == 1) {
+				oripart.set(i * m + j); // 비트를 설정
 			}
 		}
 	}
-	//cout << '\n';
 	return;
 
 }
@@ -125,7 +122,7 @@ tuple<int, int, int>findstpoint(int pcnt) {
 
 			for (int k = 0; k < 4; k++) {
 				
-				if (includes(oripart.begin(), oripart.end(), puzzle[k].begin(), puzzle[k].end())){
+				if ((oripart&puzzle[k])== puzzle[k]){
 					sty = i;
 					stx = j;
 					rrcnt = k;
@@ -140,7 +137,7 @@ tuple<int, int, int>findstpoint(int pcnt) {
 
 Result findTreasureChest(int Pieces[MAX_M][MAX_M]){
 	pmap = vector<vector<int>>(m, vector<int>(m, 0));
-	puzzle = vector<set<int>>(4);
+	puzzle=vector<bitset<400>>(4);
 	int py = -1;
 	int px = -1;
 	int pcnt = 0;
