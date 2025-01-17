@@ -30,7 +30,7 @@ static int pseudo_rand(void)
 #include<tuple>
 #include<set>
 #include<algorithm>
-#include <bitset>
+#include<bitset>
 using namespace std;
 
 static int Map[MAX_N][MAX_N];
@@ -46,34 +46,33 @@ int n, m;
 
 
 int findsum(int y, int x) {
-	return cmap[y+m][x+m] - cmap[y][x+m] - cmap[y+m][x] + cmap[y][x];
-	
+	return cmap[y + m][x + m] - cmap[y][x + m] - cmap[y + m][x] + cmap[y][x];
+
 }
-void init(int N, int M, int Map[MAX_N][MAX_N]){
+void init(int N, int M, int Map[MAX_N][MAX_N]) {
 
 	n = N;
 	m = M;
 	map = vector<vector<int>>(n, vector<int>(n, 0));
-	cmap = vector<vector<int>>(n+1, vector<int>(n+1, 0));
+	cmap = vector<vector<int>>(n + 1, vector<int>(n + 1, 0));
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) { 
+		for (int j = 0; j < n; j++) {
 			map[i][j] = Map[i][j];
-			cmap[i+1][j+1] = cmap[i][j+1] + cmap[i+1][j] - cmap[i][j] + Map[i][j];
+			cmap[i + 1][j + 1] = cmap[i][j + 1] + cmap[i + 1][j] - cmap[i][j] + Map[i][j];
 		}
 	}
 	return;
 }
-void resetcmap() {
-	cmap = vector<vector<int>>(n + 1, vector<int>(n + 1, 0));
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+void resetcmap(int sty, int stx) {
+	for (int i = sty; i < n; i++) {
+		for (int j = stx; j < n; j++) {
 			cmap[i + 1][j + 1] = cmap[i][j + 1] + cmap[i + 1][j] - cmap[i][j] + map[i][j];
 		}
 	}
 	return;
 }
 vector<vector<int>>rotateright(vector<vector<int>>puzz) {
-	vector<vector<int>>temp= vector<vector<int>>(m, vector<int>(m, 0));
+	vector<vector<int>>temp = vector<vector<int>>(m, vector<int>(m, 0));
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < m; j++) {
 			temp[j][m - 1 - i] = puzz[i][j];
@@ -81,10 +80,10 @@ vector<vector<int>>rotateright(vector<vector<int>>puzz) {
 	}
 	return temp;
 }
-pair<int, int>rr(int y,int x) {
-	return make_pair(x,m-1-y);
+pair<int, int>rr(int y, int x) {
+	return make_pair(x, m - 1 - y);
 }
-void sett(vector<vector<int>>pmap,int k) {
+void sett(vector<vector<int>>pmap, int k) {
 	puzzle[k].reset(); // 초기화
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < m; ++j) {
@@ -94,10 +93,10 @@ void sett(vector<vector<int>>pmap,int k) {
 		}
 	}
 	return;
-	
+
 }
 
-void settmap(int y,int x) {
+void settmap(int y, int x) {
 	oripart.reset(); // 초기화
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < m; ++j) {
@@ -117,27 +116,27 @@ tuple<int, int, int>findstpoint(int pcnt) {
 	for (int i = 0; i <= n - m; i++) {
 		for (int j = 0; j <= n - m; j++) {
 			if (findsum(i, j) < pcnt)continue;
-			
+
 			settmap(i, j);
 
 			for (int k = 0; k < 4; k++) {
-				
-				if ((oripart&puzzle[k])== puzzle[k]){
+
+				if ((oripart & puzzle[k]) == puzzle[k]) {
 					sty = i;
 					stx = j;
 					rrcnt = k;
-					return make_tuple(sty,stx,rrcnt);
+					return make_tuple(sty, stx, rrcnt);
 				}
 			}
-			
+
 		}
 	}
 	return make_tuple(sty, stx, rrcnt);
 }
 
-Result findTreasureChest(int Pieces[MAX_M][MAX_M]){
+Result findTreasureChest(int Pieces[MAX_M][MAX_M]) {
 	pmap = vector<vector<int>>(m, vector<int>(m, 0));
-	puzzle=vector<bitset<400>>(4);
+	puzzle = vector<bitset<400>>(4);
 	int py = -1;
 	int px = -1;
 	int pcnt = 0;
@@ -157,19 +156,19 @@ Result findTreasureChest(int Pieces[MAX_M][MAX_M]){
 	}
 
 	for (int k = 0; k < 4; k++) {
-		sett(pmap,k);
+		sett(pmap, k);
 		pmap = rotateright(pmap);
 	}
-	
+
 	int sty, stx, rrcnt;
-	tie(sty,stx,rrcnt)=findstpoint(pcnt);
+	tie(sty, stx, rrcnt) = findstpoint(pcnt);
 	//cout << sty << " " << stx << " " << rrcnt << '\n';
 	for (int i = 0; i < rrcnt; i++) {
 		tie(py, px) = rr(py, px);
 	}
 	//cout << py << " " << px << '\n';
-	int ry=sty+py;
-	int rx=stx+px;
+	int ry = sty + py;
+	int rx = stx + px;
 
 	for (int k = 0; k < rrcnt; k++) {
 		pmap = rotateright(pmap);
@@ -177,17 +176,18 @@ Result findTreasureChest(int Pieces[MAX_M][MAX_M]){
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < m; j++) {
 			if (pmap[i][j] == 1) {
-				map[sty+i][stx+j] -= 1;
+				map[sty + i][stx + j] -= 1;
 			}
 		}
 	}
-	resetcmap();
+	resetcmap(sty,stx);
 	//cout << ry << " " << rx << '\n';
 	//cout << '\n';
 	return Result({ ry,rx });
 
 
 }
+
 
 
 
@@ -218,7 +218,7 @@ static int run(int Ans)
 	}
 
 	init(N, M, Map);
-	
+
 
 	for (int t = 0; t < K; ++t) {
 		int num, sy, sx;
